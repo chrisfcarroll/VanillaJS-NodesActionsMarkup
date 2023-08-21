@@ -29,7 +29,7 @@
       <h6 id="board1-header" aria-label="Board 1">Board 1 <button aria-label="Clear Board 1">Clear</button></h6>
       <div role="grid" class="oxo-board" aria-labelledby="board1-header">
         <div role="gridcell" id="board1-cell-1" aria-labelledby="board1-header board1-cell-1">
-          <label>top Left</label>&nbsp;
+          <label>top left</label>&nbsp;
         </div>
         <div role="gridcell" id="board1-cell-2"  aria-labelledby="board1-header board1-cell-2">
           <label>top middle</label>&nbsp;</div>
@@ -49,14 +49,40 @@
           <label>Bottom right</label>&nbsp;</div>
       </div>
     </section>
+    <section class="oxo-board-section">
+      <h6 id="board2-header" aria-label="Board 2">Board 2 <button aria-label="Clear Board 2">Clear</button></h6>
+      <div role="grid" class="oxo-board" aria-labelledby="board2-header">
+        <div role="gridcell" id="board2-cell-1" aria-labelledby="board2-header board2-cell-1">
+          <label>top left</label>&nbsp;
+        </div>
+        <div role="gridcell" id="board2-cell-2"  aria-labelledby="board2-header board2-cell-2">
+          <label>top middle</label>&nbsp;</div>
+        <div role="gridcell" id="board2-cell-3"  aria-labelledby="board2-header board2-cell-3">
+          <label>top right</label>&nbsp;</div>
+        <div role="gridcell" id="board2-cell-4" aria-labelledby="board2-header board2-cell-4">
+          <label>middle left</label>&nbsp;</div>
+        <div role="gridcell" id="board2-cell-5"  aria-labelledby="board2-header board2-cell-5">
+          <label>middle square</label>&nbsp;</div>
+        <div role="gridcell" id="board2-cell-6"  aria-labelledby="board2-header board2-cell-6">
+          <label>middle right</label>&nbsp;</div>
+        <div role="gridcell" id="board2-cell-7" aria-labelledby="board2-header board2-cell-7">
+          <label>Bottom left</label>&nbsp;</div>
+        <div role="gridcell" id="board2-cell-8"  aria-labelledby="board2-header board2-cell-8">
+          <label>Bottom middle</label>&nbsp;</div>
+        <div role="gridcell" id="board2-cell-9"  aria-labelledby="board2-header board2-cell-9">
+          <label>Bottom right</label>&nbsp;</div>
+      </div>
+    </section>
   </div>
 
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/plugins.js"></script>
+  <script src="js/oxo-game.js" type="module"></script>
   <script src="js/main.js" type="module"></script>
   <script type="module">
     import wireUp from './js/main.js'
-    wireUp()
+    wireUp(1)
+    wireUp(2)
   </script>
 </body>
 </html>
