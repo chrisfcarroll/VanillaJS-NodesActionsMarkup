@@ -1,0 +1,62 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  <h1>9 Tac</h1>
+  <div role="grid" class="nine-by-nine">
+    <section class="oxo-board-section">
+      <h6 id="board1-header" aria-label="Board 1">Board 1 <button aria-label="Clear Board 1">Clear</button></h6>
+      <div role="grid" class="oxo-board" aria-labelledby="board1-header">
+        <div role="gridcell" id="board1-cell-1" aria-labelledby="board1-header board1-cell-1">
+          <label>top Left</label>&nbsp;
+        </div>
+        <div role="gridcell" id="board1-cell-2"  aria-labelledby="board1-header board1-cell-2">
+          <label>top middle</label>&nbsp;</div>
+        <div role="gridcell" id="board1-cell-3"  aria-labelledby="board1-header board1-cell-3">
+          <label>top right</label>&nbsp;</div>
+        <div role="gridcell" id="board1-cell-4" aria-labelledby="board1-header board1-cell-4">
+          <label>middle left</label>&nbsp;</div>
+        <div role="gridcell" id="board1-cell-5"  aria-labelledby="board1-header board1-cell-5">
+          <label>middle square</label>&nbsp;</div>
+        <div role="gridcell" id="board1-cell-6"  aria-labelledby="board1-header board1-cell-6">
+          <label>middle right</label>&nbsp;</div>
+        <div role="gridcell" id="board1-cell-7" aria-labelledby="board1-header board1-cell-7">
+          <label>Bottom left</label>&nbsp;</div>
+        <div role="gridcell" id="board1-cell-8"  aria-labelledby="board1-header board1-cell-8">
+          <label>Bottom middle</label>&nbsp;</div>
+        <div role="gridcell" id="board1-cell-9"  aria-labelledby="board1-header board1-cell-9">
+          <label>Bottom right</label>&nbsp;</div>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js" type="module"></script>
+  <script type="module">
+    import wireUp from './js/main.js'
+    wireUp()
+  </script>
+</body>
+</html>
