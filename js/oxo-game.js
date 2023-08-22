@@ -1,6 +1,8 @@
 export const unplayedSquare = '\u00A0'
 
-function OxoGame() {
+function OxoGame(moveQueue, name) {
+    let _moveQueue= moveQueue || []
+    this.name=name || 'Started at ' + new Date().toTimeString()
     this.boardModel= Array(9).fill(unplayedSquare)
     this.playerOnMove = 'X'
     this.winner = undefined
@@ -13,6 +15,7 @@ function OxoGame() {
       //
       this.boardModel[playedAt] = this.playerOnMove;
       const played= this.playerOnMove
+      _moveQueue.push({game:this.name, player:this.playerOnMove, playedAt:playedAt})
       this.playerOnMove = (this.playerOnMove === 'X' ? 'O' : 'X')
       this.setWinnerIfWon()
       return played

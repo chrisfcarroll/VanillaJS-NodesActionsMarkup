@@ -178,9 +178,9 @@ textarea {
 .nine-by-nine {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: 27vmin;
-  height: 80vmin;
-  width: 80vmin;
+  grid-auto-rows: minmax(9rem, 27vmin);
+  height: 81vmin;
+  width: 81vmin;
   font-family: "Arial Rounded MT Bold","Avenir","Futura",sans-serif;
   container: nine-by-nine / size;
 }
@@ -190,10 +190,12 @@ textarea {
 }
 
 .oxo-board {
-  width:24vmin;
   display: grid;
+  width:24vmin;
+  min-height: 9rem;
+  min-width: 9rem;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: 8vmin;
+  grid-auto-rows: minmax(3rem,8vmin);
   aspect-ratio: 1 / 1;
   border: 0.6px dashed lightblue;
   container: oxo-board / size;
@@ -204,6 +206,8 @@ textarea {
   text-align: center;
   font-weight: bold;
   font-size:8vmin;
+  min-height: 2rem;
+  min-width: 2rem;
   overflow: clip;
 }
 

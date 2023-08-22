@@ -53,15 +53,22 @@
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/plugins.js"></script>
   <script src="js/oxo-game.js" type="module"></script>
+  <script src="js/observable-push-queue.js" type="module"></script>
+  <script src="js/ultimate-oxo-game.js" type="module"></script>
   <script src="js/place-board.js" type="module"></script>
   <script type="module">
+    import ObservablePushQueue from './js/observable-push-queue.js'
     import {wireUp} from './js/oxo-board-io.js'
     import placeBoard from './js/place-board.js'
-    wireUp(1)
+    import UltimateOxoGame from './js/ultimate-oxo-game.js'
+    window.moveQueue= new ObservablePushQueue()
+    let gameNamePrefix="Game"
+    wireUp(1,window.moveQueue,gameNamePrefix)
     for(let i=2; i<=9; i++){
       placeBoard(i, document.querySelector("div[role=grid].nine-by-nine"))
-      wireUp(i)
+      wireUp(i,window.moveQueue,gameNamePrefix)
     }
+    let metaGame=new UltimateOxoGame(window.moveQueue, Array(9).fill('').map((e,i)=>gameNamePrefix+i))
   </script>
   <template id="oxo-board-section-template">
     <section class="oxo-board-section">

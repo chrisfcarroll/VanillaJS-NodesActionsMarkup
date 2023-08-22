@@ -45,7 +45,7 @@ test('9tac game board renders nine cells Top Left to Bottom Right', async ()=> {
 test('Clicking on an empty game plays the first move', async()=>{
   const user = userEvent.setup()
   document.body.innerHTML=(await getIndexHtml()).body.innerHTML
-  let {inputs} = wireUp(1)
+  let {inputs} = wireUp(1, [])
   //
   let topLeft = screen.getByRole("gridcell", {name:'Board 1 top left'})
   await user.click(topLeft)

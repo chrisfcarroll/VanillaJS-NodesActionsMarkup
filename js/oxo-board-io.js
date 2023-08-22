@@ -1,13 +1,13 @@
 import OxoGame, {unplayedSquare} from './oxo-game.js'
 
 
-export function OxoBoardInputs(boardNumber) {
-
+export function OxoBoardInputs(boardNumber, moveQueue, gameNamePrefix) {
+    gameNamePrefix = (gameNamePrefix||"Game ").toString()
     const thisBoard =
       this.board = document.querySelectorAll(".nine-by-nine .oxo-board-section:nth-of-type("+boardNumber+") div[role=gridcell]")
     console.assert(this.board.length == 9, 'Board ' + boardNumber + ' should have 9 cells')
 
-    const game= new OxoGame();
+    const game= new OxoGame(moveQueue, gameNamePrefix + boardNumber);
     for (let i=0; i < this.board.length; i++) {
       let cell= this.board[i]
       cell.addEventListener('click', e => {
@@ -32,14 +32,14 @@ export function OxoBoardInputs(boardNumber) {
     clearButton.addEventListener('click',this.newGame)
 }
 
-export function wireUp(boardNumber){
+export function wireUp(boardNumber, moveQueue,gameNamePrefix){
 
   const boards=[]
 
   function inputs(boardNumber) {
 
     if(!boards[boardNumber]){
-      boards[boardNumber]= new OxoBoardInputs(boardNumber)
+      boards[boardNumber]= new OxoBoardInputs(boardNumber,moveQueue,gameNamePrefix)
     }
     return boards[boardNumber]
   }
@@ -52,4 +52,3 @@ export function wireUp(boardNumber){
 
   return { inputs :  inputs(boardNumber), outputs: outputs(boardNumber) }
 }
-
