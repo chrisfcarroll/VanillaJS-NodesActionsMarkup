@@ -1,5 +1,6 @@
 import OxoGame, {unplayedSquare} from './oxo-game.js'
 
+
 export function OxoBoardInputs(boardNumber) {
 
     const thisBoard =
@@ -10,15 +11,11 @@ export function OxoBoardInputs(boardNumber) {
     for (let i=0; i < this.board.length; i++) {
       let cell= this.board[i]
       cell.addEventListener('click', e => {
-        const currentValue=game.boardModel[i]
-        if(currentValue !== unplayedSquare) return; //ignore click already played square
-        if(game.winner) return;
-        //
-        game.boardModel[i] = game.playerOnMove;
-        e.target.innerHTML = e.target.innerHTML.replace('&nbsp;', game.playerOnMove)
-        game.playerOnMove= (game.playerOnMove==='X' ? 'O' : 'X')
-        if(game.setWinnerIfWon() ){
-          for(let cell of game.winLine) { this.board[cell].classList.add('green') }
+        e.target.innerHTML = e.target.innerHTML.replace(/&nbsp;|X|O/, game.playMove(i))
+        if (game.winLine) {
+          for (let cell of game.winLine) {
+            this.board[cell].classList.add('green')
+          }
         }
       })
     }

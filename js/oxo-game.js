@@ -6,6 +6,19 @@ function OxoGame() {
     this.winner = undefined
     this.winLine = undefined
 
+    this.playMove = function(playedAt) {
+      const currentValue = this.boardModel[playedAt]
+      if (currentValue !== unplayedSquare) return currentValue; //ignore click already played square
+      if (this.winner) return currentValue;
+      //
+      this.boardModel[playedAt] = this.playerOnMove;
+      const played= this.playerOnMove
+      this.playerOnMove = (this.playerOnMove === 'X' ? 'O' : 'X')
+      this.setWinnerIfWon()
+      return played
+    }
+
+
     this.setWinnerIfWon= function() {
       const wins = [
         [0, 1, 2],
