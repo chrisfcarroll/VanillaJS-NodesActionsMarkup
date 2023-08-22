@@ -7,10 +7,10 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
+  <meta property="og:title" content="Small Games, VanillaJS">
+  <meta property="og:type" content="Games">
   <meta property="og:url" content="">
-  <meta property="og:image" content="">
+  <meta property="og:image" content="icon.png">
 
   <link rel="manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="icon.png">
@@ -58,8 +58,8 @@
   <script src="js/place-board.js" type="module"></script>
   <script type="module">
     import ObservablePushQueue from './js/observable-push-queue.js'
-    import {wireUp} from './js/oxo-board-io.js'
     import placeBoard from './js/place-board.js'
+    import {wireUp} from './js/oxo-board-io.js'
     import UltimateOxoGame from './js/ultimate-oxo-game.js'
     window.moveQueue= new ObservablePushQueue()
     let gameNamePrefix="Game"
