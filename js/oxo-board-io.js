@@ -1,6 +1,6 @@
 import OxoGame, {unplayedSquare} from './oxo-game.js'
 
-function BoardInputs(boardNumber) {
+export function OxoBoardInputs(boardNumber) {
 
     const thisBoard =
       this.board = document.querySelectorAll(".nine-by-nine .oxo-board-section:nth-of-type("+boardNumber+") div[role=gridcell]")
@@ -35,4 +35,24 @@ function BoardInputs(boardNumber) {
     clearButton.addEventListener('click',this.newGame)
 }
 
-export default BoardInputs
+export function wireUp(boardNumber){
+
+  const boards=[]
+
+  function inputs(boardNumber) {
+
+    if(!boards[boardNumber]){
+      boards[boardNumber]= new OxoBoardInputs(boardNumber)
+    }
+    return boards[boardNumber]
+  }
+
+  function outputs(boardNumber){
+    return {
+
+    }
+  }
+
+  return { inputs :  inputs(boardNumber), outputs: outputs(boardNumber) }
+}
+

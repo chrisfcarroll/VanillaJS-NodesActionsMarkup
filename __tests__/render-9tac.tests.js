@@ -1,9 +1,9 @@
-import {fireEvent, screen} from '@testing-library/dom'
+import {screen} from '@testing-library/dom'
 import '@jest/globals'
 import '@testing-library/jest-dom'
 import {promises as fs} from 'fs'
 import userEvent from '@testing-library/user-event'
-import wireUp from '../js/main'
+import {wireUp} from '../js/oxo-board-io'
 
 let indexRaw;
 let index;

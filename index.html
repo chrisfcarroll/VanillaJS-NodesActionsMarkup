@@ -49,40 +49,45 @@
           <label>Bottom right</label>&nbsp;</div>
       </div>
     </section>
-    <section class="oxo-board-section">
-      <h6 id="board2-header" aria-label="Board 2">Board 2 <button aria-label="Clear Board 2">Clear</button></h6>
-      <div role="grid" class="oxo-board" aria-labelledby="board2-header">
-        <div role="gridcell" id="board2-cell-1" aria-labelledby="board2-header board2-cell-1">
-          <label>top left</label>&nbsp;
-        </div>
-        <div role="gridcell" id="board2-cell-2"  aria-labelledby="board2-header board2-cell-2">
-          <label>top middle</label>&nbsp;</div>
-        <div role="gridcell" id="board2-cell-3"  aria-labelledby="board2-header board2-cell-3">
-          <label>top right</label>&nbsp;</div>
-        <div role="gridcell" id="board2-cell-4" aria-labelledby="board2-header board2-cell-4">
-          <label>middle left</label>&nbsp;</div>
-        <div role="gridcell" id="board2-cell-5"  aria-labelledby="board2-header board2-cell-5">
-          <label>middle square</label>&nbsp;</div>
-        <div role="gridcell" id="board2-cell-6"  aria-labelledby="board2-header board2-cell-6">
-          <label>middle right</label>&nbsp;</div>
-        <div role="gridcell" id="board2-cell-7" aria-labelledby="board2-header board2-cell-7">
-          <label>Bottom left</label>&nbsp;</div>
-        <div role="gridcell" id="board2-cell-8"  aria-labelledby="board2-header board2-cell-8">
-          <label>Bottom middle</label>&nbsp;</div>
-        <div role="gridcell" id="board2-cell-9"  aria-labelledby="board2-header board2-cell-9">
-          <label>Bottom right</label>&nbsp;</div>
-      </div>
-    </section>
   </div>
-
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/plugins.js"></script>
   <script src="js/oxo-game.js" type="module"></script>
-  <script src="js/main.js" type="module"></script>
+  <script src="js/place-board.js" type="module"></script>
   <script type="module">
-    import wireUp from './js/main.js'
+    import {wireUp} from './js/oxo-board-io.js'
+    import placeBoard from './js/place-board.js'
     wireUp(1)
-    wireUp(2)
+    for(let i=2; i<=9; i++){
+      placeBoard(i, document.querySelector("div[role=grid].nine-by-nine"))
+      wireUp(i)
+    }
   </script>
+  <template id="oxo-board-section-template">
+    <section class="oxo-board-section">
+      <h6 id="board0-header" aria-label="Board 0">Board 0 <button aria-label="Clear Board 0">Clear</button></h6>
+      <div role="grid" class="oxo-board" aria-labelledby="board0-header">
+        <div role="gridcell" id="board0-cell-1" aria-labelledby="board0-header board0-cell-1">
+          <label>top left</label>&nbsp;
+        </div>
+        <div role="gridcell" id="board0-cell-2"  aria-labelledby="board0-header board0-cell-2">
+          <label>top middle</label>&nbsp;</div>
+        <div role="gridcell" id="board0-cell-3"  aria-labelledby="board0-header board0-cell-3">
+          <label>top right</label>&nbsp;</div>
+        <div role="gridcell" id="board0-cell-4" aria-labelledby="board0-header board0-cell-4">
+          <label>middle left</label>&nbsp;</div>
+        <div role="gridcell" id="board0-cell-5"  aria-labelledby="board0-header board0-cell-5">
+          <label>middle square</label>&nbsp;</div>
+        <div role="gridcell" id="board0-cell-6"  aria-labelledby="board0-header board0-cell-6">
+          <label>middle right</label>&nbsp;</div>
+        <div role="gridcell" id="board0-cell-7" aria-labelledby="board0-header board0-cell-7">
+          <label>Bottom left</label>&nbsp;</div>
+        <div role="gridcell" id="board0-cell-8"  aria-labelledby="board0-header board0-cell-8">
+          <label>Bottom middle</label>&nbsp;</div>
+        <div role="gridcell" id="board0-cell-9"  aria-labelledby="board0-header board0-cell-9">
+          <label>Bottom right</label>&nbsp;</div>
+      </div>
+    </section>
+  </template>
 </body>
 </html>
