@@ -1,4 +1,4 @@
-function placeBoard(boardNumber,container){
+function placeOxoBoard(boardNumber, container){
   const template=document
     .getElementById("oxo-board-section-template")
 
@@ -10,4 +10,4 @@ function placeBoard(boardNumber,container){
   container.insertAdjacentHTML("beforeend", `<section class="oxo-board-section">${templatedContent}</section>`)
 }
 
-export default placeBoard
+export default placeOxoBoard

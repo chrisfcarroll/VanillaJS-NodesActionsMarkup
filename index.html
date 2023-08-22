@@ -23,53 +23,86 @@
 </head>
 
 <body>
-  <h1>9 Tac</h1>
-  <div role="grid" class="nine-by-nine">
-    <section class="oxo-board-section">
-      <h6 id="board1-header" aria-label="Board 1">Board 1 <button aria-label="Clear Board 1">Clear</button></h6>
-      <div role="grid" class="oxo-board" aria-labelledby="board1-header">
-        <div role="gridcell" id="board1-cell-1" aria-labelledby="board1-header board1-cell-1">
+  <div class="twocolumns">
+    <div>
+      <h1>9 Tac</h1>
+      <div role="grid" class="nine-by-nine">
+        <section class="oxo-board-section">
+          <h6 id="board1-header" aria-label="Board 1">Board 1 <button aria-label="Clear Board 1">Clear</button></h6>
+          <div role="grid" class="oxo-board" aria-labelledby="board1-header">
+            <div role="gridcell" id="board1-cell-1" aria-labelledby="board1-header board1-cell-1">
+              <label>top left</label>&nbsp;
+            </div>
+            <div role="gridcell" id="board1-cell-2"  aria-labelledby="board1-header board1-cell-2">
+              <label>top middle</label>&nbsp;</div>
+            <div role="gridcell" id="board1-cell-3"  aria-labelledby="board1-header board1-cell-3">
+              <label>top right</label>&nbsp;</div>
+            <div role="gridcell" id="board1-cell-4" aria-labelledby="board1-header board1-cell-4">
+              <label>middle left</label>&nbsp;</div>
+            <div role="gridcell" id="board1-cell-5"  aria-labelledby="board1-header board1-cell-5">
+              <label>middle square</label>&nbsp;</div>
+            <div role="gridcell" id="board1-cell-6"  aria-labelledby="board1-header board1-cell-6">
+              <label>middle right</label>&nbsp;</div>
+            <div role="gridcell" id="board1-cell-7" aria-labelledby="board1-header board1-cell-7">
+              <label>Bottom left</label>&nbsp;</div>
+            <div role="gridcell" id="board1-cell-8"  aria-labelledby="board1-header board1-cell-8">
+              <label>Bottom middle</label>&nbsp;</div>
+            <div role="gridcell" id="board1-cell-9"  aria-labelledby="board1-header board1-cell-9">
+              <label>Bottom right</label>&nbsp;</div>
+          </div>
+        </section>
+      </div>
+  </div>
+  <section class="oxo-board-section">
+      <h6 id="metaboard-header">Meta Game</h6>
+      <div role="grid" class="oxo-board" aria-labelledby="metaboard-header" id="metagame-grid">
+        <div role="gridcell" id="metaboard-cell-1" aria-labelledby="metaboard-header metaboard-cell-1">
           <label>top left</label>&nbsp;
         </div>
-        <div role="gridcell" id="board1-cell-2"  aria-labelledby="board1-header board1-cell-2">
+        <div role="gridcell" id="metaboard-cell-2"  aria-labelledby="metaboard-header metaboard-cell-2">
           <label>top middle</label>&nbsp;</div>
-        <div role="gridcell" id="board1-cell-3"  aria-labelledby="board1-header board1-cell-3">
+        <div role="gridcell" id="metaboard-cell-3"  aria-labelledby="metaboard-header metaboard-cell-3">
           <label>top right</label>&nbsp;</div>
-        <div role="gridcell" id="board1-cell-4" aria-labelledby="board1-header board1-cell-4">
+        <div role="gridcell" id="metaboard-cell-4" aria-labelledby="metaboard-header metaboard-cell-4">
           <label>middle left</label>&nbsp;</div>
-        <div role="gridcell" id="board1-cell-5"  aria-labelledby="board1-header board1-cell-5">
+        <div role="gridcell" id="metaboard-cell-5"  aria-labelledby="metaboard-header metaboard-cell-5">
           <label>middle square</label>&nbsp;</div>
-        <div role="gridcell" id="board1-cell-6"  aria-labelledby="board1-header board1-cell-6">
+        <div role="gridcell" id="metaboard-cell-6"  aria-labelledby="metaboard-header metaboard-cell-6">
           <label>middle right</label>&nbsp;</div>
-        <div role="gridcell" id="board1-cell-7" aria-labelledby="board1-header board1-cell-7">
+        <div role="gridcell" id="metaboard-cell-7" aria-labelledby="metaboard-header metaboard-cell-7">
           <label>Bottom left</label>&nbsp;</div>
-        <div role="gridcell" id="board1-cell-8"  aria-labelledby="board1-header board1-cell-8">
+        <div role="gridcell" id="metaboard-cell-8"  aria-labelledby="metaboard-header metaboard-cell-8">
           <label>Bottom middle</label>&nbsp;</div>
-        <div role="gridcell" id="board1-cell-9"  aria-labelledby="board1-header board1-cell-9">
+        <div role="gridcell" id="metaboard-cell-9"  aria-labelledby="metaboard-header metaboard-cell-9">
           <label>Bottom right</label>&nbsp;</div>
       </div>
     </section>
   </div>
+
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/plugins.js"></script>
   <script src="js/oxo-game.js" type="module"></script>
   <script src="js/observable-push-queue.js" type="module"></script>
   <script src="js/ultimate-oxo-game.js" type="module"></script>
-  <script src="js/place-board.js" type="module"></script>
+  <script src="js/place-oxo-board.js" type="module"></script>
   <script type="module">
     import ObservablePushQueue from './js/observable-push-queue.js'
-    import placeBoard from './js/place-board.js'
-    import {wireUp} from './js/oxo-board-io.js'
+    import OxoGame from './js/oxo-game.js'
+    import placeOxoBoardMarkup from './js/place-oxo-board.js'
+    import {wireUpOxoBoard,wireUpMetaGame} from './js/oxo-board-io.js'
     import UltimateOxoGame from './js/ultimate-oxo-game.js'
     window.moveQueue= new ObservablePushQueue()
-    let gameNamePrefix="Game"
-    wireUp(1,window.moveQueue,gameNamePrefix)
+    const gameNamePrefix="Game"
+    const div9By9 = document.querySelector("div[role=grid].nine-by-nine")
+    wireUpOxoBoard(1, new OxoGame(window.moveQueue, gameNamePrefix + 1), div9By9)
     for(let i=2; i<=9; i++){
-      placeBoard(i, document.querySelector("div[role=grid].nine-by-nine"))
-      wireUp(i,window.moveQueue,gameNamePrefix)
+      placeOxoBoardMarkup(i, div9By9)
+      wireUpOxoBoard(i,new OxoGame(window.moveQueue, gameNamePrefix + i),div9By9)
     }
-    let metaGame=new UltimateOxoGame(window.moveQueue, Array(9).fill('').map((e,i)=>gameNamePrefix+i))
+    let metaGame=new UltimateOxoGame( window.moveQueue, Array(9).fill('').map((e,i)=>gameNamePrefix+i) )
+    wireUpMetaGame(metaGame, document.getElementById("metagame-grid"))
   </script>
+
   <template id="oxo-board-section-template">
     <section class="oxo-board-section">
       <h6 id="board0-header" aria-label="Board 0">Board 0 <button aria-label="Clear Board 0">Clear</button></h6>

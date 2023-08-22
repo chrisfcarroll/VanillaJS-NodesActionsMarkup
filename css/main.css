@@ -175,6 +175,11 @@ textarea {
    Modify as content requires.
    ========================================================================== */
 
+.twocolumns{
+  display:flex;
+  flex-direction: row;
+}
+
 .nine-by-nine {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
