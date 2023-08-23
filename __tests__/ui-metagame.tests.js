@@ -2,7 +2,7 @@ import '@jest/globals'
 import '@testing-library/jest-dom'
 import {promises as fs} from 'fs'
 import userEvent from '@testing-library/user-event'
-import createMetaGameAndPlaceBoardsAndWireUpAll from '../js/create-meta-game-and-place-boards-and-wire-up-all'
+import createGameModelsPlaceBoardsWireUpAll from '../js/create-game-models-place-boards-wire-up-all'
 
 let indexRaw
 let index
@@ -30,7 +30,7 @@ test('Winning a game plays the right move in the metagame', async ()=>{
     containerMetaGame ,
     metaGame,
     oxoBoards
-  } = createMetaGameAndPlaceBoardsAndWireUpAll();
+  } = createGameModelsPlaceBoardsWireUpAll();
   expect(window.moveQueue).toBeDefined()
 
   let board = oxoBoards[1]

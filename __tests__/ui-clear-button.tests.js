@@ -2,7 +2,7 @@ import '@jest/globals'
 import '@testing-library/jest-dom'
 import {promises as fs} from 'fs'
 import userEvent from '@testing-library/user-event'
-import createMetaGameAndPlaceBoardsAndWireUpAll from '../js/create-meta-game-and-place-boards-and-wire-up-all'
+import createGameModelsPlaceBoardsWireUpAll from '../js/create-game-models-place-boards-wire-up-all'
 import {unplayedSquare} from '../js/oxo-game'
 import {allBoardCellsSelector, allMetagameCellSelector} from '../js/oxo-board-wire-up'
 
@@ -33,7 +33,7 @@ test('New Game button starts new games', async ()=>{
     metaGame,
     oxoBoards,
     clearButton
-  } = createMetaGameAndPlaceBoardsAndWireUpAll();
+  } = createGameModelsPlaceBoardsWireUpAll();
 
   //Playing the first seven cells in order from top left is a win for player 1
   for(let i=1; i <= 7; i++){
@@ -61,7 +61,7 @@ test('New Game button clears all squares', async ()=>{
     metaGame,
     oxoBoards,
     clearButton
-  } = createMetaGameAndPlaceBoardsAndWireUpAll();
+  } = createGameModelsPlaceBoardsWireUpAll();
 
   //Playing the first seven cells in order from top left is a win for player 1
   for(let i=1; i <= 7; i++){
@@ -91,7 +91,7 @@ test('After pressing New Game button everything is wired up again', async ()=>{
     metaGame,
     oxoBoards,
     clearButton
-  } = createMetaGameAndPlaceBoardsAndWireUpAll();
+  } = createGameModelsPlaceBoardsWireUpAll();
 
   await user.click(clearButton)
 

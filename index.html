@@ -84,9 +84,16 @@
 
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/plugins.js"></script>
+  <script src="js/oxo-game.js" type="module"></script>
+  <script src="js/observable-push-queue.js" type="module"></script>
+  <script src="js/ultimate-oxo-game.js" type="module"></script>
+  <script src="js/place-oxo-board.js" type="module"></script>
+  <script src="js/create-game-models-place-boards-wire-up-all.js" type="module"></script>
+
+
   <script type="module">
-    import createMetaGameAndPlaceBoardsAndWireUpAll from './js/create-meta-game-and-place-boards-and-wire-up-all.js'
-    createMetaGameAndPlaceBoardsAndWireUpAll(
+    import createGameModelsPlaceBoardsWireUpAll from './js/create-game-models-place-boards-wire-up-all.js'
+    createGameModelsPlaceBoardsWireUpAll(
       "div[role=grid].nine-by-nine",
       "metagame-grid"
     )

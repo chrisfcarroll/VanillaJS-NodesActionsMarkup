@@ -4,9 +4,9 @@ import placeOxoBoardMarkup from './place-oxo-board.js'
 import {wireUpOxoBoard, wireUpMetaGame, allMetagameCellSelector} from './oxo-board-wire-up.js'
 import UltimateOxoGame from './ultimate-oxo-game.js'
 
-export default function createMetaGameAndPlaceBoardsAndWireUpAll(container9x9="div[role=grid].nine-by-nine",
-                                                                 containerMetaGameGrid = "metagame-grid",
-                                                                 clearButtonId="new-game-button") {
+export default function createGameModelsPlaceBoardsWireUpAll(container9x9="div[role=grid].nine-by-nine",
+                                                             containerMetaGameGrid = "metagame-grid",
+                                                             clearButtonId="new-game-button") {
   if(!window){
     throw new Error('Module create-and-wire-up-all expects window to be defined')
   }
