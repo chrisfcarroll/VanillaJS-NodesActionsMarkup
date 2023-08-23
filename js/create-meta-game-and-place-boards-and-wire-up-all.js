@@ -1,5 +1,5 @@
 import ObservablePushQueue from './observable-push-queue.js'
-import OxoGame from './oxo-game.js'
+import {unplayedSquare} from './oxo-game.js'
 import placeOxoBoardMarkup from './place-oxo-board.js'
 import {wireUpOxoBoard,wireUpMetaGame} from './oxo-board-wire-up.js'
 import UltimateOxoGame from './ultimate-oxo-game.js'
@@ -17,15 +17,29 @@ export default function createMetaGameAndPlaceBoardsAndWireUpAll(container9x9="d
   const metaGame=new UltimateOxoGame(window.moveQueue)
   const oxoBoards=[]
   const clearButton = document.getElementById(clearButtonId)
-
   wireUpMetaGame(metaGame, containerMetaGame)
-  clearButton.addEventListener('click', ()=>metaGame.newGame())
 
   oxoBoards[1]= wireUpOxoBoard(1, metaGame.games[1], container9By9)
   for(let i=2; i<=9; i++){
     placeOxoBoardMarkup(i, container9By9)
     oxoBoards[i]= wireUpOxoBoard(i, metaGame.games[i], container9By9)
   }
+
+  clearButton.addEventListener('click', ()=>{
+    metaGame.newGame()
+    for(let board of oxoBoards){
+      if(!board)continue;
+      for(let cell of board.cells){
+        cell.innerHTML= cell.innerHTML.replace(/&nbsp;|X|O/, unplayedSquare)
+      }
+    }
+    const metaGameCells=containerMetaGame.querySelector("div[role=gridcell]")
+    for(let i=0; i<metaGameCells.length; i++){
+      let cell=metaGameCells[i]
+      cell.innerHTML= cell.innerHTML.replace(/&nbsp;|X|O/, unplayedSquare)
+    }
+  })
+
 
   return {
     container9By9 : container9By9,
