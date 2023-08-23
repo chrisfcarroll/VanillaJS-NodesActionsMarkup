@@ -224,7 +224,6 @@ textarea {
   min-width: 2rem;
   overflow: clip;
 }
-
 .oxo-board [role=gridcell] label{
   display:block;
   width:100%;
@@ -241,20 +240,29 @@ textarea {
   font-weight: lighter;
 }
 
-.green { color:green }
+.oxo-board.small {
+  width:18vmin;
+  min-height: 6rem;
+  min-width: 6rem;
+  grid-auto-rows: minmax(2rem,6vmin);
+  container: oxo-board / size;
+}
+.oxo-board.small [role=gridcell] {
+  font-size: 6vmin;
+  min-height: 1.4rem;
+  min-width: 1.4rem;
+}
 
+
+.green { color:green }
 
 
 @media only screen and (min-width: 35em) {
   /* Style adjustments for viewports that meet the condition */
-
-
 }
 
 @media not (min-width: 35em){
   /* Style adjustments for viewports that meet the condition */
-
-
 }
 
 

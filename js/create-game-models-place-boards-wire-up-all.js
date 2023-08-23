@@ -1,7 +1,7 @@
 import ObservablePushQueue from './observable-push-queue.js'
 import {unplayedSquare} from './oxo-game.js'
 import placeOxoBoardMarkup from './place-oxo-board.js'
-import {wireUpOxoBoard, wireUpMetaGame, allMetagameCellSelector} from './oxo-board-wire-up.js'
+import {wireUpOxoBoard, wireUpMetaGame, allMetagameCellSelector} from './wire-up-oxo-board.js'
 import UltimateOxoGame from './ultimate-oxo-game.js'
 
 export default function createGameModelsPlaceBoardsWireUpAll(container9x9="div[role=grid].nine-by-nine",

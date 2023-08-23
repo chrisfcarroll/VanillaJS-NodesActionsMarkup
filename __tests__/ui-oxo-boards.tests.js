@@ -3,7 +3,7 @@ import '@jest/globals'
 import '@testing-library/jest-dom'
 import {promises as fs} from 'fs'
 import userEvent from '@testing-library/user-event'
-import {wireUpOxoBoard} from '../js/oxo-board-wire-up'
+import {wireUpOxoBoard} from '../js/wire-up-oxo-board'
 import OxoGame from '../js/oxo-game'
 
 let indexRaw;

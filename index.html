@@ -1,24 +1,19 @@
 <!doctype html>
 <html class="no-js" lang="">
-
 <head>
   <meta charset="utf-8">
-  <title></title>
-  <meta name="description" content="">
+  <title>Nine Noughts & Crosses</title>
+  <meta name="description" content="Small Games - Nine Noughts and Crosses">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <meta property="og:title" content="Small Games, VanillaJS">
   <meta property="og:type" content="Games">
-  <meta property="og:url" content="">
+  <meta property="og:url" content="https://www.cafe-encounter.net/small-games/">
   <meta property="og:image" content="icon.png">
-
   <link rel="manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="icon.png">
   <!-- Place favicon.ico in the root directory -->
-
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
-
   <meta name="theme-color" content="#fafafa">
 </head>
 
@@ -58,7 +53,7 @@
   </div>
   <section class="oxo-board-section metagame">
       <h6 id="metaboard-header">Meta Game</h6>
-      <div role="grid" class="oxo-board" aria-labelledby="metaboard-header" id="metagame-grid">
+      <div role="grid" class="oxo-board small" aria-labelledby="metaboard-header" id="metagame-grid">
         <div role="gridcell" id="metaboard-cell-1" aria-labelledby="metaboard-header metaboard-cell-1">
           <label>top left</label>&nbsp;
         </div>
@@ -84,13 +79,13 @@
 
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/plugins.js"></script>
-  <script src="js/oxo-game.js" type="module"></script>
+
   <script src="js/observable-push-queue.js" type="module"></script>
+  <script src="js/oxo-game.js" type="module"></script>
   <script src="js/ultimate-oxo-game.js" type="module"></script>
   <script src="js/place-oxo-board.js" type="module"></script>
+  <script src="js/wire-up-oxo-board.js" type="module"></script>
   <script src="js/create-game-models-place-boards-wire-up-all.js" type="module"></script>
-
-
   <script type="module">
     import createGameModelsPlaceBoardsWireUpAll from './js/create-game-models-place-boards-wire-up-all.js'
     createGameModelsPlaceBoardsWireUpAll(

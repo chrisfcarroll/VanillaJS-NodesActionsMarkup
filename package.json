@@ -15,11 +15,12 @@
     "css/normalize.css",
     "js/vendor/modernizr-3.11.2.min.js",
     "js/plugins.js",
-    "js/oxo-game.js",
+    "js/create-game-models-place-boards-wire-up-all.js",
     "js/observable-push-queue.js",
-    "js/ultimate-oxo-game.js",
+    "js/oxo-game.js",
     "js/place-oxo-board.js",
-    "js/create-game-models-place-boards-wire-up-all.js"
+    "js/ultimate-oxo-game.js",
+    "js/wire-up-oxo-board.js"
   ],
   "devDependencies": {
     "@babel/preset-env": "^7.22.10",

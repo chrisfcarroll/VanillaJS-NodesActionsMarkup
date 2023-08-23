@@ -4,7 +4,7 @@ import {promises as fs} from 'fs'
 import userEvent from '@testing-library/user-event'
 import createGameModelsPlaceBoardsWireUpAll from '../js/create-game-models-place-boards-wire-up-all'
 import {unplayedSquare} from '../js/oxo-game'
-import {allBoardCellsSelector, allMetagameCellSelector} from '../js/oxo-board-wire-up'
+import {allBoardCellsSelector, allMetagameCellSelector} from '../js/wire-up-oxo-board'
 
 let indexRaw
 let index
