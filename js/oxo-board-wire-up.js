@@ -1,8 +1,11 @@
 import {unplayedSquare} from './oxo-game.js'
 import ObservablePushQueue from './observable-push-queue.js'
 
+export let allBoardCellsSelector=".oxo-board-section div[role=gridcell]"
+
+export let allMetagameCellSelector="div[role=gridcell]"
+
 export let boardCellSelectorPattern=".oxo-board-section:nth-of-type(${boardNumber}) div[role=gridcell]"
-export let boardClearButtonSelectorPattern=".oxo-board-section:nth-of-type(${boardNumber}) button[aria-label='Clear Board ${boardNumber}']"
 
 export let metagameCellSelectorPattern="div[role=gridcell]:nth-of-type(${gameNumber})"
 export function OxoBoardInputs(boardNumber, game, containerElement) {
@@ -14,15 +17,21 @@ export function OxoBoardInputs(boardNumber, game, containerElement) {
     console.assert(this.cells.length === 9, 'Board ' + boardNumber + ' should have 9 cells')
 
     for (let i=1; i <= this.cells.length; i++) {
-      let cell= this.cells[i-1]
-      cell.addEventListener('click', e => {
+      let cell= thisCells[i-1]
+      if(cell.eventForCell){
+        cell.removeEventListener('click', cell.eventForCell)
+        cell.classList.remove('green')
+      }
+      let eventForCell=function(e){
         e.target.innerHTML = e.target.innerHTML.replace(/&nbsp;|X|O/, game.playMove(i))
         if (game.winLine) {
-          for (let cell of game.winLine) {
-            this.cells[cell-1].classList.add('green')
+          for (let square of game.winLine) {
+            thisCells[square-1].classList.add('green')
           }
         }
-      })
+      }
+      cell.addEventListener('click', eventForCell)
+      cell.eventForCell= eventForCell
     }
     this.newGame = function(){
       for(let cell of thisCells){
@@ -30,11 +39,6 @@ export function OxoBoardInputs(boardNumber, game, containerElement) {
         cell.classList.remove('green')
       }
       game.newGame()
-    }
-    const maybeClearButton=containerElement
-      .querySelectorAll(boardClearButtonSelectorPattern.replaceAll("${boardNumber}",boardNumber))
-    if(maybeClearButton.length) {
-      maybeClearButton[0].addEventListener('click', this.newGame)
     }
 }
 

@@ -1,10 +1,29 @@
-import {screen} from '@testing-library/dom'
 import '@jest/globals'
 import '@testing-library/jest-dom'
+import {screen} from '@testing-library/dom'
 import {promises as fs} from 'fs'
 
 let indexRaw;
 let index;
+
+test('jest runs', ()=>{
+  expect(true).toBeTruthy()
+})
+
+test('testing-library and jest-dom runs', ()=>{
+
+  document.body.innerHTML ="<button>Press</button>";
+  const button=screen.getByText('Press')
+  expect(button).toBeVisible()
+})
+
+test('can load index.html', async ()=> {
+
+  const indexRaw= (await fs.readFile('index.html')).toString()
+  const index= new DOMParser().parseFromString(indexRaw,"text/html")
+  document.body.innerHTML=index.body.innerHTML
+  expect(document.body).toBeVisible()
+})
 
 async function getIndexHtml(){
   indexRaw= indexRaw || (await fs.readFile('index.html')).toString()
@@ -12,14 +31,14 @@ async function getIndexHtml(){
   return index
 }
 
-test('9tac game cells renders', async ()=> {
+test('Game Board 1 renders', async ()=> {
 
   document.body.innerHTML= (await getIndexHtml()).body.innerHTML
   const board= screen.getByRole("grid", {name: "Board 1"})
   expect(board).toBeVisible()
 })
 
-test('9tac game cells renders nine cells Top Left to Bottom Right', async ()=> {
+test('Game Board 1 renders nine cells Top Left to Bottom Right', async ()=> {
 
   document.body.innerHTML= (await getIndexHtml()).body.innerHTML
   const expectedBoards=["Board 1"]

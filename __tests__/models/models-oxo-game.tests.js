@@ -1,8 +1,6 @@
 import '@jest/globals'
 import '@testing-library/jest-dom'
-import OxoGame, {unplayedSquare} from '../../js/oxo-game'
-import ObservablePushQueue from '../../js/observable-push-queue'
-import UltimateOxoGame from '../../js/ultimate-oxo-game'
+import OxoGame from '../../js/oxo-game'
 
 test('OxoGame recognises win and not won', ()=>{
 
@@ -41,7 +39,7 @@ describe('OxoGame records move in a global queue', ()=>{
   test('but still ignores invalid moves', ()=>{
       const queue= []
       let game= new OxoGame(queue)
-      for(let i=0; i<7; i++){
+      for(let i=1; i<=7; i++){
         const currentPlayer=game.playerOnMove
         const queueLengthWas=queue.length
         //
