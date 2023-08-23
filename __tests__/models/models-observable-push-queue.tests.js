@@ -1,5 +1,6 @@
 import '@jest/globals'
 import ObservablePushQueue from '../../js/observable-push-queue'
+import expect from 'expect'
 
 test('Queue.push() keeps pushed elements and sets length', ()=>{
     const queue= new ObservablePushQueue()
@@ -75,7 +76,6 @@ test('Queue.pop() calls observers', ()=>{
     queue.addObserver('2', e=>observed2.push(e))
 
     for(let i=0; i<6; i++){
-      const queueLengthWas=queue.length
       queue.push({i:i, j: new Date(2000 + i,i,i)})
     }
 
@@ -102,7 +102,6 @@ test('Queue.shift() calls observers', ()=>{
     queue.addObserver('2', e=>observed2.push(e))
 
     for(let i=0; i<6; i++){
-      const queueLengthWas=queue.length
       queue.push({i:i, j: new Date(2000 + i,i,i)})
     }
 
