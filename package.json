@@ -2,17 +2,25 @@
   "name": "small-games-vanilla-js",
   "version": "0.0.1",
   "description": "Small games in VanillaJS",
-  "keywords": "games,vanillajs",
+  "keywords": ["games","vanillajs"],
   "license": "GPL3",
   "author": "chrisfcarroll",
   "scripts": {
     "start": "http-server",
     "test": "jest"
   },
-  "source": ["index.html",
-             "css/main.css", "css/normalize.css",
-             "js/observable-push-queue.js", "js/oxo-board-io.js", "js/oxo-game.js", "js/place-board.js", "js/plugins.js", "js/ultimate-oxo-game.js",
-             "js/vendor/modernizr-3.11.2.min.js"],
+  "source": [
+    "index.html",
+    "css/main.css",
+    "css/normalize.css",
+    "js/vendor/modernizr-3.11.2.min.js",
+    "js/plugins.js",
+    "js/oxo-game.js",
+    "js/observable-push-queue.js",
+    "js/ultimate-oxo-game.js",
+    "js/place-oxo-board.js",
+    "js/create-boards-and-wire-up-all.js"
+  ],
   "devDependencies": {
     "@babel/preset-env": "^7.22.10",
     "@parcel/packager-raw-url": "^2.9.3",
