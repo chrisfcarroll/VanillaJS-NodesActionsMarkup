@@ -35,6 +35,7 @@ function UltimateOxoGame(queue,oxoGames){
   this.observeMove= function(event){
     console.info(event)
     let game= that.games.get(event.value.game)
+    if(!game){console.error("game " +event.value.game + " isn't in games list") ; debugger}
     if(game.isShadowOf && game.isShadowOf===that.name){
       game.playMove(event.value.playedAt)
     }
@@ -42,7 +43,7 @@ function UltimateOxoGame(queue,oxoGames){
       console.log(`${game.name} won by ${game.winner}`)
       let gameNumber = gameNumberFromName(game.name)
       that.metaGame.playerOnMove= game.winner
-      that.metaGame.playMove(gameNumber - 1 /*The game name is 1-based, the array is 0-based*/)
+      that.metaGame.playMove(gameNumber -1 /*The game name is 1-based, the array is 0-based*/)
     }
   }
   this.queue.addObserver(this.name, this.observeMove)

@@ -85,22 +85,10 @@
   <script src="js/observable-push-queue.js" type="module"></script>
   <script src="js/ultimate-oxo-game.js" type="module"></script>
   <script src="js/place-oxo-board.js" type="module"></script>
+  <script src="js/create-boards-and-wire-up-all.js" type="module"></script>
   <script type="module">
-    import ObservablePushQueue from './js/observable-push-queue.js'
-    import OxoGame from './js/oxo-game.js'
-    import placeOxoBoardMarkup from './js/place-oxo-board.js'
-    import {wireUpOxoBoard,wireUpMetaGame} from './js/oxo-board-io.js'
-    import UltimateOxoGame from './js/ultimate-oxo-game.js'
-    window.moveQueue= new ObservablePushQueue()
-    const gameNamePrefix="Game"
-    const div9By9 = document.querySelector("div[role=grid].nine-by-nine")
-    wireUpOxoBoard(1, new OxoGame(window.moveQueue, gameNamePrefix + 1), div9By9)
-    for(let i=2; i<=9; i++){
-      placeOxoBoardMarkup(i, div9By9)
-      wireUpOxoBoard(i,new OxoGame(window.moveQueue, gameNamePrefix + i),div9By9)
-    }
-    let metaGame=new UltimateOxoGame( window.moveQueue, Array(9).fill('').map((e,i)=>gameNamePrefix+i) )
-    wireUpMetaGame(metaGame, document.getElementById("metagame-grid"))
+    import createBoardsAndWireUpAll from './js/create-boards-and-wire-up-all.js'
+    createBoardsAndWireUpAll()
   </script>
 
   <template id="oxo-board-section-template">

@@ -1,6 +1,6 @@
 {
-  "short_name": "",
-  "name": "",
+  "short_name": "SmallGames",
+  "name": "Small Games — Ultimate tic tac toe",
   "icons": [{
     "src": "icon.png",
     "type": "image/png",

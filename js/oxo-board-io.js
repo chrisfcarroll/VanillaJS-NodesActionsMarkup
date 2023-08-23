@@ -1,6 +1,5 @@
-import OxoGame, {GameEvent, unplayedSquare} from './oxo-game.js'
+import {unplayedSquare} from './oxo-game.js'
 import ObservablePushQueue from './observable-push-queue.js'
-import {gameNumberFromName} from './ultimate-oxo-game.js'
 
 export let boardCellSelectorPattern=".oxo-board-section:nth-of-type(${boardNumber}) div[role=gridcell]"
 export let boardClearButtonSelectorPattern=".oxo-board-section:nth-of-type(${boardNumber}) button[aria-label='Clear Board ${boardNumber}']"
@@ -9,7 +8,7 @@ export let metagameCellSelectorPattern="div[role=gridcell]:nth-of-type(${gameNum
 export function OxoBoardInputs(boardNumber, game, containerElement) {
     const thisBoard =
       this.board = containerElement.querySelectorAll(boardCellSelectorPattern.replace("${boardNumber}",boardNumber))
-    console.assert(this.board.length == 9, 'Board ' + boardNumber + ' should have 9 cells')
+    console.assert(this.board.length === 9, 'Board ' + boardNumber + ' should have 9 cells')
 
     for (let i=0; i < this.board.length; i++) {
       let cell= this.board[i]
@@ -24,7 +23,7 @@ export function OxoBoardInputs(boardNumber, game, containerElement) {
     }
     this.newGame = function(){
       for(let cell of thisBoard){
-        cell.innerHTML = cell.innerHTML.replace(/X|O/, unplayedSquare)
+        cell.innerHTML = cell.innerHTML.replace(/[XO]/, unplayedSquare)
         cell.classList.remove('green')
       }
       game.newGame()
@@ -47,6 +46,7 @@ export function wireUpOxoBoard(boardNumber, game, container){
     return boards[boardNumber]
   }
 
+  // noinspection JSUnusedLocalSymbols
   function outputs(boardNumber){
     return {}
   }
@@ -58,9 +58,9 @@ export function wireUpMetaGame(metaGame,boardGridElement){
   let queue= metaGame.metaGame.moveQueue= new ObservablePushQueue()
   queue.addObserver("metaGameOutput", e=>{
     console.log("metagame output got ",e)
-    let action= new GameEvent(e.value.game, e.value.player,e.value.playedAt)
+    // GameEvent(e.value.game, e.value.player,e.value.playedAt)
     let player=e.value.player
-    let cell= boardGridElement.querySelector(metagameCellSelectorPattern.replaceAll("${gameNumber}",e.value.playedAt))
+    let cell= boardGridElement.querySelector(metagameCellSelectorPattern.replaceAll("${gameNumber}",1 + parseInt(e.value.playedAt)))
     cell.innerHTML= cell.innerHTML.replace(/&nbsp;|X|O/, player)
   })
 }
