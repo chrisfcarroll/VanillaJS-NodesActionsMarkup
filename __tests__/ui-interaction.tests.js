@@ -18,7 +18,7 @@ test('Clicking on an empty game plays the first move', async()=>{
   const user = userEvent.setup()
   document.body.innerHTML=(await getIndexHtml()).body.innerHTML
   const div9By9 = document.querySelector("div[role=grid].nine-by-nine")
-  let {inputs} = wireUpOxoBoard(1, new OxoGame(),div9By9)
+  let board = wireUpOxoBoard(1, new OxoGame(),div9By9)
   //
   let topLeft = screen.getByRole("gridcell", {name:'Board 1 top left'})
   await user.click(topLeft)
@@ -27,14 +27,14 @@ test('Clicking on an empty game plays the first move', async()=>{
   expect(topLeft.innerHTML).not.toContain('&nbsp;')
 
   //cleanup
-  inputs.newGame()
+  board.newGame()
 })
 
 test('Clicking two squares on an empty game plays the first two moves', async()=>{
   const user = userEvent.setup()
   document.outerHTML=(await getIndexHtml()).outerHTML
   const div9By9 = document.querySelector("div[role=grid].nine-by-nine")
-  let {inputs}= wireUpOxoBoard(1,new OxoGame([],"1"), div9By9)
+  let board= wireUpOxoBoard(1,new OxoGame([],"1"), div9By9)
   //
   let topMiddle = screen.getByRole("gridcell", {name:'Board 1 top middle'})
   await user.click(topMiddle)
@@ -44,14 +44,14 @@ test('Clicking two squares on an empty game plays the first two moves', async()=
   expect(topLeft.innerHTML).toContain('O')
   expect(topLeft.innerHTML).not.toContain('&nbsp;')
 
-  inputs.newGame()
+  board.newGame()
 })
 
 test('Clicking a square a second time has no effect', async()=>{
   const user = userEvent.setup()
   document.outerHTML=(await getIndexHtml()).outerHTML
   const div9By9 = document.querySelector("div[role=grid].nine-by-nine")
-  let {inputs} = wireUpOxoBoard(1,new OxoGame([],"1"), div9By9)
+  let board = wireUpOxoBoard(1,new OxoGame([],"1"), div9By9)
   //
   let topLeft = screen.getByRole("gridcell", {name:'Board 1 top left'})
   await user.click(topLeft)
@@ -61,25 +61,25 @@ test('Clicking a square a second time has no effect', async()=>{
   expect(topLeft.innerHTML).not.toContain('&nbsp;')
   expect(topLeft.innerHTML).not.toContain('O')
 
-  inputs.newGame()
+  board.newGame()
 })
 
 test('Clicking a won game has no effect', async ()=>{
   const user = userEvent.setup()
   document.outerHTML=(await getIndexHtml()).outerHTML
   const div9By9 = document.querySelector("div[role=grid].nine-by-nine")
-  let {inputs} = wireUpOxoBoard(1, new OxoGame([],"1"), div9By9)
+  let board = wireUpOxoBoard(1, new OxoGame([],"1"), div9By9)
 
   //Playing the first seven cells in order from top left is a win for player 1
-  for(let i=0; i<7; i++){
-    await user.click(inputs.board[i])
+  for(let i=1; i<=7; i++){
+    await user.click(board.cells[i])
   }
   //
-  await user.click(inputs.board[0])
-  expect(inputs.board[0].innerHTML).toContain('X')
-  await user.click(inputs.board[7])
-  expect(inputs.board[7].innerHTML).toContain('&nbsp;')
+  await user.click(board.cells[1])
+  expect(board.cells[1].innerHTML).toContain('X')
+  await user.click(board.cells[8])
+  expect(board.cells[8].innerHTML).toContain('&nbsp;')
 
   //
-  inputs.newGame()
+  board.newGame()
 })

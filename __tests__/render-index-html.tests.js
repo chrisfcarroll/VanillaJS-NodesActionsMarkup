@@ -12,14 +12,14 @@ async function getIndexHtml(){
   return index
 }
 
-test('9tac game board renders', async ()=> {
+test('9tac game cells renders', async ()=> {
 
   document.body.innerHTML= (await getIndexHtml()).body.innerHTML
   const board= screen.getByRole("grid", {name: "Board 1"})
   expect(board).toBeVisible()
 })
 
-test('9tac game board renders nine cells Top Left to Bottom Right', async ()=> {
+test('9tac game cells renders nine cells Top Left to Bottom Right', async ()=> {
 
   document.body.innerHTML= (await getIndexHtml()).body.innerHTML
   const expectedBoards=["Board 1"]

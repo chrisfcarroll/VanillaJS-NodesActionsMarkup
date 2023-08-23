@@ -1,18 +1,5 @@
 import OxoGame from './oxo-game.js'
-
-export function clearAllGames(oxoBoards,metaGame,moveQueue,oldGames) {
-
-    for(let board of oxoBoards){
-      board.inputs.newGame()
-    }
-    metaGame.metaGame.newGame()
-    const gameCopy=[]
-    while(moveQueue.length){
-      gameCopy.push(moveQueue.shift())
-    }
-    oldGames.push(gameCopy)
-}
-
+import ObservablePushQueue from './observable-push-queue.js'
 
 export function gameNumberFromName(name){
   let gameNumberMatch= name.match(/\d/)
@@ -22,45 +9,40 @@ export function gameNumberFromName(name){
   return gameNumberMatch[0]
 }
 
-function UltimateOxoGame(queue,oxoGames){
-  if(!queue || !queue.push || !queue.addObserver){throw new Error("queue doesn't have push/shift/addObserver functions")}
-  if(!oxoGames || typeof oxoGames[Symbol.iterator] !== 'function'){throw new Error("oxoGames is not iterable")}
+function UltimateOxoGame(queue,name){
+  this.queue= queue || new ObservablePushQueue()
+  if(queue && (!queue.push || !queue.addObserver)){throw new Error("queue doesn't have push/shift/addObserver functions")}
+  this.name = name || "Metagame started at " + new Date().toTimeString()
+  this.oldGames=[]
   const that=this;
-  this.name = this.name || "Metagame started at " + new Date().toTimeString()
-  this.queue=queue
-  this.games=new Map()
-  this.shadowQueue=[]
-  for(let i=0; i<9; i++){
-    let game= oxoGames[i]
-    if(typeof game === 'string'){
-      game= new OxoGame(this.shadowQueue,game)
-      game.isShadowOf=this.name
+
+  this.newGame= function(){
+    that.games=new Array(10)
+    for(let i=1; i<=9; i++){
+      that.games[i]= new OxoGame(that.queue,"Game "+i)
     }
-    this.games.set(game.name,game)
+    that.metaGame=new OxoGame([],"metaGame")
+    let lastGame=[]
+    for(let i=0; that.queue.length>0 || i> 9999; i++){
+      lastGame.push(that.queue.shift())
+    }
+    that.oldGames.push(lastGame)
   }
-  if(this.games.size!==9){throw new Error(`you passed ${this.games.size} oxoGames instead of 9`)}
-
-  for (let game of this.games.values()) {
-    game.newGame()
-  }
-
-  this.metaGame=new OxoGame([],"metaGame")
 
   this.observeMove= function(event){
     console.info(event)
-    let game= that.games.get(event.value.game)
+    let gameNumber=gameNumberFromName(event.value.game)
+    let game= that.games[gameNumber]
     if(!game){console.error("game " +event.value.game + " isn't in games list") ; debugger}
-    if(game.isShadowOf && game.isShadowOf===that.name){
-      game.playMove(event.value.playedAt)
-    }
     if(game.winLine){
       console.log(`${game.name} won by ${game.winner}`)
-      let gameNumber = gameNumberFromName(game.name)
       that.metaGame.playerOnMove= game.winner
-      that.metaGame.playMove(gameNumber -1 /*The game name is 1-based, the array is 0-based*/)
+      that.metaGame.playMove(gameNumber)
     }
   }
+
   this.queue.addObserver(this.name, this.observeMove)
+  this.newGame()
 }
 
 export default UltimateOxoGame

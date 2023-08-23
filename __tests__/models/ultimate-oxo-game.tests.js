@@ -20,38 +20,33 @@ test('UltimateOxoGame reads the game queue', ()=>{
 })
 
 test('UltimateOxoGame knows when a game is finished', ()=>{
-    let queue = new ObservablePushQueue()
-    let games=[]
-    for(let i=0; i<9; i++){games.push(new OxoGame(queue,"Game " + (i+1)))}
-    let metaGame=new UltimateOxoGame(queue,games)
 
-    for(let i=0; i<7; i++){
-      const currentPlayer=games[0].playerOnMove
-      const queueLengthWas=queue.length
-      games[0].playMove(i)
+  const metaGame=new UltimateOxoGame()
+  let lastPlayer;
+  for(let i=1; i<=7; i++){
+      lastPlayer=metaGame.games[1].playerOnMove
+      metaGame.games[1].playMove(i)
     }
-    expect(games[0].winLine).toEqual([2,4,6])
+  expect( metaGame.games[1].winLine).toEqual([3,5,7])
+  expect( metaGame.games[1].winner ).toBe(lastPlayer)
 
-  expect(metaGame.games.get('Game 1').winLine).toEqual([2,4,6])
   for(let i=2; i <= 9 ; i++){
-    expect(metaGame.games.get('Game ' + 2).winLine).toBeUndefined()
+    expect(metaGame.games[i].winLine).toBeUndefined()
   }
 })
 
 test('UltimateOxoGame updates the metagame when a game is finished', ()=>{
-   let queue = new ObservablePushQueue()
-    let games=[]
-    for(let i=0; i<9; i++){games.push(new OxoGame(queue,"Game " + (i+1)))}
-    let metaGame=new UltimateOxoGame(queue,games)
+    const metaGame=new UltimateOxoGame()
+    const games=metaGame.games
+    let lastPlayer
 
-    for(let i=0; i<7; i++){
-      const currentPlayer=games[0].playerOnMove
-      const queueLengthWas=queue.length
-      games[0].playMove(i)
+    for(let i=1; i <= 7; i++){
+      lastPlayer=games[1].playerOnMove
+      games[1].playMove(i)
     }
-    expect(games[0].winLine).toEqual([2,4,6])
+    expect(games[1].winLine).toEqual([3,5,7])
 
-    expect(metaGame.metaGame.boardModel).toEqual(
+    expect(metaGame.metaGame.boardModel.slice(1,10)).toEqual(
         ['X', unplayedSquare,unplayedSquare,
                   unplayedSquare,unplayedSquare,unplayedSquare,
                   unplayedSquare,unplayedSquare,unplayedSquare,])

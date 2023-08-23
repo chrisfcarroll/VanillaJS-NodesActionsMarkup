@@ -2,7 +2,7 @@ import '@jest/globals'
 import '@testing-library/jest-dom'
 import {promises as fs} from 'fs'
 import userEvent from '@testing-library/user-event'
-import createBoardsAndWireUpAll from '../js/create-boards-and-wire-up-all'
+import createMetaGameAndPlaceBoardsAndWireUpAll from '../js/create-meta-game-and-place-boards-and-wire-up-all'
 
 let indexRaw
 let index
@@ -30,17 +30,17 @@ test('Winning a game plays the right move in the metagame', async ()=>{
     containerMetaGame ,
     metaGame,
     oxoBoards
-  } = createBoardsAndWireUpAll();
+  } = createMetaGameAndPlaceBoardsAndWireUpAll();
   expect(window.moveQueue).toBeDefined()
 
-  let {inputs} = oxoBoards[1]
+  let board = oxoBoards[1]
 
   //Playing the first seven cells in order from top left is a win for player 1
-  for(let i=0; i<7; i++){
-    await user.click(inputs.board[i])
+  for(let i=1; i <= 7; i++){
+    await user.click(board.cells[i-1])
   }
   //
-  expect(metaGame.metaGame.boardModel[0]).toBe('X')
+  expect(metaGame.metaGame.boardModel[1]).toBe('X')
 })
 
 // test('New Game button starts new games', async ()=>{
@@ -53,15 +53,15 @@ test('Winning a game plays the right move in the metagame', async ()=>{
 //     metaGame,
 //     oxoBoards,
 //     clearButton
-//   } = createBoardsAndWireUpAll();
+//   } = createMetaGameAndPlaceBoardsAndWireUpAll();
 //
 //   //Playing the first seven cells in order from top left is a win for player 1
 //   for(let i=0; i < 7; i++){
-//     await user.click(oxoBoards[1].inputs.board[i])
+//     await user.click(oxoBoards[1].inputs.cells[i])
 //   }
 //   expect(metaGame.metaGame.boardModel[0]).toBe('X')
 //   for(let i= 2; i <= 9 ; i++){
-//     await user.click( oxoBoards[i].inputs.board[i])
+//     await user.click( oxoBoards[i].inputs.cells[i])
 //   }
 //
 //   await user.click(clearButton)

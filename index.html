@@ -84,14 +84,9 @@
 
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/plugins.js"></script>
-  <script src="js/oxo-game.js" type="module"></script>
-  <script src="js/observable-push-queue.js" type="module"></script>
-  <script src="js/ultimate-oxo-game.js" type="module"></script>
-  <script src="js/place-oxo-board.js" type="module"></script>
-  <script src="js/create-boards-and-wire-up-all.js" type="module"></script>
   <script type="module">
-    import createBoardsAndWireUpAll from './js/create-boards-and-wire-up-all.js'
-    createBoardsAndWireUpAll(
+    import createMetaGameAndPlaceBoardsAndWireUpAll from './js/create-meta-game-and-place-boards-and-wire-up-all.js'
+    createMetaGameAndPlaceBoardsAndWireUpAll(
       "div[role=grid].nine-by-nine",
       "metagame-grid"
     )
@@ -101,8 +96,7 @@
     <section class="oxo-board-section">
       <div role="grid" class="oxo-board" aria-label="Board 0" id="board0">
         <div role="gridcell" id="board0-cell-1" aria-labelledby="board0 board0-cell-1">
-          <label>top left</label>&nbsp;
-        </div>
+          <label>top left</label>&nbsp;</div>
         <div role="gridcell" id="board0-cell-2"  aria-labelledby="board0 board0-cell-2">
           <label>top middle</label>&nbsp;</div>
         <div role="gridcell" id="board0-cell-3"  aria-labelledby="board0 board0-cell-3">

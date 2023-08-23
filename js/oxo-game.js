@@ -11,36 +11,38 @@ export class GameEvent{
 function OxoGame(moveQueue, name) {
     this.moveQueue= moveQueue || []
     this.name=name || 'Started at ' + new Date().toTimeString()
-    this.boardModel= Array(9).fill(unplayedSquare)
+    this.boardModel= Array(10).fill(unplayedSquare)
     this.playerOnMove = 'X'
     this.winner = undefined
     this.winLine = undefined
+    const that=this
 
     this.playMove = function(playedAt) {
-      const currentValue = this.boardModel[playedAt]
+      if(playedAt<1 || playedAt>9)console.error('playedAt',playedAt,'in game ' + that.name)
+      const currentValue = that.boardModel[playedAt]
       if (currentValue !== unplayedSquare) return currentValue; //ignore click already played square
-      if (this.winner) return currentValue;
+      if (that.winner) return currentValue;
       //
-      this.boardModel[playedAt] = this.playerOnMove;
-      const played= this.playerOnMove
-      this.setWinnerIfWon()
-      this.playerOnMove = (this.playerOnMove === 'X' ? 'O' : 'X')
-      this.moveQueue.push( {game:this.name, player:played, playedAt:playedAt} )
+      that.boardModel[playedAt] = that.playerOnMove;
+      const played= that.playerOnMove
+      that.setWinnerIfWon()
+      that.playerOnMove = (that.playerOnMove === 'X' ? 'O' : 'X')
+      that.moveQueue.push( {game:that.name, player:played, playedAt:playedAt} )
       return played
     }
 
 
     this.setWinnerIfWon= function() {
       const wins = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 3, 6],
-        [0, 4, 8],
-        [2, 4, 6]
-      ]
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9],
+            [1, 4, 7],
+            [2, 5, 8],
+            [3, 6, 9],
+            [1, 5, 9],
+            [3, 5, 7]
+        ]
       const won = wins.map(line => {
         const player = this.boardModel[line[0]]
         if (player === unplayedSquare) return undefined
