@@ -1,5 +1,19 @@
 import OxoGame from './oxo-game.js'
 
+export function clearAllGames(oxoBoards,metaGame,moveQueue,oldGames) {
+
+    for(let board of oxoBoards){
+      board.inputs.newGame()
+    }
+    metaGame.metaGame.newGame()
+    const gameCopy=[]
+    while(moveQueue.length){
+      gameCopy.push(moveQueue.shift())
+    }
+    oldGames.push(gameCopy)
+}
+
+
 export function gameNumberFromName(name){
   let gameNumberMatch= name.match(/\d/)
   if(!gameNumberMatch || gameNumberMatch[0] < 1 || gameNumberMatch[0] > 9){

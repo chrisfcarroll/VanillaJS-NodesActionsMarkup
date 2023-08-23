@@ -23,7 +23,10 @@
 </head>
 
 <body>
-  <h1>Ultimate Nought and Crosses</h1>
+  <div class="title-and-top-level-control-panel">
+    <h1>Nine Nought and Crosses</h1>
+    <div class="centralising-panel"><button hidden="hidden" id="new-game-button">New Game</button></div>
+  </div>
   <div class="twocolumns">
     <div>
       <h6>Play!</h6>
@@ -88,7 +91,10 @@
   <script src="js/create-boards-and-wire-up-all.js" type="module"></script>
   <script type="module">
     import createBoardsAndWireUpAll from './js/create-boards-and-wire-up-all.js'
-    createBoardsAndWireUpAll()
+    createBoardsAndWireUpAll(
+      "div[role=grid].nine-by-nine",
+      "metagame-grid"
+    )
   </script>
 
   <template id="oxo-board-section-template">

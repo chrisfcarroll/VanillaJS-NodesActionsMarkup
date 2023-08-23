@@ -36,23 +36,7 @@ export function OxoBoardInputs(boardNumber, game, containerElement) {
 }
 
 export function wireUpOxoBoard(boardNumber, game, container){
-
-  const boards=[]
-
-  function inputs(boardNumber) {
-
-    if(!boards[boardNumber]){
-      boards[boardNumber]= new OxoBoardInputs(boardNumber,game,container)
-    }
-    return boards[boardNumber]
-  }
-
-  // noinspection JSUnusedLocalSymbols
-  function outputs(boardNumber){
-    return {}
-  }
-
-  return { inputs :  inputs(boardNumber), outputs: outputs(boardNumber) }
+  return { inputs :  new OxoBoardInputs(boardNumber,game,container), outputs: {} }
 }
 
 export function wireUpMetaGame(metaGame,boardGridElement){

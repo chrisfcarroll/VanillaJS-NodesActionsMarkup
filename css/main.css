@@ -180,6 +180,17 @@ textarea {
   display:flex;
   flex-direction: row;
 }
+.title-and-top-level-control-panel{
+  display:flex;
+  flex-direction: row;
+  vertical-align: baseline;
+}
+.centralising-panel {
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .nine-by-nine {
   display: grid;
