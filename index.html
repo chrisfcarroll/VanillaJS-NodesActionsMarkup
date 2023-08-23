@@ -23,37 +23,37 @@
 </head>
 
 <body>
+  <h1>Ultimate Nought and Crosses</h1>
   <div class="twocolumns">
     <div>
-      <h1>9 Tac</h1>
+      <h6>Play!</h6>
       <div role="grid" class="nine-by-nine">
         <section class="oxo-board-section">
-          <h6 id="board1-header" aria-label="Board 1">Board 1 <button aria-label="Clear Board 1">Clear</button></h6>
-          <div role="grid" class="oxo-board" aria-labelledby="board1-header">
-            <div role="gridcell" id="board1-cell-1" aria-labelledby="board1-header board1-cell-1">
+          <div role="grid" class="oxo-board" aria-label="Board 1" id="board1">
+            <div role="gridcell" id="board1-cell-1" aria-labelledby="board1 board1-cell-1">
               <label>top left</label>&nbsp;
             </div>
-            <div role="gridcell" id="board1-cell-2"  aria-labelledby="board1-header board1-cell-2">
+            <div role="gridcell" id="board1-cell-2"  aria-labelledby="board1 board1-cell-2">
               <label>top middle</label>&nbsp;</div>
-            <div role="gridcell" id="board1-cell-3"  aria-labelledby="board1-header board1-cell-3">
+            <div role="gridcell" id="board1-cell-3"  aria-labelledby="board1 board1-cell-3">
               <label>top right</label>&nbsp;</div>
-            <div role="gridcell" id="board1-cell-4" aria-labelledby="board1-header board1-cell-4">
+            <div role="gridcell" id="board1-cell-4" aria-labelledby="board1 board1-cell-4">
               <label>middle left</label>&nbsp;</div>
-            <div role="gridcell" id="board1-cell-5"  aria-labelledby="board1-header board1-cell-5">
+            <div role="gridcell" id="board1-cell-5"  aria-labelledby="board1 board1-cell-5">
               <label>middle square</label>&nbsp;</div>
-            <div role="gridcell" id="board1-cell-6"  aria-labelledby="board1-header board1-cell-6">
+            <div role="gridcell" id="board1-cell-6"  aria-labelledby="board1 board1-cell-6">
               <label>middle right</label>&nbsp;</div>
-            <div role="gridcell" id="board1-cell-7" aria-labelledby="board1-header board1-cell-7">
+            <div role="gridcell" id="board1-cell-7" aria-labelledby="board1 board1-cell-7">
               <label>Bottom left</label>&nbsp;</div>
-            <div role="gridcell" id="board1-cell-8"  aria-labelledby="board1-header board1-cell-8">
+            <div role="gridcell" id="board1-cell-8"  aria-labelledby="board1 board1-cell-8">
               <label>Bottom middle</label>&nbsp;</div>
-            <div role="gridcell" id="board1-cell-9"  aria-labelledby="board1-header board1-cell-9">
+            <div role="gridcell" id="board1-cell-9"  aria-labelledby="board1 board1-cell-9">
               <label>Bottom right</label>&nbsp;</div>
           </div>
         </section>
       </div>
   </div>
-  <section class="oxo-board-section">
+  <section class="oxo-board-section metagame">
       <h6 id="metaboard-header">Meta Game</h6>
       <div role="grid" class="oxo-board" aria-labelledby="metaboard-header" id="metagame-grid">
         <div role="gridcell" id="metaboard-cell-1" aria-labelledby="metaboard-header metaboard-cell-1">
@@ -93,26 +93,25 @@
 
   <template id="oxo-board-section-template">
     <section class="oxo-board-section">
-      <h6 id="board0-header" aria-label="Board 0">Board 0 <button aria-label="Clear Board 0">Clear</button></h6>
-      <div role="grid" class="oxo-board" aria-labelledby="board0-header">
-        <div role="gridcell" id="board0-cell-1" aria-labelledby="board0-header board0-cell-1">
+      <div role="grid" class="oxo-board" aria-label="Board 0" id="board0">
+        <div role="gridcell" id="board0-cell-1" aria-labelledby="board0 board0-cell-1">
           <label>top left</label>&nbsp;
         </div>
-        <div role="gridcell" id="board0-cell-2"  aria-labelledby="board0-header board0-cell-2">
+        <div role="gridcell" id="board0-cell-2"  aria-labelledby="board0 board0-cell-2">
           <label>top middle</label>&nbsp;</div>
-        <div role="gridcell" id="board0-cell-3"  aria-labelledby="board0-header board0-cell-3">
+        <div role="gridcell" id="board0-cell-3"  aria-labelledby="board0 board0-cell-3">
           <label>top right</label>&nbsp;</div>
-        <div role="gridcell" id="board0-cell-4" aria-labelledby="board0-header board0-cell-4">
+        <div role="gridcell" id="board0-cell-4" aria-labelledby="board0 board0-cell-4">
           <label>middle left</label>&nbsp;</div>
-        <div role="gridcell" id="board0-cell-5"  aria-labelledby="board0-header board0-cell-5">
+        <div role="gridcell" id="board0-cell-5"  aria-labelledby="board0 board0-cell-5">
           <label>middle square</label>&nbsp;</div>
-        <div role="gridcell" id="board0-cell-6"  aria-labelledby="board0-header board0-cell-6">
+        <div role="gridcell" id="board0-cell-6"  aria-labelledby="board0 board0-cell-6">
           <label>middle right</label>&nbsp;</div>
-        <div role="gridcell" id="board0-cell-7" aria-labelledby="board0-header board0-cell-7">
+        <div role="gridcell" id="board0-cell-7" aria-labelledby="board0 board0-cell-7">
           <label>Bottom left</label>&nbsp;</div>
-        <div role="gridcell" id="board0-cell-8"  aria-labelledby="board0-header board0-cell-8">
+        <div role="gridcell" id="board0-cell-8"  aria-labelledby="board0 board0-cell-8">
           <label>Bottom middle</label>&nbsp;</div>
-        <div role="gridcell" id="board0-cell-9"  aria-labelledby="board0-header board0-cell-9">
+        <div role="gridcell" id="board0-cell-9"  aria-labelledby="board0 board0-cell-9">
           <label>Bottom right</label>&nbsp;</div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 import ObservablePushQueue from './observable-push-queue.js'
 import OxoGame from './oxo-game.js'
 import placeOxoBoardMarkup from './place-oxo-board.js'
-import {wireUpOxoBoard,wireUpMetaGame} from './oxo-board-io.js'
+import {wireUpOxoBoard,wireUpMetaGame} from './oxo-board-wire-up.js'
 import UltimateOxoGame from './ultimate-oxo-game.js'
 
 export default function createBoardsAndWireUpAll(){

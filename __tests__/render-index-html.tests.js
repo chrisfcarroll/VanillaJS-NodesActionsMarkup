@@ -2,9 +2,6 @@ import {screen} from '@testing-library/dom'
 import '@jest/globals'
 import '@testing-library/jest-dom'
 import {promises as fs} from 'fs'
-import userEvent from '@testing-library/user-event'
-import {wireUpOxoBoard} from '../js/oxo-board-io'
-import OxoGame from '../js/oxo-game'
 
 let indexRaw;
 let index;

@@ -28,10 +28,11 @@ export function OxoBoardInputs(boardNumber, game, containerElement) {
       }
       game.newGame()
     }
-    const clearButton=containerElement
-      .querySelector(boardClearButtonSelectorPattern.replaceAll("${boardNumber}",boardNumber))
-    console.assert(clearButton !== undefined)
-    clearButton.addEventListener('click',this.newGame)
+    const maybeClearButton=containerElement
+      .querySelectorAll(boardClearButtonSelectorPattern.replaceAll("${boardNumber}",boardNumber))
+    if(maybeClearButton.length) {
+      maybeClearButton[0].addEventListener('click', this.newGame)
+    }
 }
 
 export function wireUpOxoBoard(boardNumber, game, container){

@@ -1,10 +1,7 @@
-import {screen} from '@testing-library/dom'
 import '@jest/globals'
 import '@testing-library/jest-dom'
 import {promises as fs} from 'fs'
 import userEvent from '@testing-library/user-event'
-import {wireUpOxoBoard} from '../js/oxo-board-io'
-import OxoGame from '../js/oxo-game'
 import createBoardsAndWireUpAll from '../js/create-boards-and-wire-up-all'
 
 let indexRaw
@@ -27,6 +24,7 @@ beforeEach( async () => {
 test('Winning a game plays the right move in the metagame', async ()=>{
   const user = userEvent.setup()
   document.outerHTML=(await getIndexHtml()).outerHTML
+  // noinspection JSUnusedLocalSymbols
   const {
     container9By9,
     containerMetaGame ,
@@ -35,7 +33,7 @@ test('Winning a game plays the right move in the metagame', async ()=>{
   } = createBoardsAndWireUpAll();
   expect(window.moveQueue).toBeDefined()
 
-  let {inputs,outputs} = oxoBoards[1]
+  let {inputs} = oxoBoards[1]
 
   //Playing the first seven cells in order from top left is a win for player 1
   for(let i=0; i<7; i++){

@@ -15,6 +15,7 @@ html {
   color: #222;
   font-size: 1em;
   line-height: 1.4;
+   font-family: "Arial Rounded MT Bold","Avenir","Futura",sans-serif;
 }
 
 /*
@@ -190,9 +191,6 @@ textarea {
   container: nine-by-nine / size;
 }
 .nine-by-nine h6 {margin:0 ; font-weight: normal;}
-.oxo-board-section {
-  border: 0.6px dashed purple;
-}
 
 .oxo-board {
   display: grid;

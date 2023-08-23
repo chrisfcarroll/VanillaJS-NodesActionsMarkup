@@ -3,7 +3,7 @@ import '@jest/globals'
 import '@testing-library/jest-dom'
 import {promises as fs} from 'fs'
 import userEvent from '@testing-library/user-event'
-import {wireUpOxoBoard} from '../js/oxo-board-io'
+import {wireUpOxoBoard} from '../js/oxo-board-wire-up'
 import OxoGame from '../js/oxo-game'
 
 let indexRaw;
@@ -51,7 +51,7 @@ test('Clicking a square a second time has no effect', async()=>{
   const user = userEvent.setup()
   document.outerHTML=(await getIndexHtml()).outerHTML
   const div9By9 = document.querySelector("div[role=grid].nine-by-nine")
-  let {inputs,outputs} = wireUpOxoBoard(1,new OxoGame([],"1"), div9By9)
+  let {inputs} = wireUpOxoBoard(1,new OxoGame([],"1"), div9By9)
   //
   let topLeft = screen.getByRole("gridcell", {name:'Board 1 top left'})
   await user.click(topLeft)
@@ -68,7 +68,7 @@ test('Clicking a won game has no effect', async ()=>{
   const user = userEvent.setup()
   document.outerHTML=(await getIndexHtml()).outerHTML
   const div9By9 = document.querySelector("div[role=grid].nine-by-nine")
-  let {inputs,outputs} = wireUpOxoBoard(1, new OxoGame([],"1"), div9By9)
+  let {inputs} = wireUpOxoBoard(1, new OxoGame([],"1"), div9By9)
 
   //Playing the first seven cells in order from top left is a win for player 1
   for(let i=0; i<7; i++){
