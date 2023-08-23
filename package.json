@@ -19,7 +19,7 @@
     "js/observable-push-queue.js",
     "js/ultimate-oxo-game.js",
     "js/place-oxo-board.js",
-    "js/create-boards-and-wire-up-all.js"
+    "js/create-game-models-place-boards-wire-up-all.js"
   ],
   "devDependencies": {
     "@babel/preset-env": "^7.22.10",
