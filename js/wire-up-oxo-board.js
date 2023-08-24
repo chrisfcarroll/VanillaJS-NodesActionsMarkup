@@ -23,7 +23,10 @@ export function OxoBoardInputs(boardNumber, game, containerElement) {
         cell.classList.remove('green')
       }
       let eventForCell=function(e){
-        e.target.innerHTML = e.target.innerHTML.replace(/&nbsp;|X|O/, game.playMove(i))
+        const justPlayed = game.playMove(i)
+        const wasValidMove= justPlayed!==unplayedSquare
+        e.target.innerHTML = e.target.innerHTML.replace(/&nbsp;|X|O/, justPlayed)
+        if(wasValidMove){e.target.classList.add('played')}
         if (game.winLine) {
           for (let square of game.winLine) {
             thisCells[square-1].classList.add('green')
@@ -36,7 +39,7 @@ export function OxoBoardInputs(boardNumber, game, containerElement) {
     this.newGame = function(){
       for(let cell of thisCells){
         cell.innerHTML = cell.innerHTML.replace(/[XO]/, unplayedSquare)
-        cell.classList.remove('green')
+        cell.classList.remove('green','played')
       }
       game.newGame()
     }

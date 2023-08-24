@@ -170,11 +170,37 @@ textarea {
   clear: both;
 }
 
-/* ==========================================================================
-   EXAMPLE Media Queries for Responsive Design.
-   These examples override the primary ('mobile first') styles.
-   Modify as content requires.
-   ========================================================================== */
+@keyframes fadeInOut {
+  0%,100% { opacity: 0 }
+  50%    { opacity: .5 }
+}
+@keyframes fadeIn {
+  0%   { opacity: .3 }
+  100% { opacity: 1 }
+}
+@keyframes blinkOnce {
+  0%     { opacity: .9 }
+  33%    { opacity: .7 }
+  66%    { opacity: .9 }
+  100%   { opacity: 1 }
+}
+
+@media (prefers-reduced-motion) {
+
+  @keyframes fadeInOut {
+    0%,100% { opacity: 0 }
+    50% { opacity: 0.1 }
+  }
+  @keyframes fadeIn {
+    0%   { opacity: .8 }
+    100% { opacity: 1 }
+  }
+  @keyframes blinkOnce {
+    0%   { opacity: 1 }
+    66%  { opacity: .9 }
+    100% { opacity: 1 }
+  }
+}
 
 .twocolumns{
   display:flex;
@@ -183,10 +209,10 @@ textarea {
 .title-and-top-level-control-panel{
   display:flex;
   flex-direction: row;
-  vertical-align: baseline;
+  align-content: center;
 }
 .centralising-panel {
-  padding: 0.2rem;
+  padding: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -253,8 +279,15 @@ textarea {
   min-width: 1.4rem;
 }
 
+.played { animation: fadeIn 0.3s ease-out;}
+.green { color:green ; animation: blinkOnce .8s ease-out;}
 
-.green { color:green }
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
 
 
 @media only screen and (min-width: 35em) {
@@ -264,14 +297,6 @@ textarea {
 @media not (min-width: 35em){
   /* Style adjustments for viewports that meet the condition */
 }
-
-
-
-
-
-
-
-
 
 @media print,
   (-webkit-min-device-pixel-ratio: 1.25),
