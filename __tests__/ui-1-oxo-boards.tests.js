@@ -17,8 +17,8 @@ async function getIndexHtml(){
 test('Clicking on an empty game plays the first move', async()=>{
   const user = userEvent.setup()
   document.body.innerHTML=(await getIndexHtml()).body.innerHTML
-  const div9By9 = document.querySelector("div[role=grid].nine-by-nine")
-  let board = wireUpOxoBoard(1, new OxoGame(),div9By9)
+  const div3by3 = document.querySelector("div[role=grid].three-by-three")
+  let board = wireUpOxoBoard(1, new OxoGame(),div3by3)
   //
   let topLeft = screen.getByRole("gridcell", {name:'Board 1 top left'})
   await user.click(topLeft)
@@ -33,8 +33,8 @@ test('Clicking on an empty game plays the first move', async()=>{
 test('Clicking two squares on an empty game plays the first two moves', async()=>{
   const user = userEvent.setup()
   document.outerHTML=(await getIndexHtml()).outerHTML
-  const div9By9 = document.querySelector("div[role=grid].nine-by-nine")
-  let board= wireUpOxoBoard(1,new OxoGame([],"1"), div9By9)
+  const div3by3 = document.querySelector("div[role=grid].three-by-three")
+  let board= wireUpOxoBoard(1,new OxoGame([],"1"), div3by3)
   //
   let topMiddle = screen.getByRole("gridcell", {name:'Board 1 top middle'})
   await user.click(topMiddle)
@@ -50,8 +50,8 @@ test('Clicking two squares on an empty game plays the first two moves', async()=
 test('Clicking a square a second time has no effect', async()=>{
   const user = userEvent.setup()
   document.outerHTML=(await getIndexHtml()).outerHTML
-  const div9By9 = document.querySelector("div[role=grid].nine-by-nine")
-  let board = wireUpOxoBoard(1,new OxoGame([],"1"), div9By9)
+  const div3by3 = document.querySelector("div[role=grid].three-by-three")
+  let board = wireUpOxoBoard(1,new OxoGame([],"1"), div3by3)
   //
   let topLeft = screen.getByRole("gridcell", {name:'Board 1 top left'})
   await user.click(topLeft)
@@ -67,8 +67,8 @@ test('Clicking a square a second time has no effect', async()=>{
 test('Clicking a won game has no effect', async ()=>{
   const user = userEvent.setup()
   document.outerHTML=(await getIndexHtml()).outerHTML
-  const div9By9 = document.querySelector("div[role=grid].nine-by-nine")
-  let board = wireUpOxoBoard(1, new OxoGame([],"1"), div9By9)
+  const div3by3 = document.querySelector("div[role=grid].three-by-three")
+  let board = wireUpOxoBoard(1, new OxoGame([],"1"), div3by3)
 
   //Playing the first seven cells in order from top left is a win for player 1
   for(let i=1; i<=7; i++){

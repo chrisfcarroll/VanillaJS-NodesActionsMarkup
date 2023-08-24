@@ -36,7 +36,7 @@ test('Winning a game plays the right move in the metagame', async ()=>{
   document.outerHTML=(await getIndexHtml()).outerHTML
   // noinspection JSUnusedLocalSymbols
   const {
-    container9By9,
+    container3by3,
     containerMetaGame ,
     metaGame,
     oxoBoards

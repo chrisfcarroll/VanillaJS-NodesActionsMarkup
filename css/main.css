@@ -100,6 +100,11 @@ h6 { margin: 0.5rem 0 }
   0%   { opacity: .3 }
   100% { opacity: 1 }
 }
+@keyframes fadeBackIn {
+  0%   { opacity: 1 }
+  66%  { opacity: .8 }
+  100% { opacity: 1 }
+}
 @keyframes blinkOnce {
   0%     { opacity: .9 }
   33%    { opacity: .7 }
@@ -115,6 +120,11 @@ h6 { margin: 0.5rem 0 }
   }
   @keyframes fadeIn {
     0%   { opacity: .8 }
+    100% { opacity: 1 }
+  }
+  @keyframes fadeBackIn {
+    0%   { opacity: 1 }
+    66%  { opacity: .85 }
     100% { opacity: 1 }
   }
   @keyframes blinkOnce {
@@ -140,18 +150,37 @@ h6 { margin: 0.5rem 0 }
   justify-content: center;
 }
 
-.nine-by-nine {
+.three-by-three {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-rows: minmax(9rem, 27vmin);
   height: 81vmin;
   width: 81vmin;
   font-family: "Arial Rounded MT Bold","Avenir","Futura",sans-serif;
-  container: nine-by-nine / size;
+  container: three-by-three / size;
 }
-.nine-by-nine h6 {margin:0 ; font-weight: normal;}
+.three-by-three h6 {margin:0 ; font-weight: normal;}
+
+.three-by-three .oxo-board-section{
+  display:flex;
+}
+
+.one-by-one{
+  height: 27vmin;
+  width: 27vmin;
+  min-height: 9rem;
+  padding-top: 1.5vmin;
+  display: flex;
+  align-items: flex-start;
+}
+
+.oxo-board-section.playable{
+  animation: fadeBackIn 1s ;
+  background: #f3fff3;
+}
 
 .oxo-board {
+  margin:auto;
   display: grid;
   width:24vmin;
   min-height: 9rem;

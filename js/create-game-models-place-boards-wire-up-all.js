@@ -4,7 +4,7 @@ import placeOxoBoardMarkup from './place-oxo-board.js'
 import {wireUpOxoBoard, wireUpMetaGame, allMetagameCellSelector} from './wire-up-oxo-board.js'
 import UltimateOxoGame from './ultimate-oxo-game.js'
 
-export default function createGameModelsPlaceBoardsWireUpAll(container9x9="div[role=grid].nine-by-nine",
+export default function createGameModelsPlaceBoardsWireUpAll(container3by3="div[role=grid].three-by-three",
                                                              containerMetaGameGrid = "metagame-grid",
                                                              clearButtonId="new-game-button") {
   if(!window){
@@ -12,29 +12,32 @@ export default function createGameModelsPlaceBoardsWireUpAll(container9x9="div[r
   }
   window.moveQueue= new ObservablePushQueue()
 
-  const container9By9 = document.querySelector(container9x9)
+  const containerEl3by3 = document.querySelector(container3by3)
   const containerMetaGame = document.getElementById(containerMetaGameGrid)
   const metaGame=new UltimateOxoGame(window.moveQueue)
   const oxoBoards=[]
   const clearButton = document.getElementById(clearButtonId)
   wireUpMetaGame(metaGame, containerMetaGame)
 
-  oxoBoards[1]= wireUpOxoBoard(1, metaGame.games[1], container9By9)
+  oxoBoards[1]= wireUpOxoBoard(1, metaGame.games[1], containerEl3by3)
   for(let i=2; i<=9; i++){
-    placeOxoBoardMarkup(i, container9By9)
-    oxoBoards[i]= wireUpOxoBoard(i, metaGame.games[i], container9By9)
+    placeOxoBoardMarkup(i, containerEl3by3)
+    oxoBoards[i]= wireUpOxoBoard(i, metaGame.games[i], containerEl3by3)
   }
 
   clearButton.addEventListener('click', ()=>{
     for(let board of oxoBoards.filter(b=>b)){
       for(let cell of board.cells){
         cell.innerHTML= cell.innerHTML.replace(/[XO]/, unplayedSquare)
-        cell.classList.remove('green')
+        cell.classList.remove('green','played')
       }
       metaGame.newGame()
       for(let i=1; i<=9; i++){
-        oxoBoards[i]=wireUpOxoBoard(i, metaGame.games[i], container9By9)
+        oxoBoards[i]=wireUpOxoBoard(i, metaGame.games[i], containerEl3by3)
       }
+    }
+    for(let board of containerEl3by3.querySelectorAll('.playable')){
+      board.classList.remove('playable')
     }
     const metaGameCells=containerMetaGame.querySelectorAll(allMetagameCellSelector)
     console.assert(metaGameCells.length===9, 'expected 9 metaGameCells, got', metaGameCells)
@@ -45,7 +48,7 @@ export default function createGameModelsPlaceBoardsWireUpAll(container9x9="div[r
 
 
   return {
-    container9By9 : container9By9,
+    container3by3 : containerEl3by3,
     containerMetaGame : containerMetaGame,
     metaGame : metaGame,
     oxoBoards : oxoBoards,

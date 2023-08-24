@@ -23,9 +23,9 @@
     <div class="centralising-panel"><button id="new-game-button">New Game</button></div>
   </div>
   <div class="twocolumns">
-    <div>
+    <div class="leftcolumn">
       <h6>Play!</h6>
-      <div role="grid" class="nine-by-nine">
+      <div role="grid" class="three-by-three">
         <section class="oxo-board-section">
           <div role="grid" class="oxo-board" aria-label="Board 1" id="board1">
             <div role="gridcell" id="board1-cell-1" aria-labelledby="board1 board1-cell-1">
@@ -50,33 +50,36 @@
           </div>
         </section>
       </div>
-  </div>
-  <section class="oxo-board-section metagame">
+    </div>
+    <div class="rightcolumn">
       <h6 id="metaboard-header">Meta Game</h6>
-      <div role="grid" class="oxo-board small" aria-labelledby="metaboard-header" id="metagame-grid">
-        <div role="gridcell" id="metaboard-cell-1" aria-labelledby="metaboard-header metaboard-cell-1">
-          <label>top left</label>&nbsp;
-        </div>
-        <div role="gridcell" id="metaboard-cell-2"  aria-labelledby="metaboard-header metaboard-cell-2">
-          <label>top middle</label>&nbsp;</div>
-        <div role="gridcell" id="metaboard-cell-3"  aria-labelledby="metaboard-header metaboard-cell-3">
-          <label>top right</label>&nbsp;</div>
-        <div role="gridcell" id="metaboard-cell-4" aria-labelledby="metaboard-header metaboard-cell-4">
-          <label>middle left</label>&nbsp;</div>
-        <div role="gridcell" id="metaboard-cell-5"  aria-labelledby="metaboard-header metaboard-cell-5">
-          <label>middle square</label>&nbsp;</div>
-        <div role="gridcell" id="metaboard-cell-6"  aria-labelledby="metaboard-header metaboard-cell-6">
-          <label>middle right</label>&nbsp;</div>
-        <div role="gridcell" id="metaboard-cell-7" aria-labelledby="metaboard-header metaboard-cell-7">
-          <label>Bottom left</label>&nbsp;</div>
-        <div role="gridcell" id="metaboard-cell-8"  aria-labelledby="metaboard-header metaboard-cell-8">
-          <label>Bottom middle</label>&nbsp;</div>
-        <div role="gridcell" id="metaboard-cell-9"  aria-labelledby="metaboard-header metaboard-cell-9">
-          <label>Bottom right</label>&nbsp;</div>
+      <div class="one-by-one">
+        <section class="oxo-board-section metagame">
+          <div role="grid" class="oxo-board small" aria-labelledby="metaboard-header" id="metagame-grid">
+            <div role="gridcell" id="metaboard-cell-1" aria-labelledby="metaboard-header metaboard-cell-1">
+              <label>top left</label>&nbsp;
+            </div>
+            <div role="gridcell" id="metaboard-cell-2"  aria-labelledby="metaboard-header metaboard-cell-2">
+              <label>top middle</label>&nbsp;</div>
+            <div role="gridcell" id="metaboard-cell-3"  aria-labelledby="metaboard-header metaboard-cell-3">
+              <label>top right</label>&nbsp;</div>
+            <div role="gridcell" id="metaboard-cell-4" aria-labelledby="metaboard-header metaboard-cell-4">
+              <label>middle left</label>&nbsp;</div>
+            <div role="gridcell" id="metaboard-cell-5"  aria-labelledby="metaboard-header metaboard-cell-5">
+              <label>middle square</label>&nbsp;</div>
+            <div role="gridcell" id="metaboard-cell-6"  aria-labelledby="metaboard-header metaboard-cell-6">
+              <label>middle right</label>&nbsp;</div>
+            <div role="gridcell" id="metaboard-cell-7" aria-labelledby="metaboard-header metaboard-cell-7">
+              <label>Bottom left</label>&nbsp;</div>
+            <div role="gridcell" id="metaboard-cell-8"  aria-labelledby="metaboard-header metaboard-cell-8">
+              <label>Bottom middle</label>&nbsp;</div>
+            <div role="gridcell" id="metaboard-cell-9"  aria-labelledby="metaboard-header metaboard-cell-9">
+              <label>Bottom right</label>&nbsp;</div>
+          </div>
+        </section>
       </div>
-    </section>
+    </div>
   </div>
-
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/plugins.js"></script>
 
@@ -89,7 +92,7 @@
   <script type="module">
     import createGameModelsPlaceBoardsWireUpAll from './js/create-game-models-place-boards-wire-up-all.js'
     window.game=createGameModelsPlaceBoardsWireUpAll(
-      "div[role=grid].nine-by-nine",
+      "div[role=grid].three-by-three",
       "metagame-grid"
     )
   </script>

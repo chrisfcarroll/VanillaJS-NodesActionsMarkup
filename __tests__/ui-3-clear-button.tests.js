@@ -37,7 +37,7 @@ test('New Game button starts new games', async ()=>{
   document.outerHTML=(await getIndexHtml()).outerHTML
   // noinspection JSUnusedLocalSymbols
   const {
-    container9By9,
+    container3by3,
     containerMetaGame ,
     metaGame,
     oxoBoards,
@@ -73,7 +73,7 @@ test('New Game button clears all squares', async ()=>{
   document.outerHTML=(await getIndexHtml()).outerHTML
   // noinspection JSUnusedLocalSymbols
   const {
-    container9By9,
+    container3by3,
     containerMetaGame ,
     metaGame,
     oxoBoards,
@@ -84,7 +84,7 @@ test('New Game button clears all squares', async ()=>{
   await givenSomeMoreMoves()
   await user.click(clearButton)
 
-  for(let square of container9By9.querySelectorAll(allBoardCellsSelector)){
+  for(let square of container3by3.querySelectorAll(allBoardCellsSelector)){
       expect(square.innerHTML).toContain('&nbsp;')
   }
   for(let square of containerMetaGame.querySelectorAll(allMetagameCellSelector)){
@@ -109,7 +109,7 @@ test('After pressing New Game button everything is wired up again', async ()=>{
   document.outerHTML=(await getIndexHtml()).outerHTML
   // noinspection JSUnusedLocalSymbols
   const {
-    container9By9,
+    container3by3,
     containerMetaGame ,
     metaGame,
     oxoBoards,
