@@ -23,11 +23,19 @@ test('UltimateOxoGame knows when a game is finished', ()=>{
 
   const metaGame=new UltimateOxoGame()
   let lastPlayer;
-  for(let i=1; i<=7; i++){
-      lastPlayer=metaGame.games[1].playerOnMove
-      metaGame.games[1].playMove(i)
-    }
-  expect( metaGame.games[1].winLine).toEqual([3,5,7])
+  const winGame1ForO = [
+    {game: 1, player: "x", playedAt: 1},
+    {game: 1, player: "O", playedAt: 2},
+    {game: 2, player: "X", playedAt: 1},
+    {game: 1, player: "O", playedAt: 5},
+    {game: 5, player: "X", playedAt: 1},
+    {game: 1, player: "O", playedAt: 8}
+  ]
+  for(let move of winGame1ForO){
+    lastPlayer=metaGame.playerOnMove
+    metaGame.games[move.game].playMove(move.playedAt)
+  }
+  expect( metaGame.games[1].winLine).toEqual([2,5,8])
   expect( metaGame.games[1].winner ).toBe(lastPlayer)
 
   for(let i=2; i <= 9 ; i++){
@@ -37,19 +45,26 @@ test('UltimateOxoGame knows when a game is finished', ()=>{
 
 test('UltimateOxoGame updates the metagame when a game is finished', ()=>{
     const metaGame=new UltimateOxoGame()
-    const games=metaGame.games
     let lastPlayer
 
-    for(let i=1; i <= 7; i++){
-      lastPlayer=games[1].playerOnMove
-      games[1].playMove(i)
-    }
-    expect(games[1].winLine).toEqual([3,5,7])
+  const winGame1ForO = [
+    {game: 1, player: "x", playedAt: 1},
+    {game: 1, player: "O", playedAt: 2},
+    {game: 2, player: "X", playedAt: 1},
+    {game: 1, player: "O", playedAt: 5},
+    {game: 5, player: "X", playedAt: 1},
+    {game: 1, player: "O", playedAt: 8}
+  ]
+  for(let move of winGame1ForO){
+    lastPlayer=metaGame.playerOnMove
+    metaGame.games[move.game].playMove(move.playedAt)
+  }
+  expect( metaGame.games[1].winLine).toEqual([2,5,8])
 
-    expect(metaGame.metaGame.boardModel.slice(1,10)).toEqual(
-        ['X', unplayedSquare,unplayedSquare,
-                  unplayedSquare,unplayedSquare,unplayedSquare,
-                  unplayedSquare,unplayedSquare,unplayedSquare,])
+  expect(metaGame.metaGame.boardModel.slice(1,10)).toEqual(
+      [lastPlayer, unplayedSquare,unplayedSquare,
+                unplayedSquare,unplayedSquare,unplayedSquare,
+                unplayedSquare,unplayedSquare,unplayedSquare,])
 })
 
 test('UltimateOxoGame overrides playerOnMove for the nine child games ', ()=>{
@@ -62,4 +77,49 @@ test('UltimateOxoGame overrides playerOnMove for the nine child games ', ()=>{
     expect(games[i].playerOnMove).toBe('O')
   }
 
+})
+
+test('UltimateOxoGame restricts which board can next be played on', ()=>{
+  const metaGame= new UltimateOxoGame()
+  const games= metaGame.games
+  expect(metaGame.nextBoard).toBe(0)
+  games[1].playMove(1);
+  expect(metaGame.nextBoard).toBe(1)
+
+})
+
+const winForOinGame1 = [
+    {game: 1, player: "x", playedAt: 1},
+    {game: 1, player: "O", playedAt: 2},
+    {game: 2, player: "X", playedAt: 1},
+    {game: 1, player: "O", playedAt: 5},
+    {game: 5, player: "X", playedAt: 1},
+    {game: 1, player: "O", playedAt: 8}
+  ]
+
+test('UltimateOxoGame.newGame() starts new games', ()=> {
+  const metaGame= new UltimateOxoGame()
+
+  givenAWinForOinBoard1()
+  givenSomeMoreMoves()
+  metaGame.newGame()
+
+  for(let square of metaGame.metaGame.boardModel){
+      expect(square).toBe(unplayedSquare)
+  }
+  for(let game of metaGame.games.filter(g=>g))for(let square of game.boardModel.filter(b=>b)){
+    expect(square).toBe(unplayedSquare)
+  }
+
+  function givenAWinForOinBoard1() {
+    for (let move of winForOinGame1) {
+      metaGame.games[move.game].playMove(move.playedAt)
+    }
+    expect(metaGame.metaGame.boardModel[1]).toBe('O')
+  }
+  function givenSomeMoreMoves() {
+    for (let i = 2; i <= 9; i++) {
+      metaGame.games[metaGame.nextBoard].playMove(i)
+    }
+  }
 })

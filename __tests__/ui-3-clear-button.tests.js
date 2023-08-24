@@ -23,6 +23,15 @@ beforeEach( async () => {
   hasDoneInnerHTMLChickenDance=true;
 })
 
+const winForOinGame1 = [
+    {game: 1, player: "x", playedAt: 1},
+    {game: 1, player: "O", playedAt: 2},
+    {game: 2, player: "X", playedAt: 1},
+    {game: 1, player: "O", playedAt: 5},
+    {game: 5, player: "X", playedAt: 1},
+    {game: 1, player: "O", playedAt: 8}
+  ]
+
 test('New Game button starts new games', async ()=>{
   const user = userEvent.setup()
   document.outerHTML=(await getIndexHtml()).outerHTML
@@ -35,19 +44,27 @@ test('New Game button starts new games', async ()=>{
     clearButton
   } = createGameModelsPlaceBoardsWireUpAll();
 
-  //Playing the first seven cells in order from top left is a win for player 1
-  for(let i=1; i <= 7; i++){
-    await user.click(oxoBoards[1].cells[i-1])
-  }
-  expect(metaGame.metaGame.boardModel[1]).toBe('X')
-  for(let i= 2; i <= 9 ; i++){
-    await user.click( oxoBoards[i].cells[i-1])
-  }
-
+  await givenAWinForOonBoard1()
+  await givenSomeMoreMoves()
   await user.click(clearButton)
 
   for(let square of metaGame.metaGame.boardModel){
       expect(square).toBe(unplayedSquare)
+  }
+  for(let game of metaGame.games.filter(g=>g))for(let square of game.boardModel.filter(b=>b)){
+    expect(square).toBe(unplayedSquare)
+  }
+
+  async function givenAWinForOonBoard1() {
+    for (let move of winForOinGame1) {
+      await user.click(oxoBoards[move.game].cells[move.playedAt - 1])
+    }
+    expect(metaGame.metaGame.boardModel[1]).toBe('O')
+  }
+  async function givenSomeMoreMoves() {
+    for (let i = 2; i <= 9; i++) {
+      await user.click(oxoBoards[metaGame.nextBoard].cells[i - 1])
+    }
   }
 })
 
@@ -63,14 +80,8 @@ test('New Game button clears all squares', async ()=>{
     clearButton
   } = createGameModelsPlaceBoardsWireUpAll();
 
-  //Playing the first seven cells in order from top left is a win for player 1
-  for(let i=1; i <= 7; i++){
-    await user.click(oxoBoards[1].cells[i-1])
-  }
-  expect(metaGame.metaGame.boardModel[1]).toBe('X')
-  for(let i= 2; i <= 9 ; i++){
-    await user.click( oxoBoards[i].cells[i-1])
-  }
+  await givenAWinOnBoard1ForO()
+  await givenSomeMoreMoves()
   await user.click(clearButton)
 
   for(let square of container9By9.querySelectorAll(allBoardCellsSelector)){
@@ -78,6 +89,18 @@ test('New Game button clears all squares', async ()=>{
   }
   for(let square of containerMetaGame.querySelectorAll(allMetagameCellSelector)){
       expect(square.innerHTML).toContain('&nbsp;')
+  }
+
+  async function givenAWinOnBoard1ForO() {
+    for (let move of winForOinGame1) {
+      await user.click(oxoBoards[move.game].cells[move.playedAt - 1])
+    }
+    expect(metaGame.metaGame.boardModel[1]).toBe('O')
+  }
+  async function givenSomeMoreMoves() {
+    for (let i = 2; i <= 9; i++) {
+      await user.click(oxoBoards[metaGame.nextBoard].cells[i - 1])
+    }
   }
 })
 
@@ -94,15 +117,19 @@ test('After pressing New Game button everything is wired up again', async ()=>{
   } = createGameModelsPlaceBoardsWireUpAll();
 
   await user.click(clearButton)
+  await verifyWinForOonBoard1()
+  await verifySomeMoreMoves()
 
-  //Playing the first seven cells in order from top left is a win for player 1
-  for(let i=1; i <= 7; i++){
-    await user.click(oxoBoards[1].cells[i-1])
+  async function verifyWinForOonBoard1() {
+    for (let move of winForOinGame1) {
+      await user.click(oxoBoards[move.game].cells[move.playedAt - 1])
+    }
+    expect(metaGame.metaGame.boardModel[1]).toBe('O')
   }
-  expect(metaGame.metaGame.boardModel[1]).toBe('X')
-
-  for(let i= 2; i <= 9 ; i++){
-    await user.click( oxoBoards[i].cells[i-1])
-    expect(metaGame.metaGame.boardModel[i]).toBe(unplayedSquare)
+  async function verifySomeMoreMoves() {
+    for (let i = 2; i <= 9; i++) {
+      await user.click(oxoBoards[metaGame.nextBoard].cells[i - 1])
+      expect(metaGame.metaGame.boardModel[i]).toBe(unplayedSquare)
+    }
   }
 })

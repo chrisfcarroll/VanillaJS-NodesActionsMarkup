@@ -6,7 +6,7 @@ export function gameNumberFromName(name){
   if(!gameNumberMatch || gameNumberMatch[0] < 1 || gameNumberMatch[0] > 9){
     console.error(`Expected game number in name ${game.name} to be between 1 and 9`)
   }
-  return gameNumberMatch[0]
+  return parseInt(gameNumberMatch[0])
 }
 
 function UltimateOxoGame(queue,name){
@@ -15,12 +15,13 @@ function UltimateOxoGame(queue,name){
   this.name = name || "Metagame started at " + new Date().toTimeString()
   this.oldGames=[]
   this.playerOnMove='X'
+  this.nextBoard=0
   const that=this;
 
   this.newGame= function(){
     that.games=new Array(10)
     for(let i=1; i<=9; i++){
-      that.games[i]= new OxoGame(that.queue,"Game "+i)
+      that.games[i]= new OxoGame(that.queue,"Game "+i, that)
     }
     that.metaGame= (that.metaGame)
       ? new OxoGame(that.metaGame.moveQueue,"metaGame")
@@ -30,6 +31,8 @@ function UltimateOxoGame(queue,name){
       lastGame.push(that.queue.shift())
     }
     that.oldGames.push(lastGame)
+    that.playerOnMove='X'
+    that.nextBoard=0
   }
 
   this.observeMove= function(event){
@@ -39,7 +42,6 @@ function UltimateOxoGame(queue,name){
     }
     console.info(event.method, event.action)
     updateMetaGame()
-    that.playerOnMove = (that.playerOnMove === 'X' ? 'O' : 'X')
     overrideChildGamesPlayerOnMove()
 
     function updateMetaGame() {
@@ -54,6 +56,8 @@ function UltimateOxoGame(queue,name){
         that.metaGame.playerOnMove = game.winner
         that.metaGame.playMove(gameNumber)
       }
+      that.playerOnMove = (that.playerOnMove === 'X' ? 'O' : 'X')
+      that.nextBoard= (that.games[event.action.playedAt].winLine ? 0 : event.action.playedAt)
     }
     function overrideChildGamesPlayerOnMove() {
       for (let game of that.games.filter(g=>g)) {

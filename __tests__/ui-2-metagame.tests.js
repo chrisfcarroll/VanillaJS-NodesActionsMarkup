@@ -9,6 +9,16 @@ let index
 let hasDoneInnerHTMLChickenDance=false
 window =  window || {}
 
+const winGame1ForO = [
+    {game: 1, player: "x", playedAt: 1},
+    {game: 1, player: "O", playedAt: 2},
+    {game: 2, player: "X", playedAt: 1},
+    {game: 1, player: "O", playedAt: 5},
+    {game: 5, player: "X", playedAt: 1},
+    {game: 1, player: "O", playedAt: 8}
+  ]
+
+
 async function getIndexHtml(){
   indexRaw= indexRaw || (await fs.readFile('index.html')).toString()
   index= index || new DOMParser().parseFromString(indexRaw,"text/html")
@@ -33,12 +43,10 @@ test('Winning a game plays the right move in the metagame', async ()=>{
   } = createGameModelsPlaceBoardsWireUpAll();
   expect(window.moveQueue).toBeDefined()
 
-  let board = oxoBoards[1]
-
-  //Playing the first seven cells in order from top left is a win for player 1
-  for(let i=1; i <= 7; i++){
-    await user.click(board.cells[i-1])
+  for(let move of winGame1ForO){
+    await user.click( oxoBoards[move.game].cells[move.playedAt - 1] )
   }
+
   //
-  expect(metaGame.metaGame.boardModel[1]).toBe('X')
+  expect(metaGame.metaGame.boardModel[1]).toBe('O')
 })

@@ -1,3 +1,5 @@
+import {gameNumberFromName} from './ultimate-oxo-game.js'
+
 export const unplayedSquare = '\u00A0'
 
 export class GameEvent{
@@ -8,20 +10,29 @@ export class GameEvent{
   }
 }
 
-function OxoGame(moveQueue, name) {
+function OxoGame(moveQueue, name, metaGame=undefined) {
     this.moveQueue= moveQueue || []
     this.name=name || 'Started at ' + new Date().toTimeString()
     this.boardModel= Array(10).fill(unplayedSquare)
     this.playerOnMove = 'X'
     this.winner = undefined
     this.winLine = undefined
+    this.metaGame=metaGame
+    this.metaGameNumber= metaGame? gameNumberFromName(name) : 0
     const that=this
 
     this.playMove = function(playedAt) {
       if(playedAt<1 || playedAt>9)console.error('playedAt',playedAt,'in game ' + that.name)
       const currentValue = that.boardModel[playedAt]
-      if (currentValue !== unplayedSquare) return currentValue; //ignore click already played square
-      if (that.winner) return currentValue;
+      function moveIsIllegal() {
+        //ignore click already played square
+        if (currentValue !== unplayedSquare) return currentValue;
+        //ignore moves on a won board
+        if (that.winner) return currentValue;
+        //ignore move that is the wrong board in the metaGame
+        if (that.metaGame && that.metaGame.nextBoard && that.metaGame.nextBoard !== that.metaGameNumber) return currentValue
+      }
+      if(moveIsIllegal()){return currentValue}
       //
       that.boardModel[playedAt] = that.playerOnMove;
       const played= that.playerOnMove
@@ -59,7 +70,7 @@ function OxoGame(moveQueue, name) {
         return true;
       }
       return false;
-    },
+    }
 
     this.newGame = function() {
       this.playerOnMove = 'X'
