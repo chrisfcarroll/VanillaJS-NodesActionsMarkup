@@ -14,6 +14,7 @@ function UltimateOxoGame(queue,name){
   if(queue && (!queue.push || !queue.addObserver)){throw new Error("queue doesn't have push/shift/addObserver functions")}
   this.name = name || "Metagame started at " + new Date().toTimeString()
   this.oldGames=[]
+  this.playerOnMove='X'
   const that=this;
 
   this.newGame= function(){
@@ -32,18 +33,32 @@ function UltimateOxoGame(queue,name){
   }
 
   this.observeMove= function(event){
-    if(event.action !== 'push'){
-      console.info('ignoring',event.action,event.value)
+    if(event.method !== 'push'){
+      console.info('ignoring',event.method,event.action)
       return
     }
-    console.info(event.action,event.value)
-    let gameNumber=gameNumberFromName(event.value.game)
-    let game= that.games[gameNumber]
-    if(!game){console.error("game " +event.value.game + " isn't in games list") ; debugger}
-    if(game.winLine){
-      console.log(`${game.name} was won by ${game.winner}`)
-      that.metaGame.playerOnMove= game.winner
-      that.metaGame.playMove(gameNumber)
+    console.info(event.method, event.action)
+    updateMetaGame()
+    that.playerOnMove = (that.playerOnMove === 'X' ? 'O' : 'X')
+    overrideChildGamesPlayerOnMove()
+
+    function updateMetaGame() {
+      let gameNumber = gameNumberFromName(event.action.game)
+      let game = that.games[gameNumber]
+      if (!game) {
+        console.error("game " + event.action.game + " isn't in games list");
+        debugger
+      }
+      if (game.winLine) {
+        console.log(`${game.name} was won by ${game.winner}`)
+        that.metaGame.playerOnMove = game.winner
+        that.metaGame.playMove(gameNumber)
+      }
+    }
+    function overrideChildGamesPlayerOnMove() {
+      for (let game of that.games.filter(g=>g)) {
+        game.playerOnMove = that.playerOnMove
+      }
     }
   }
 

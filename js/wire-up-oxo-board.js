@@ -50,9 +50,9 @@ export function wireUpMetaGame(metaGame,boardGridElement){
   let queue= metaGame.metaGame.moveQueue= new ObservablePushQueue()
   queue.addObserver("metaGameOutput", e=>{
     console.log("metagame output got ",e)
-    // GameEvent(e.value.game, e.value.player,e.value.playedAt)
-    let player=e.value.player
-    let cell= boardGridElement.querySelector(metagameCellSelectorPattern.replaceAll("${gameNumber}",e.value.playedAt))
+    // GameEvent(e.action.game, e.action.player,e.action.playedAt)
+    let player=e.action.player
+    let cell= boardGridElement.querySelector(metagameCellSelectorPattern.replaceAll("${gameNumber}",e.action.playedAt))
     cell.innerHTML= cell.innerHTML.replace(/&nbsp;|X|O/, player)
     if(metaGame.metaGame.winLine){
       for(let square of metaGame.metaGame.winLine){

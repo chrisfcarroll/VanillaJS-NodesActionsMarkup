@@ -7,10 +7,10 @@ function ObservablePushQueue(){
     if(this.observers.has(name))throw new Error(name + ' is already registered')
     this.observers.set(name,observer)
   }
-  this.broadcast = function(action,value) {
+  this.broadcast = function(method,action) {
     for (let key of this.observers.keys()) {
       let observer=this.observers.get(key)
-      try{ observer({action: action, value: value})}
+      try{ observer({method: method, action: action})}
       catch(e){console.warn('casting to observer',key,e)}
     }
   }

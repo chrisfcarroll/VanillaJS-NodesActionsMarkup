@@ -59,9 +59,9 @@ test('Queue.push() calls observers', ()=>{
       queue.push({i:i, j: new Date(2000 + i,i,i)})
 
       expect(observed1.length).toBe(queueLengthWas + 1)
-      expect(observed1[queue.length-1]).toEqual({action:'push', value:{i:i, j: new Date(2000 + i,i,i)}})
+      expect(observed1[queue.length-1]).toEqual({method:'push', action:{i:i, j: new Date(2000 + i,i,i)}})
       expect(observed2.length).toBe(queueLengthWas + 1)
-      expect(observed2[queue.length-1]).toEqual({action:'push', value:{i:i, j: new Date(2000 + i,i,i)}})
+      expect(observed2[queue.length-1]).toEqual({method:'push', action:{i:i, j: new Date(2000 + i,i,i)}})
     }
 })
 
@@ -79,9 +79,9 @@ test('Queue.pop() calls observers', ()=>{
     }
 
     for(let i=5; i>=0; i--){
-      const expectedEvent={action:'pop', value:{i:i, j: new Date(2000 + i,i,i)}}
-      const expectedValue = queue.pop()
-      expect(expectedEvent.value).toEqual(expectedValue)
+      const expectedEvent={method:'pop', action:{i:i, j: new Date(2000 + i,i,i)}}
+      const expectedAction = queue.pop()
+      expect(expectedEvent.action).toEqual(expectedAction)
 
       expect(observed1.length).toBe(12 - i)
       expect(observed1[observed1.length-1]).toEqual(expectedEvent)
@@ -105,9 +105,9 @@ test('Queue.shift() calls observers', ()=>{
     }
 
     for(let i=0; i<6; i++){
-      const expectedEvent={action:'shift', value:{i:i, j: new Date(2000 + i,i,i)}}
-      const expectedValue = queue.shift()
-      expect(expectedEvent.value).toEqual(expectedValue)
+      const expectedEvent={method:'shift', action:{i:i, j: new Date(2000 + i,i,i)}}
+      const expectedAction = queue.shift()
+      expect(expectedEvent.action).toEqual(expectedAction)
 
       expect(observed1.length).toBe(7 + i)
       expect(observed1[observed1.length-1]).toEqual(expectedEvent)

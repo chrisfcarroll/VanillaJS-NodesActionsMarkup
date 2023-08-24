@@ -51,3 +51,15 @@ test('UltimateOxoGame updates the metagame when a game is finished', ()=>{
                   unplayedSquare,unplayedSquare,unplayedSquare,
                   unplayedSquare,unplayedSquare,unplayedSquare,])
 })
+
+test('UltimateOxoGame overrides playerOnMove for the nine child games ', ()=>{
+  const metaGame= new UltimateOxoGame()
+  const games= metaGame.games
+  games[1].playMove(1);
+  expect(games[1].playerOnMove).toBe('O')
+
+  for(let i=2; i <=9 ; i++){
+    expect(games[i].playerOnMove).toBe('O')
+  }
+
+})
