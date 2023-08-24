@@ -1,6 +1,6 @@
 import '@jest/globals'
 import '@testing-library/jest-dom'
-import OxoGame from '../../js/oxo-game'
+import OxoGame from '../js/oxo-game'
 
 test('OxoGame recognises win and not won', ()=>{
 
@@ -49,7 +49,7 @@ describe('OxoGame records move in a global queue', ()=>{
         expect(queue.length).toBe(queueLengthWas + 1)
         expect(queue[queue.length-1]).toEqual({game:game.name, player:currentPlayer, playedAt:i})
       }
-      game.playMove(0)
+      game.playMove(1)
       expect(queue.length).toBe(7)
   })
 })

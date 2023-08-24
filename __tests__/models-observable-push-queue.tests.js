@@ -1,6 +1,5 @@
 import '@jest/globals'
-import ObservablePushQueue from '../../js/observable-push-queue'
-import expect from 'expect'
+import ObservablePushQueue from '../js/observable-push-queue'
 
 test('Queue.push() keeps pushed elements and sets length', ()=>{
     const queue= new ObservablePushQueue()

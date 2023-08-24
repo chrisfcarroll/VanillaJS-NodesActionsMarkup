@@ -5,6 +5,11 @@ import {promises as fs} from 'fs'
 
 let indexRaw;
 let index;
+async function getIndexHtml(){
+  indexRaw= indexRaw || (await fs.readFile('index.html')).toString()
+  index= index || new DOMParser().parseFromString(indexRaw,"text/html")
+  return index
+}
 
 test('jest runs', ()=>{
   expect(true).toBeTruthy()
@@ -24,12 +29,6 @@ test('can load index.html', async ()=> {
   document.body.innerHTML=index.body.innerHTML
   expect(document.body).toBeVisible()
 })
-
-async function getIndexHtml(){
-  indexRaw= indexRaw || (await fs.readFile('index.html')).toString()
-  index= index || new DOMParser().parseFromString(indexRaw,"text/html")
-  return index
-}
 
 test('Game Board 1 renders', async ()=> {
 
