@@ -90,7 +90,10 @@ textarea {
 
 h1 { margin: 1rem 0 }
 h6 { margin: 0.5rem 0 }
-
+@media not (min-width: 35em) {
+  h1 {font-size: 1rem; margin:0}
+  h6 {margin:0}
+}
 
 @keyframes fadeInOut {
   0%,100% { opacity: 0 }
@@ -159,7 +162,7 @@ h6 { margin: 0.5rem 0 }
 .three-by-three {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: minmax(9rem, 27vmin);
+  grid-auto-rows: minmax(7.5rem, 27vmin);
   height: 81vmin;
   width: 81vmin;
   font-family: "Arial Rounded MT Bold","Avenir","Futura",sans-serif;
@@ -192,11 +195,15 @@ h6 { margin: 0.5rem 0 }
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-rows: minmax(2.5rem,8vmin);
   aspect-ratio: 1 / 1;
-  border: 0.6px dashed lightblue;
+  border: 1px solid darkgrey;
   container: oxo-board / size;
 }
+@media only screen and (max-width: 35em){
+  .oxo-board {border: 1px solid black;}
+}
+
 .oxo-board [role=gridcell] {
-  border: 0.6px solid darkgrey;
+  border: 0.6px solid grey;
   aspect-ratio: 1 / 1;
   text-align: center;
   font-weight: bold;
@@ -220,6 +227,12 @@ h6 { margin: 0.5rem 0 }
   font-family: sans-serif;
   font-weight: lighter;
 }
+@media not (min-width: 35em){
+  .oxo-board [role=gridcell] label{
+    font-size: 0.2rem;
+  }
+}
+
 
 .oxo-board.small {
   width:18vmin;

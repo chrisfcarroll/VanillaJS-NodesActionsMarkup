@@ -57,3 +57,17 @@ test('Game Board 1 renders nine cells Top Left to Bottom Right', async ()=> {
     }
   }
 })
+
+test('Gridcells all have accessible names', async ()=>{
+
+  document.body.innerHTML= (await getIndexHtml()).body.innerHTML
+
+  for(let board of ['Board 1', 'Meta Game'])
+    for(let row of ['top','middle','bottom'])
+      for(let column of ['left','middle','right']){
+        let name=board + ' ' + row + ' ' + column
+        if(row + ' ' + column === 'middle middle'){name=board + ' middle square'}
+        screen.getByRole('gridcell', {name:name} )
+      }
+
+})
