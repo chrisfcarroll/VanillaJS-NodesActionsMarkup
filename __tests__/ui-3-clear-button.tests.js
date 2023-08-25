@@ -41,12 +41,12 @@ test('New Game button starts new games', async ()=>{
     containerMetaGame ,
     metaGame,
     oxoBoards,
-    clearButton
+    newGameButton
   } = createGameModelsPlaceBoardsWireUpAll();
 
   await givenAWinForOonBoard1()
   await givenSomeMoreMoves()
-  await user.click(clearButton)
+  await user.click(newGameButton)
 
   for(let square of metaGame.metaGame.boardModel){
       expect(square).toBe(unplayedSquare)
@@ -77,12 +77,12 @@ test('New Game button clears all squares', async ()=>{
     containerMetaGame ,
     metaGame,
     oxoBoards,
-    clearButton
+    newGameButton
   } = createGameModelsPlaceBoardsWireUpAll();
 
   await givenAWinOnBoard1ForO()
   await givenSomeMoreMoves()
-  await user.click(clearButton)
+  await user.click(newGameButton)
 
   for(let square of container3by3.querySelectorAll(allBoardCellsSelector)){
       expect(square.innerHTML).toContain('&nbsp;')
@@ -113,10 +113,10 @@ test('After pressing New Game button everything is wired up again', async ()=>{
     containerMetaGame ,
     metaGame,
     oxoBoards,
-    clearButton
+    newGameButton
   } = createGameModelsPlaceBoardsWireUpAll();
 
-  await user.click(clearButton)
+  await user.click(newGameButton)
   await verifyWinForOonBoard1()
   await verifySomeMoreMoves()
 

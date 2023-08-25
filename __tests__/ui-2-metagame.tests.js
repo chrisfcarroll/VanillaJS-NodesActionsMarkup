@@ -39,7 +39,8 @@ test('Winning a game plays the right move in the metagame', async ()=>{
     container3by3,
     containerMetaGame ,
     metaGame,
-    oxoBoards
+    oxoBoards,
+    newGameButton
   } = createGameModelsPlaceBoardsWireUpAll();
   expect(window.moveQueue).toBeDefined()
 
