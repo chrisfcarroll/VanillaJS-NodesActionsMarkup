@@ -22,7 +22,7 @@
     <h1>Ultimate Nought and Crosses</h1>
     <div class="centralising-panel"><button id="new-game-button">New Game</button></div>
   </div>
-  <div class="twocolumns">
+  <div class="twocolumns" id="game">
     <div class="leftcolumn">
       <h6>Play!</h6>
       <div role="grid" class="three-by-three">
@@ -87,7 +87,9 @@
   <script src="js/oxo-game.js" type="module"></script>
   <script src="js/ultimate-oxo-game.js" type="module"></script>
   <script src="js/place-oxo-board.js" type="module"></script>
-  <script src="js/wire-up-oxo-board.js" type="module"></script>
+  <script src="js/NodesAndActions-nine-oxo-games.js" type="module"></script>
+  <script src="js/NodesAndActions-metagame.js" type="module"></script>
+  <script src="js/NodesAndActions-new-game-button.js" type="module"></script>
   <script src="js/create-game-models-place-boards-wire-up-all.js" type="module"></script>
   <script type="module">
     import createGameModelsPlaceBoardsWireUpAll from './js/create-game-models-place-boards-wire-up-all.js'
@@ -95,6 +97,12 @@
       "div[role=grid].three-by-three",
       "metagame-grid"
     )
+  </script>
+  <script type="module" id="assert-expected-htl-dom-nodes-exist-for-game-elements">
+    import {assertDomNodes as assertMetaGameNodes} from './js/NodesAndActions-metagame.js'
+    import {assertDomNodes as assertNineGamesNodes} from './js/NodesAndActions-nine-oxo-games.js'
+    assertMetaGameNodes()
+    assertNineGamesNodes()
   </script>
 
   <template id="oxo-board-section-template">

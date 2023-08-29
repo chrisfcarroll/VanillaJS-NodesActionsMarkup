@@ -4,8 +4,11 @@ import {promises as fs} from 'fs'
 import userEvent from '@testing-library/user-event'
 import createGameModelsPlaceBoardsWireUpAll from '../js/create-game-models-place-boards-wire-up-all'
 import {unplayedSquare} from '../js/oxo-game'
-import {allBoardCellsSelector, allMetagameCellSelector} from '../js/wire-up-oxo-board'
-
+import {
+  cellsByBoardNumberDomNodes,
+  nineOxoBoardsAllCellsDomNodes
+} from '../js/NodesAndActions-nine-oxo-games'
+import {metaGameAllCellDomNodes} from '../js/NodesAndActions-metagame'
 let indexRaw
 let index
 let hasDoneInnerHTMLChickenDance=false
@@ -24,7 +27,7 @@ beforeEach( async () => {
 })
 
 const winForOinGame1 = [
-    {game: 1, player: "x", playedAt: 1},
+    {game: 1, player: "X", playedAt: 1},
     {game: 1, player: "O", playedAt: 2},
     {game: 2, player: "X", playedAt: 1},
     {game: 1, player: "O", playedAt: 5},
@@ -37,10 +40,9 @@ test('New Game button starts new games', async ()=>{
   document.outerHTML=(await getIndexHtml()).outerHTML
   // noinspection JSUnusedLocalSymbols
   const {
-    container3by3,
-    containerMetaGame ,
     metaGame,
-    oxoBoards,
+    metaGameActions,
+    oxoBoardActions,
     newGameButton
   } = createGameModelsPlaceBoardsWireUpAll();
 
@@ -57,13 +59,13 @@ test('New Game button starts new games', async ()=>{
 
   async function givenAWinForOonBoard1() {
     for (let move of winForOinGame1) {
-      await user.click(oxoBoards[move.game].cells[move.playedAt - 1])
+      await user.click(cellsByBoardNumberDomNodes(move.game)[move.playedAt - 1])
     }
     expect(metaGame.metaGame.boardModel[1]).toBe('O')
   }
   async function givenSomeMoreMoves() {
     for (let i = 2; i <= 9; i++) {
-      await user.click(oxoBoards[metaGame.nextBoard].cells[i - 1])
+      await user.click(cellsByBoardNumberDomNodes(metaGame.nextBoard)[i - 1])
     }
   }
 })
@@ -73,10 +75,8 @@ test('New Game button clears all squares', async ()=>{
   document.outerHTML=(await getIndexHtml()).outerHTML
   // noinspection JSUnusedLocalSymbols
   const {
-    container3by3,
-    containerMetaGame ,
     metaGame,
-    oxoBoards,
+    oxoBoardActions,
     newGameButton
   } = createGameModelsPlaceBoardsWireUpAll();
 
@@ -84,22 +84,22 @@ test('New Game button clears all squares', async ()=>{
   await givenSomeMoreMoves()
   await user.click(newGameButton)
 
-  for(let square of container3by3.querySelectorAll(allBoardCellsSelector)){
+  for(let square of nineOxoBoardsAllCellsDomNodes()){
       expect(square.innerHTML).toContain('&nbsp;')
   }
-  for(let square of containerMetaGame.querySelectorAll(allMetagameCellSelector)){
+  for(let square of metaGameAllCellDomNodes()){
       expect(square.innerHTML).toContain('&nbsp;')
   }
 
   async function givenAWinOnBoard1ForO() {
     for (let move of winForOinGame1) {
-      await user.click(oxoBoards[move.game].cells[move.playedAt - 1])
+      await user.click(cellsByBoardNumberDomNodes(move.game)[move.playedAt - 1])
     }
     expect(metaGame.metaGame.boardModel[1]).toBe('O')
   }
   async function givenSomeMoreMoves() {
     for (let i = 2; i <= 9; i++) {
-      await user.click(oxoBoards[metaGame.nextBoard].cells[i - 1])
+      await user.click(cellsByBoardNumberDomNodes(metaGame.nextBoard)[i - 1])
     }
   }
 })
@@ -109,10 +109,8 @@ test('After pressing New Game button everything is wired up again', async ()=>{
   document.outerHTML=(await getIndexHtml()).outerHTML
   // noinspection JSUnusedLocalSymbols
   const {
-    container3by3,
-    containerMetaGame ,
     metaGame,
-    oxoBoards,
+    oxoBoardActions,
     newGameButton
   } = createGameModelsPlaceBoardsWireUpAll();
 
@@ -122,13 +120,13 @@ test('After pressing New Game button everything is wired up again', async ()=>{
 
   async function verifyWinForOonBoard1() {
     for (let move of winForOinGame1) {
-      await user.click(oxoBoards[move.game].cells[move.playedAt - 1])
+      await user.click( cellsByBoardNumberDomNodes(move.game)[move.playedAt - 1] )
     }
     expect(metaGame.metaGame.boardModel[1]).toBe('O')
   }
   async function verifySomeMoreMoves() {
     for (let i = 2; i <= 9; i++) {
-      await user.click(oxoBoards[metaGame.nextBoard].cells[i - 1])
+      await user.click(cellsByBoardNumberDomNodes(metaGame.nextBoard)[i - 1])
       expect(metaGame.metaGame.boardModel[i]).toBe(unplayedSquare)
     }
   }
