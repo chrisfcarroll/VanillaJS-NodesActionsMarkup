@@ -41,14 +41,14 @@ test('New Game button starts new games', async ()=>{
   // noinspection JSUnusedLocalSymbols
   const {
     metaGame,
-    metaGameActions,
-    oxoBoardActions,
-    newGameButton
+    metaGameNodesActions,
+    oxoBoardsNodesActionsList,
+    newGameButtonNA
   } = createGameModelsPlaceBoardsWireUpAll();
 
   await givenAWinForOonBoard1()
   await givenSomeMoreMoves()
-  await user.click(newGameButton)
+  await user.click(newGameButtonNA.node)
 
   for(let square of metaGame.metaGame.boardModel){
       expect(square).toBe(unplayedSquare)
@@ -59,13 +59,13 @@ test('New Game button starts new games', async ()=>{
 
   async function givenAWinForOonBoard1() {
     for (let move of winForOinGame1) {
-      await user.click(cellsByBoardNumberDomNodes(move.game)[move.playedAt - 1])
+      await user.click( oxoBoardsNodesActionsList[move.game].nodes.cells[move.playedAt - 1])
     }
     expect(metaGame.metaGame.boardModel[1]).toBe('O')
   }
   async function givenSomeMoreMoves() {
     for (let i = 2; i <= 9; i++) {
-      await user.click(cellsByBoardNumberDomNodes(metaGame.nextBoard)[i - 1])
+      await user.click( oxoBoardsNodesActionsList[metaGame.nextBoard].nodes.cells[i - 1])
     }
   }
 })
@@ -76,30 +76,31 @@ test('New Game button clears all squares', async ()=>{
   // noinspection JSUnusedLocalSymbols
   const {
     metaGame,
-    oxoBoardActions,
-    newGameButton
+    metaGameNodesActions,
+    oxoBoardsNodesActionsList,
+    newGameButtonNA
   } = createGameModelsPlaceBoardsWireUpAll();
 
   await givenAWinOnBoard1ForO()
   await givenSomeMoreMoves()
-  await user.click(newGameButton)
+  await user.click(newGameButtonNA.node)
 
-  for(let square of nineOxoBoardsAllCellsDomNodes()){
+  for(let square of metaGameNodesActions.nodes.nineOxoBoardsAllCells){
       expect(square.innerHTML).toContain('&nbsp;')
   }
-  for(let square of metaGameAllCellDomNodes()){
+  for(let square of metaGameNodesActions.nodes.metaGameAllCells){
       expect(square.innerHTML).toContain('&nbsp;')
   }
 
   async function givenAWinOnBoard1ForO() {
     for (let move of winForOinGame1) {
-      await user.click(cellsByBoardNumberDomNodes(move.game)[move.playedAt - 1])
+      await user.click( oxoBoardsNodesActionsList[move.game].nodes.cells[move.playedAt - 1])
     }
     expect(metaGame.metaGame.boardModel[1]).toBe('O')
   }
   async function givenSomeMoreMoves() {
     for (let i = 2; i <= 9; i++) {
-      await user.click(cellsByBoardNumberDomNodes(metaGame.nextBoard)[i - 1])
+      await user.click( oxoBoardsNodesActionsList[metaGame.nextBoard].nodes.cells[i - 1])
     }
   }
 })
@@ -110,23 +111,23 @@ test('After pressing New Game button everything is wired up again', async ()=>{
   // noinspection JSUnusedLocalSymbols
   const {
     metaGame,
-    oxoBoardActions,
-    newGameButton
+    oxoBoardsNodesActionsList,
+    newGameButtonNA
   } = createGameModelsPlaceBoardsWireUpAll();
 
-  await user.click(newGameButton)
+  await user.click(newGameButtonNA.node)
   await verifyWinForOonBoard1()
   await verifySomeMoreMoves()
 
   async function verifyWinForOonBoard1() {
     for (let move of winForOinGame1) {
-      await user.click( cellsByBoardNumberDomNodes(move.game)[move.playedAt - 1] )
+      await user.click( oxoBoardsNodesActionsList[move.game].nodes.cells[move.playedAt - 1] )
     }
     expect(metaGame.metaGame.boardModel[1]).toBe('O')
   }
   async function verifySomeMoreMoves() {
     for (let i = 2; i <= 9; i++) {
-      await user.click(cellsByBoardNumberDomNodes(metaGame.nextBoard)[i - 1])
+      await user.click( oxoBoardsNodesActionsList[metaGame.nextBoard].nodes.cells[i - 1])
       expect(metaGame.metaGame.boardModel[i]).toBe(unplayedSquare)
     }
   }

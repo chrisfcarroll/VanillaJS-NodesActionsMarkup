@@ -1,20 +1,17 @@
 import {unplayedSquare} from './oxo-game.js'
 
 const nineOxoBoardsSelector="div[role=grid].three-by-three"
-const nineOxoBoardsAllCellsSelector=".oxo-board-section div[role=gridcell]"
 const boardSelectorPattern = ".oxo-board-section:nth-of-type(${gameNumber})"
 const boardCellsByBoardNumberSelectorPattern=".oxo-board-section:nth-of-type(${boardNumber}) div[role=gridcell]"
 
-export const nineOxoBoardsDomNode = ()=>document.querySelector(nineOxoBoardsSelector)
-export const nineOxoBoardsAllCellsDomNodes =
-      () => nineOxoBoardsDomNode().querySelectorAll(nineOxoBoardsAllCellsSelector)
+const nineOxoBoardsDomNode = ()=>document.querySelector(nineOxoBoardsSelector)
 
-export function boardByNumberDomNode(boardNumber) {
+function boardByNumberDomNode(boardNumber) {
   return nineOxoBoardsDomNode().querySelector(
     boardSelectorPattern.replace("${gameNumber}", boardNumber))
 }
 
-export function cellsByBoardNumberDomNodes(boardNumber){
+function cellsByBoardNumberDomNodes(boardNumber){
   console.assert(boardNumber>=1 && boardNumber<=9, 'Tried to select board number ' + boardNumber)
   return nineOxoBoardsDomNode().querySelectorAll(
     boardCellsByBoardNumberSelectorPattern.replace("${boardNumber}",boardNumber))
@@ -28,19 +25,20 @@ export function assertDomNodes() {
   }
 }
 
-export function OxoBoardActions(boardNumber, game) {
+export function OxoBoardNodesActions(boardNumber, game) {
   //
   // off-by-1 errors: the games are played on boards 1-9 with squares 1-9
   // but arrays of DomNodes are 0-8
   //
   const thisCells= cellsByBoardNumberDomNodes(boardNumber)
+  const that=this
+
+  this.nodes= {
+    boardByNumber:boardByNumberDomNode,
+    cells:thisCells
+  }
 
   this.boardNumber=boardNumber;
-
-  this.queryCell = function (i) {
-    console.assert(i>=1 && i<=9, `OxoBoardActions(boardNumber=${boardNumber}).querySquare(${i}) is not in range 1-9`)
-    return thisCells[i]
-  }
 
   this.newGame = function(){
     for(let cell of thisCells){

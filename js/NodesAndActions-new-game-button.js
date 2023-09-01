@@ -1,28 +1,30 @@
-import {nineOxoBoardsDomNode, OxoBoardActions} from './NodesAndActions-nine-oxo-games.js'
-import {gameDomNode} from './NodesAndActions-metagame.js'
+import { OxoBoardNodesActions} from './NodesAndActions-nine-oxo-games.js'
+import {MetaGameNodesActions} from './NodesAndActions-metagame.js'
 
 export const newGameButtonId="new-game-button"
-export const newGameButtonDomNode= ()=>document.getElementById(newGameButtonId)
+const newGameButtonDomNode= ()=>document.getElementById(newGameButtonId)
 
 export const assertDomNodesExist= function(){
   console.assert(newGameButtonDomNode(),'Expected newGameButtonDomNode with id ' + newGameButtonId)
 }
-export function wireUpNewGameButtonActions(metaGame, metaGameActions, oxoBoardsActions) {
+export function NewGameButtonNodesActions(metaGameModel, metaGameNodesActions, oxoBoardsNodesActionsList) {
 
-  newGameButtonDomNode().addEventListener('click', () => {
+  this.node=newGameButtonDomNode()
 
-    metaGame.newGame()
-    metaGameActions.setAllCellAsUnplayed()
+  this.node.addEventListener('click', () => {
 
-    for (let board of oxoBoardsActions.filter(b => b)) {
+    metaGameModel.newGame()
+    metaGameNodesActions.setAllCellAsUnplayed()
+
+    for (let board of oxoBoardsNodesActionsList.filter(b => b)) {
       board.setAllCellAsUnplayed()
       for (let i = 1; i <= 9; i++) {
-        oxoBoardsActions[i] = new OxoBoardActions(i, metaGame.games[i])
+        oxoBoardsNodesActionsList[i] = new OxoBoardNodesActions(i, metaGameModel.games[i])
       }
     }
-    for (let board of nineOxoBoardsDomNode().querySelectorAll('.playable')) {
+    for (let board of metaGameNodesActions.nodes.nineOxoBoards.querySelectorAll('.playable')) {
       board.classList.remove('playable')
     }
-    gameDomNode().classList.remove('game-over')
+    metaGameNodesActions.nodes.game.classList.remove('game-over')
   })
 }

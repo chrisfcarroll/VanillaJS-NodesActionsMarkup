@@ -6,16 +6,22 @@ const metaGameHTMLElementId = "metagame-grid"
 const metagameAllCellsSelector="div[role=gridcell]"
 const metagameCellByNumberSelector="div[role=gridcell]:nth-of-type(${gameNumber})"
 const allBoardsSelector = ".oxo-board-section"
+const nineOxoBoardsSelector="div[role=grid].three-by-three"
+const nineOxoBoardsAllCellsSelector=".oxo-board-section div[role=gridcell]"
 
-export const gameDomNode= ()=>document.getElementById(gameHTMLElementId)
-export const metaGameDomNode = () => document.getElementById(metaGameHTMLElementId)
-export const metaGameAllCellDomNodes =
+const gameDomNode= ()=>document.getElementById(gameHTMLElementId)
+const metaGameDomNode = () => document.getElementById(metaGameHTMLElementId)
+const metaGameAllCellDomNodes =
           () => metaGameDomNode().querySelectorAll(metagameAllCellsSelector)
-export const metaGameCellByNumberDomNode = function(i) {
+const metaGameCellByNumberDomNode = function(i) {
       console.assert(i>=1 && i<=9, 'attempt to access metaGame Cell ' + i)
       return metaGameDomNode().querySelector(metagameCellByNumberSelector.replace("${gameNumber}", i))
     }
-export const allBoardDomNodes= ()=> document.querySelectorAll(allBoardsSelector)
+const allBoardsDomNodes= ()=> document.querySelectorAll(allBoardsSelector)
+const nineOxoBoardsDomNode = ()=>document.querySelector(nineOxoBoardsSelector)
+const nineOxoBoardsAllCellsDomNodes =
+      () => nineOxoBoardsDomNode().querySelectorAll(nineOxoBoardsAllCellsSelector)
+
 
 export const assertDomNodes = function(){
   console.assert(gameDomNode(),`expected ${gameHTMLElementId} ID for one node`)
@@ -24,7 +30,18 @@ export const assertDomNodes = function(){
   console.assert(metaGameCellByNumberDomNode(1), `expected 1 metaGame grid cell for ${metagameCellByNumberSelector} with gameNumber=1`)
 }
 
-export function MetaGameActions(metaGame){
+export function MetaGameNodesActions(metaGame){
+
+  this.nodes = {
+    game:gameDomNode(),
+    metaGame:metaGameDomNode(),
+    metaGameAllCells: metaGameAllCellDomNodes(),
+    metaGameCellByNumber:metaGameCellByNumberDomNode,
+    allBoards:allBoardsDomNodes(),
+    nineOxoBoards:nineOxoBoardsDomNode(),
+    nineOxoBoardsAllCells:nineOxoBoardsAllCellsDomNodes(),
+
+  }
 
   this.setAllCellAsUnplayed = function(){
     for (let cell of metaGameAllCellDomNodes()) {

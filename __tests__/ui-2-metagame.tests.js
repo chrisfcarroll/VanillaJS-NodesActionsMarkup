@@ -65,14 +65,14 @@ test('Winning a game plays the right move in the metagame', async ()=>{
   // noinspection JSUnusedLocalSymbols
   const {
     metaGame,
-    metaGameActions,
-    oxoBoardActions,
-    newGameButton
+    metaGameNodesActions,
+    oxoBoardsNodesActionsList,
+    newGameButtonNA
   } = createGameModelsPlaceBoardsWireUpAll();
   expect(window.moveQueue).toBeDefined()
 
   for(let move of winGame1ForO){
-    await user.click( cellsByBoardNumberDomNodes(move.game)[move.playedAt - 1] )
+    await user.click( oxoBoardsNodesActionsList[move.game].nodes.cells[move.playedAt - 1] )
   }
 
   //
@@ -86,18 +86,18 @@ test('Winning the metaGame shows game-over style', async ()=>{
   // noinspection JSUnusedLocalSymbols
   const {
     metaGame,
-    metaGameActions,
-    oxoBoardActions,
-    newGameButton
+    metaGameNodesActions,
+    oxoBoardsNodesActionsList,
+    newGameButtonNA
   } = createGameModelsPlaceBoardsWireUpAll();
   expect(window.moveQueue).toBeDefined()
 
   for(let move of winMetaGameForO){
-    await user.click( cellsByBoardNumberDomNodes(move.game)[move.playedAt - 1] )
+    await user.click( oxoBoardsNodesActionsList[move.game].nodes.cells[move.playedAt - 1] )
   }
 
   //
   expect(metaGame.metaGame.winLine).toBeDefined()
-  expect(gameDomNode().classList).toContain('game-over')
+  expect(metaGameNodesActions.nodes.game.classList).toContain('game-over')
 
 })

@@ -116,8 +116,8 @@ h6 { margin: 0.5rem 0 }
 }
 @keyframes expandBounce {
   0%   { scale: 1 }
-  50%  { scale: .8 }
-  90%  { scale: 1.2 }
+  40%  { scale: .9 }
+  70%  { scale: 1.05 }
   100% { scale: 1 }
 }
 
@@ -143,8 +143,8 @@ h6 { margin: 0.5rem 0 }
   }
   @keyframes expandBounce {
     0%   { scale: 1 ; opacity: 1}
-    50%  { scale: 1.05 ; opacity: .85}
-    90%  { scale: 1.05 ; opacity: 1}
+    40%  { scale: 0.98 ; opacity: .85}
+    70%  { scale: 1.02 ; opacity: 1}
     100% { scale: 1 ; opacity: 1}
   }
 }
