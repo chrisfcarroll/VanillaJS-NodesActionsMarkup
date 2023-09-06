@@ -3,7 +3,7 @@ import '@testing-library/jest-dom'
 import {promises as fs} from 'fs'
 import userEvent from '@testing-library/user-event'
 import createGameModelsPlaceBoardsWireUpAll from '../js/create-game-models-place-boards-wire-up-all'
-import {cellsByBoardNumberDomNodes} from '../js/NodesAndActions-nine-oxo-games'
+import {cellsByBoardNumberDomNodes} from '../js/NodesAndActions-oxo-board'
 import {gameDomNode} from '../js/NodesAndActions-metagame'
 
 let indexRaw

@@ -1,6 +1,6 @@
 import '@jest/globals'
 import '@testing-library/jest-dom'
-import OxoGame from '../js/oxo-game'
+import OxoGame from '../js/Oxo-game'
 
 test('OxoGame recognises win and not won', ()=>{
 

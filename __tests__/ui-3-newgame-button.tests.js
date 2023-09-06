@@ -3,12 +3,8 @@ import '@testing-library/jest-dom'
 import {promises as fs} from 'fs'
 import userEvent from '@testing-library/user-event'
 import createGameModelsPlaceBoardsWireUpAll from '../js/create-game-models-place-boards-wire-up-all'
-import {unplayedSquare} from '../js/oxo-game'
-import {
-  cellsByBoardNumberDomNodes,
-  nineOxoBoardsAllCellsDomNodes
-} from '../js/NodesAndActions-nine-oxo-games'
-import {metaGameAllCellDomNodes} from '../js/NodesAndActions-metagame'
+import {unplayedSquare} from '../js/Oxo-game'
+import { nineOxoBoardsAllCellsDomNodes} from '../js/Nodes-nine-boards'
 let indexRaw
 let index
 let hasDoneInnerHTMLChickenDance=false
@@ -85,7 +81,7 @@ test('New Game button clears all squares', async ()=>{
   await givenSomeMoreMoves()
   await user.click(newGameButtonNA.node)
 
-  for(let square of metaGameNodesActions.nodes.nineOxoBoardsAllCells){
+  for(let square of nineOxoBoardsAllCellsDomNodes()){
       expect(square.innerHTML).toContain('&nbsp;')
   }
   for(let square of metaGameNodesActions.nodes.metaGameAllCells){

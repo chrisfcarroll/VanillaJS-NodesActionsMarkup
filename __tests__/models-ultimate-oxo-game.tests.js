@@ -1,8 +1,8 @@
 import '@jest/globals'
 import '@testing-library/jest-dom'
-import OxoGame, {unplayedSquare} from '../js/oxo-game'
-import ObservablePushQueue from '../js/observable-push-queue'
-import UltimateOxoGame from '../js/ultimate-oxo-game'
+import OxoGame, {unplayedSquare} from '../js/Oxo-game'
+import ObservablePushQueue from '../js/Observable-push-queue'
+import UltimateOxoGame from '../js/Ultimate-oxo-game'
 
 test('UltimateOxoGame reads the game queue', ()=>{
     let queue = new ObservablePushQueue()

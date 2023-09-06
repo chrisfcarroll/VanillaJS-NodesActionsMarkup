@@ -1,25 +1,21 @@
-import {unplayedSquare} from './oxo-game.js'
+import {unplayedSquare} from './Oxo-game.js'
+import {nineBoardsDomNode} from './Nodes-nine-boards.js'
 
-const nineOxoBoardsSelector="div[role=grid].three-by-three"
 const boardSelectorPattern = ".oxo-board-section:nth-of-type(${gameNumber})"
 const boardCellsByBoardNumberSelectorPattern=".oxo-board-section:nth-of-type(${boardNumber}) div[role=gridcell]"
 
-const nineOxoBoardsDomNode = ()=>document.querySelector(nineOxoBoardsSelector)
-
 function boardByNumberDomNode(boardNumber) {
-  return nineOxoBoardsDomNode().querySelector(
+  return nineBoardsDomNode().querySelector(
     boardSelectorPattern.replace("${gameNumber}", boardNumber))
 }
 
 function cellsByBoardNumberDomNodes(boardNumber){
   console.assert(boardNumber>=1 && boardNumber<=9, 'Tried to select board number ' + boardNumber)
-  return nineOxoBoardsDomNode().querySelectorAll(
+  return nineBoardsDomNode().querySelectorAll(
     boardCellsByBoardNumberSelectorPattern.replace("${boardNumber}",boardNumber))
 }
 
 export function assertDomNodes() {
-  console.assert(nineOxoBoardsDomNode(), 'nineOxoBoardsSelector ' + nineOxoBoardsSelector + ' isn\'t an HTML Node')
-  console.assert(nineOxoBoardsDomNode(), 'nineOxoBoardsSelector ' + nineOxoBoardsSelector + ' isn\'t an HTML Node')
   for (let boardNumber = 1; boardNumber <= 9; boardNumber++) for (let i = 1; i <= 9; i++) {
     console.assert(cellsByBoardNumberDomNodes(i), 'Board ' + boardNumber + ' should have 9 cells')
   }
@@ -31,7 +27,6 @@ export function OxoBoardNodesActions(boardNumber, game) {
   // but arrays of DomNodes are 0-8
   //
   const thisCells= cellsByBoardNumberDomNodes(boardNumber)
-  const that=this
 
   this.nodes= {
     boardByNumber:boardByNumberDomNode,
@@ -91,9 +86,10 @@ export function OxoBoardNodesActions(boardNumber, game) {
     }
   }
   function cleanCellIfUsedInAPreviousGame(cell) {
-    if (cell.eventForCell) {
-      cell.removeEventListener('click', cell.eventForCell)
-      cell.classList.remove('green', 'played')
-    }
+    if (!cell.eventForCell) { return }
+    //
+    cell.removeEventListener('click', cell.eventForCell)
+    delete cell.eventForCell
+    cell.classList.remove('green', 'played')
   }
 }

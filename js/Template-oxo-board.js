@@ -1,6 +1,6 @@
 const oxoBoardSectionTemplateId="oxo-board-section-template"
 
-function insertOxoBoardHtml(boardNumber, container){
+export function insertOxoBoardHtml(boardNumber, container){
   const template=document
     .getElementById(oxoBoardSectionTemplateId)
 
@@ -10,6 +10,5 @@ function insertOxoBoardHtml(boardNumber, container){
           .replaceAll('board 0','cells ' + boardNumber)
 
   container.insertAdjacentHTML("beforeend", `<section class="oxo-board-section">${templatedContent}</section>`)
+  return container
 }
-
-export default insertOxoBoardHtml

@@ -3,8 +3,8 @@ import '@jest/globals'
 import '@testing-library/jest-dom'
 import {promises as fs} from 'fs'
 import userEvent from '@testing-library/user-event'
-import OxoGame from '../js/oxo-game'
-import {cellsByBoardNumberDomNodes, OxoBoardNodesActions} from '../js/NodesAndActions-nine-oxo-games'
+import OxoGame from '../js/Oxo-game'
+import {cellsByBoardNumberDomNodes, OxoBoardNodesActions} from '../js/NodesAndActions-oxo-board'
 
 let indexRaw;
 let index;

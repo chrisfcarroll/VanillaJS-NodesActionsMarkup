@@ -1,10 +1,10 @@
-import { OxoBoardNodesActions} from './NodesAndActions-nine-oxo-games.js'
-import {MetaGameNodesActions} from './NodesAndActions-metagame.js'
+import {OxoBoardNodesActions} from './NodesAndActions-oxo-board.js'
+import {nineBoardsDomNode} from './Nodes-nine-boards.js'
 
 export const newGameButtonId="new-game-button"
 const newGameButtonDomNode= ()=>document.getElementById(newGameButtonId)
 
-export const assertDomNodesExist= function(){
+export const assertDomNodes= function(){
   console.assert(newGameButtonDomNode(),'Expected newGameButtonDomNode with id ' + newGameButtonId)
 }
 export function NewGameButtonNodesActions(metaGameModel, metaGameNodesActions, oxoBoardsNodesActionsList) {
@@ -22,7 +22,7 @@ export function NewGameButtonNodesActions(metaGameModel, metaGameNodesActions, o
         oxoBoardsNodesActionsList[i] = new OxoBoardNodesActions(i, metaGameModel.games[i])
       }
     }
-    for (let board of metaGameNodesActions.nodes.nineOxoBoards.querySelectorAll('.playable')) {
+    for (let board of nineBoardsDomNode().querySelectorAll('.playable')) {
       board.classList.remove('playable')
     }
     metaGameNodesActions.nodes.game.classList.remove('game-over')

@@ -1,13 +1,10 @@
-import ObservablePushQueue from './observable-push-queue.js'
-import {unplayedSquare} from './oxo-game.js'
+import ObservablePushQueue from './Observable-push-queue.js'
+import {unplayedSquare} from './Oxo-game.js'
 
 const gameHTMLElementId="game"
 const metaGameHTMLElementId = "metagame-grid"
 const metagameAllCellsSelector="div[role=gridcell]"
 const metagameCellByNumberSelector="div[role=gridcell]:nth-of-type(${gameNumber})"
-const allBoardsSelector = ".oxo-board-section"
-const nineOxoBoardsSelector="div[role=grid].three-by-three"
-const nineOxoBoardsAllCellsSelector=".oxo-board-section div[role=gridcell]"
 
 const gameDomNode= ()=>document.getElementById(gameHTMLElementId)
 const metaGameDomNode = () => document.getElementById(metaGameHTMLElementId)
@@ -17,11 +14,6 @@ const metaGameCellByNumberDomNode = function(i) {
       console.assert(i>=1 && i<=9, 'attempt to access metaGame Cell ' + i)
       return metaGameDomNode().querySelector(metagameCellByNumberSelector.replace("${gameNumber}", i))
     }
-const allBoardsDomNodes= ()=> document.querySelectorAll(allBoardsSelector)
-const nineOxoBoardsDomNode = ()=>document.querySelector(nineOxoBoardsSelector)
-const nineOxoBoardsAllCellsDomNodes =
-      () => nineOxoBoardsDomNode().querySelectorAll(nineOxoBoardsAllCellsSelector)
-
 
 export const assertDomNodes = function(){
   console.assert(gameDomNode(),`expected ${gameHTMLElementId} ID for one node`)
@@ -36,11 +28,7 @@ export function MetaGameNodesActions(metaGame){
     game:gameDomNode(),
     metaGame:metaGameDomNode(),
     metaGameAllCells: metaGameAllCellDomNodes(),
-    metaGameCellByNumber:metaGameCellByNumberDomNode,
-    allBoards:allBoardsDomNodes(),
-    nineOxoBoards:nineOxoBoardsDomNode(),
-    nineOxoBoardsAllCells:nineOxoBoardsAllCellsDomNodes(),
-
+    metaGameCellByNumber:metaGameCellByNumberDomNode
   }
 
   this.setAllCellAsUnplayed = function(){

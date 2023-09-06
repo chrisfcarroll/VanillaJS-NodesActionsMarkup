@@ -1,5 +1,5 @@
-import OxoGame from './oxo-game.js'
-import ObservablePushQueue from './observable-push-queue.js'
+import OxoGame from './Oxo-game.js'
+import ObservablePushQueue from './Observable-push-queue.js'
 
 export function gameNumberFromName(name){
   let gameNumberMatch= name.match(/\d/)

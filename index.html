@@ -83,13 +83,14 @@
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/plugins.js"></script>
 
-  <script src="js/observable-push-queue.js" type="module"></script>
-  <script src="js/oxo-game.js" type="module"></script>
-  <script src="js/ultimate-oxo-game.js" type="module"></script>
-  <script src="js/insert-oxo-board-html.js" type="module"></script>
-  <script src="js/NodesAndActions-nine-oxo-games.js" type="module"></script>
+  <script src="js/Observable-push-queue.js" type="module"></script>
+  <script src="js/Oxo-game.js" type="module"></script>
+  <script src="js/Ultimate-oxo-game.js" type="module"></script>
+  <script src="js/Nodes-nine-boards.js" type="module"></script>
+  <script src="js/NodesAndActions-oxo-board.js" type="module"></script>
   <script src="js/NodesAndActions-metagame.js" type="module"></script>
   <script src="js/NodesAndActions-new-game-button.js" type="module"></script>
+  <script src="js/Template-oxo-board.js" type="module"></script>
   <script src="js/create-game-models-place-boards-wire-up-all.js" type="module"></script>
   <script type="module">
     import createGameModelsPlaceBoardsWireUpAll from './js/create-game-models-place-boards-wire-up-all.js'
@@ -97,12 +98,6 @@
       "div[role=grid].three-by-three",
       "metagame-grid"
     )
-  </script>
-  <script type="module" id="assert-expected-htl-dom-nodes-exist-for-game-elements">
-    import {assertDomNodes as assertMetaGameNodes} from './js/NodesAndActions-metagame.js'
-    import {assertDomNodes as assertNineGamesNodes} from './js/NodesAndActions-nine-oxo-games.js'
-    assertMetaGameNodes()
-    assertNineGamesNodes()
   </script>
 
   <template id="oxo-board-section-template">

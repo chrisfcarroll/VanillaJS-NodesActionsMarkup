@@ -1,4 +1,4 @@
-import {gameNumberFromName} from './ultimate-oxo-game.js'
+import {gameNumberFromName} from './Ultimate-oxo-game.js'
 
 export const unplayedSquare = '\u00A0'
 
