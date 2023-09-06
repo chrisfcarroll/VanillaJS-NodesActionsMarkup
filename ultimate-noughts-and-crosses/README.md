@@ -1,6 +1,6 @@
 # Ultimate Noughts and Crosses 🚀
 
-A small game example of vanillaJS using [Nodes-Actions-Markup](../), including commandline unit tests.
+A small game example of vanilla JS using [Nodes-Actions-Markup](../), including commandline unit tests.
 
 - HTML5
 - CSS
