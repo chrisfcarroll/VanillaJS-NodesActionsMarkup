@@ -20,7 +20,7 @@ is a good choice. If you are aiming to present _content_ on the web, and then
 enrich it, the frameworks feel like a backward step: they start by removing
 all your content.
 
-Example: [ultimate-noughts-and-crosses game](./tree/main/ultimate-noughts-and-crosses)
+Example: [ultimate-noughts-and-crosses game](./ultimate-noughts-and-crosses)
 
 ## Nodes-Actions-Markup
 
