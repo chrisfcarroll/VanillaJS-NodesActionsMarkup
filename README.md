@@ -20,7 +20,7 @@ is a good choice. If you are aiming to present _content_ on the web, and then
 enrich it, the frameworks feel like a backward step: they start by removing
 all your content.
 
-Example: [ultimate-noughts-and-crosses game](./ultimate-noughts-and-crosses)
+Example code: [ultimate-noughts-and-crosses](./ultimate-noughts-and-crosses)
 
 ## Nodes-Actions-Markup
 
@@ -136,7 +136,9 @@ function NoughtAndCrossesBoard(boardNumber, noughtsAndCrossesGameModel){
 }
 const unplayedSquareHTML=' '
 ```
-As in all software, as the project grows you must plan what actions each element will expose to other elements, and how they are coupled, and how they get references to each other. Javascript modules with their import & export commands work well for modularisation, encapsulation, and defining which modules depend on knowledge of other modules.
+As in all software, as the project grows you must plan what actions each element will expose to other elements, and how they are coupled, and how they get references to each other. Javascript modules with their import & export commands work well for modularisation, encapsulation, and defining which modules depend on knowledge of other modules. Modern browsers can use modules straight from markup:
+
+`<script src="js/NodesAndActions-game-board.js" type="module"></script>`
 
 ### Markup
 
@@ -213,13 +215,14 @@ You can work effectively with html+javascript by organising your code as _Nodes_
 
 To understand model view controller and how it is a correct way to do a user interface you must understand it at two levels. At the top level, you must understand that the goal of MVC is to support the user-illusion that as the user uses your program they are dealing, not with pixels or HTML or such like, but with “real things” that they can think about and understand. For instance a signup form, or a table top game.
 
-So the _model_ is a key element for any interesting application. The view and the controller are how the user interacts with the model. The view and controller should be designed to sustain the user-illusion that the user “reaches through” the interface to manipulate and view the model.
+So the _model_ is a key element for any interesting application and 
+Nodes-Actions-Markup relies on having models to do anything meaningful. A noughts-and-crosses game should have a game model to track game state: who's turn it is, whether the game has been won, what squares have been played. An html _form_ is a special case. With forms, the browser itself knows about and maintains the model for you, so there is probably no need to add any kind of model class in code to represent it.
+
+The view and the controller are how the user interacts with the model. The view and controller should be designed to sustain the user-illusion that the user “reaches through” the interface to manipulate and view the model.
 
 Views have the responsibility of representing the model to the user, usually on-screen, in such a way that the user feels they are seeing the very thing itself. For instance, when a user sees an html signup form, they do not think “I can see the html elements on screen, but where's the form?” They think that the html elements in their browser _is_ the form. And so they fill it in. (As developers, we are also tricked by this illusion bceause the HTML standard uses 'form' for the name of an HTML element! HTML sustains the illusion so successfully that you may have to pause for a moment to realise that an HTML form element is not what a human being thinks a form is). Similarly if the user see a grid of nine squares, they think that _is_ the game.
 
-The controller's responsibility depends on what version of MVC you are using. In some versions, the view is also responsible for letting the user _update_ the model, as well as seeing the model. This pattern works well if you implement two-way data-binding: the view is bound to the model and changing one changes the other. In other versions, the controller is responsible for updating the model, and the view only reads it. This works well with a one-way dataflow approach.
-
-So Nodes-Actions-Markup still relies on having a _model_ to do anything meaningful. A noughts-and-crosses game should have a game model to track game state: who's turn it is, whether the game has been won, what squares have been played. An html _form_ is a special case. With forms, the browser itself knows about and maintains the model for you, so there is no need to add any kind of model class in code to represent it.
+The controller's responsibility depends on what version of MVC you are using. In some versions, the view is also responsible for letting the user _update_ the model, as well as seeing the model. This pattern works well if you implement two-way data-binding: the view is bound to the model and changing one changes the other. In other versions, the controller is responsible for updating the model, and the view only reads it. This works well with a one-way dataflow approach. Whether you treat Actions as part of the controller or part of the view depends on your approach to MVC.
 
 So Nodes-Actions-Markup helps you to build views and optionally controllers. The View that the user sees is the visible markup. The _Nodes_ part of Nodes-Actions-Markup lets you read and write that view in code. The _Actions_ part lets the user update the model, and lets your code keep the view in sync with the model.
 
@@ -227,6 +230,6 @@ What about the Observer pattern? Implementing the observer pattern in Javascript
 
 ### Summary
 
-In retrospect, one of the things that frameworks over HTML each gave us, is a way to *organise* how we work with HTML. You don't need a framework to organise how you work; just having a standard pattern will do.
+In retrospect, one of the things that frameworks on top of HTML each offer us, is a way to *organise* how we work with HTML. You don't need a framework to organise how you work. A standard way of working will do.
 
 Refs: https://www.cafe-encounter.net/p3501/nodes-actions-markup-use-vanillajs-in-the-browser
