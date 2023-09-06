@@ -1,10 +1,10 @@
-# Small Games 🚀
+# Ultimate Noughts and Crosses 🚀
 
-Try writing small games in vanillaJS with unit tests.
+A small game example of vanillaJS with unit tests using [Nodes-Actions-Markup](../)
 
 - HTML5
-- CSS 2020-ish
-- VanillaJS/ES6
+- CSS
+- VanillaJS/ES6 with modules supported in the browser
 - https://testing-library.com & https://jestjs.io
 
-Current efforts at https://www.cafe-encounter.net/small-games
+this game should be running at https://www.cafe-encounter.net/small-games
