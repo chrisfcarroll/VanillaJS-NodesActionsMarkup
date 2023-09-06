@@ -1,0 +1,128 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+  <meta charset="utf-8">
+  <title>Ultimate Noughts &amp; Crosses</title>
+  <meta name="description" content="Small Games - Ultimate Noughts and Crosses">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Small Games, VanillaJS">
+  <meta property="og:type" content="Games">
+  <meta property="og:url" content="https://www.cafe-encounter.net/small-games/">
+  <meta property="og:image" content="icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  <div class="title-and-top-level-control-panel">
+    <h1>Ultimate Nought and Crosses</h1>
+    <div class="centralising-panel"><button id="new-game-button">New Game</button></div>
+  </div>
+  <div class="twocolumns" id="game">
+    <div class="leftcolumn">
+      <h6>Play!</h6>
+      <div role="grid" class="three-by-three">
+        <section class="oxo-board-section">
+          <div role="grid" class="oxo-board" aria-label="Board 1" id="board1">
+            <div role="gridcell" id="board1-cell-1" aria-labelledby="board1 board1-cell-1">
+              <label>top left</label>&nbsp;
+            </div>
+            <div role="gridcell" id="board1-cell-2"  aria-labelledby="board1 board1-cell-2">
+              <label>top middle</label>&nbsp;</div>
+            <div role="gridcell" id="board1-cell-3"  aria-labelledby="board1 board1-cell-3">
+              <label>top right</label>&nbsp;</div>
+            <div role="gridcell" id="board1-cell-4" aria-labelledby="board1 board1-cell-4">
+              <label>middle left</label>&nbsp;</div>
+            <div role="gridcell" id="board1-cell-5"  aria-labelledby="board1 board1-cell-5">
+              <label>middle square</label>&nbsp;</div>
+            <div role="gridcell" id="board1-cell-6"  aria-labelledby="board1 board1-cell-6">
+              <label>middle right</label>&nbsp;</div>
+            <div role="gridcell" id="board1-cell-7" aria-labelledby="board1 board1-cell-7">
+              <label>bottom left</label>&nbsp;</div>
+            <div role="gridcell" id="board1-cell-8"  aria-labelledby="board1 board1-cell-8">
+              <label>bottom middle</label>&nbsp;</div>
+            <div role="gridcell" id="board1-cell-9"  aria-labelledby="board1 board1-cell-9">
+              <label>bottom right</label>&nbsp;</div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="rightcolumn">
+      <h6 id="metaboard-header">Meta Game</h6>
+      <div class="one-by-one">
+        <section class="oxo-board-section metagame">
+          <div role="grid" class="oxo-board small" aria-labelledby="metaboard-header" id="metagame-grid">
+            <div role="gridcell" id="metaboard-cell-1" aria-labelledby="metaboard-header metaboard-cell-1">
+              <label>top left</label>&nbsp;
+            </div>
+            <div role="gridcell" id="metaboard-cell-2"  aria-labelledby="metaboard-header metaboard-cell-2">
+              <label>top middle</label>&nbsp;</div>
+            <div role="gridcell" id="metaboard-cell-3"  aria-labelledby="metaboard-header metaboard-cell-3">
+              <label>top right</label>&nbsp;</div>
+            <div role="gridcell" id="metaboard-cell-4" aria-labelledby="metaboard-header metaboard-cell-4">
+              <label>middle left</label>&nbsp;</div>
+            <div role="gridcell" id="metaboard-cell-5"  aria-labelledby="metaboard-header metaboard-cell-5">
+              <label>middle square</label>&nbsp;</div>
+            <div role="gridcell" id="metaboard-cell-6"  aria-labelledby="metaboard-header metaboard-cell-6">
+              <label>middle right</label>&nbsp;</div>
+            <div role="gridcell" id="metaboard-cell-7" aria-labelledby="metaboard-header metaboard-cell-7">
+              <label>bottom left</label>&nbsp;</div>
+            <div role="gridcell" id="metaboard-cell-8"  aria-labelledby="metaboard-header metaboard-cell-8">
+              <label>bottom middle</label>&nbsp;</div>
+            <div role="gridcell" id="metaboard-cell-9"  aria-labelledby="metaboard-header metaboard-cell-9">
+              <label>bottom right</label>&nbsp;</div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
+  <script src="js/plugins.js"></script>
+
+  <script src="js/Observable-push-queue.js" type="module"></script>
+  <script src="js/Oxo-game.js" type="module"></script>
+  <script src="js/Ultimate-oxo-game.js" type="module"></script>
+  <script src="js/Nodes-nine-boards.js" type="module"></script>
+  <script src="js/NodesAndActions-oxo-board.js" type="module"></script>
+  <script src="js/NodesAndActions-metagame.js" type="module"></script>
+  <script src="js/NodesAndActions-new-game-button.js" type="module"></script>
+  <script src="js/Markup-oxo-board.js" type="module"></script>
+  <script src="js/create-game-models-place-boards-wire-up-all.js" type="module"></script>
+  <script type="module">
+    import createGameModelsPlaceBoardsWireUpAll from './js/create-game-models-place-boards-wire-up-all.js'
+    window.game=createGameModelsPlaceBoardsWireUpAll(
+      "div[role=grid].three-by-three",
+      "metagame-grid"
+    )
+  </script>
+
+  <template id="oxo-board-section-template">
+    <section class="oxo-board-section">
+      <div role="grid" class="oxo-board" aria-label="Board 0" id="board0">
+        <div role="gridcell" id="board0-cell-1" aria-labelledby="board0 board0-cell-1">
+          <label>top left</label>&nbsp;</div>
+        <div role="gridcell" id="board0-cell-2"  aria-labelledby="board0 board0-cell-2">
+          <label>top middle</label>&nbsp;</div>
+        <div role="gridcell" id="board0-cell-3"  aria-labelledby="board0 board0-cell-3">
+          <label>top right</label>&nbsp;</div>
+        <div role="gridcell" id="board0-cell-4" aria-labelledby="board0 board0-cell-4">
+          <label>middle left</label>&nbsp;</div>
+        <div role="gridcell" id="board0-cell-5"  aria-labelledby="board0 board0-cell-5">
+          <label>middle square</label>&nbsp;</div>
+        <div role="gridcell" id="board0-cell-6"  aria-labelledby="board0 board0-cell-6">
+          <label>middle right</label>&nbsp;</div>
+        <div role="gridcell" id="board0-cell-7" aria-labelledby="board0 board0-cell-7">
+          <label>bottom left</label>&nbsp;</div>
+        <div role="gridcell" id="board0-cell-8"  aria-labelledby="board0 board0-cell-8">
+          <label>bottom middle</label>&nbsp;</div>
+        <div role="gridcell" id="board0-cell-9"  aria-labelledby="board0 board0-cell-9">
+          <label>bottom right</label>&nbsp;</div>
+      </div>
+    </section>
+  </template>
+</body>
+</html>
