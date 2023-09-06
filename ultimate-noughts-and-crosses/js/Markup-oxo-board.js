@@ -3,7 +3,7 @@ const oxoBoardSectionTemplateId="oxo-board-section-template"
 /*
 this approach uses Templates in the markup
 */
-export function insertOxoBoardHtml(boardNumber, container){
+export function insertOxoBoardMarkup(boardNumber, container){
   const template=document
     .getElementById(oxoBoardSectionTemplateId)
 
