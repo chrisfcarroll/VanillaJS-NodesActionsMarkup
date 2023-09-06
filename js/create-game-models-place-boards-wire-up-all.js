@@ -3,7 +3,7 @@ import UltimateOxoGame from './Ultimate-oxo-game.js'
 
 import {nineBoardsDomNode, assertDomNode as nineBoardsAssertDomNodes} from './Nodes-nine-boards.js'
 import {MetaGameNodesActions, assertDomNodes as metagameAssertDomNodes} from './NodesAndActions-metagame.js'
-import {insertOxoBoardHtml} from './Template-oxo-board.js'
+import {insertOxoBoardHtml} from './Markup-oxo-board.js'
 import {OxoBoardNodesActions, assertDomNodes as oxoBoardsAssertDomNodes} from './NodesAndActions-oxo-board.js'
 import {NewGameButtonNodesActions, assertDomNodes as newGameButtonAssertDomNodes} from './NodesAndActions-new-game-button.js'
 
