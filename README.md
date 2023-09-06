@@ -233,4 +233,5 @@ What about the Observer pattern? Implementing the observer pattern in Javascript
 In retrospect, one of the things that frameworks on top of HTML each offer us, is a way to *organise* how we work with HTML. You don't need a framework to organise how you work. A standard way of working will do.
 
 Refs: https://www.cafe-encounter.net/p3501/nodes-actions-markup-use-vanillajs-in-the-browser
+
 Example small game: https://www.cafe-encounter.net/small-games/
