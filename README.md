@@ -20,13 +20,15 @@ is a good choice. If you are aiming to present _content_ on the web, and then
 enrich it, the frameworks feel like a backward step: they start by removing
 all your content.
 
+Example: [ultimate-noughts-and-crosses game](./tree/main/ultimate-noughts-and-crosses)
+
 ## Nodes-Actions-Markup
 
-You can write effective program code against html in 3 steps
+You can write effective program code against html in 3 steps:
 
-1. Identify the **nodes** in the page which code must access
-2. Identify the **actions** associated with those nodes
-3. Optionally, be able to add and remove **markup** from the page
+1. Identify the **Nodes** in the page which code must access
+2. Identify the **Actions** associated with those nodes
+3. Optionally, be able to add and remove **Markup** from the page
 
 ### Nodes
 
