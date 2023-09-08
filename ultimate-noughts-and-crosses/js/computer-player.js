@@ -41,7 +41,6 @@ export function computerPlayMoveOnOxoGame(game){
 
 export function computerPlayMoveOnUltimateOxoGame(metaGame){
 
-  const me= metaGame.playerOnMove
   const boardToPlay= (metaGame.nextBoard===0) ? chooseABoard() : metaGame.nextBoard
 
   if(boardToPlay===0) return {board:0, cell:0}

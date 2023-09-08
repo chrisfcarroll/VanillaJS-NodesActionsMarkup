@@ -24,7 +24,6 @@ describe('Computer player', ()=>{
   test('Can make valid moves Given a metaGame', ()=>{
 
     const moves=new ObservablePushQueue()
-    const name=new Date().toISOString()
     const game= new UltimateOxoGame(moves)
 
     const {board,playedAt}= computerPlayMoveOnUltimateOxoGame(game)
