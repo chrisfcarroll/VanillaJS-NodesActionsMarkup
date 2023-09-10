@@ -15,8 +15,10 @@ html {
   color: #222;
   font-size: 1em;
   line-height: 1.4;
-   font-family: "Arial Rounded MT Bold","Avenir","Futura",sans-serif;
+  font-family: "Arial Rounded MT Bold","Avenir","Futura",sans-serif;
 }
+
+/*div,legend,label { border: 1px blue dashed}*/
 
 /*
  * Remove text-shadow in selection highlight:
@@ -162,7 +164,8 @@ h6 { margin: 0.5rem 0 }
 .title-and-top-level-control-panel{
   display:flex;
   flex-direction: row;
-  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
 }
 .centralising-panel {
   padding: 0.5rem;
@@ -170,6 +173,16 @@ h6 { margin: 0.5rem 0 }
   align-items: center;
   justify-content: center;
 }
+.centralising-panel.vertical {
+  flex-direction: column;
+}
+.title-and-top-level-control-panel fieldset {
+  border: lightgrey 1px solid;
+  border-radius: 1.5vmin;
+  padding: 1vmin;
+}
+
+
 
 .three-by-three {
   display: grid;
@@ -203,6 +216,8 @@ h6 { margin: 0.5rem 0 }
 .game-over .oxo-board-section.playable{
   background: #f7fff7;
 }
+
+.game-over { color: #555555}
 
 .game-over .three-by-three{
   animation: fadeBackIn 1s ;

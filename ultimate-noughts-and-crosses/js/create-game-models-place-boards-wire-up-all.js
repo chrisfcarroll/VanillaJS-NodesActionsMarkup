@@ -6,7 +6,7 @@ import {MetaGameNodesActions, assertDomNodes as metagameAssertDomNodes} from './
 import {insertOxoBoardMarkup} from './Markup-oxo-board.js'
 import {OxoBoardNodesActions, assertDomNodes as oxoBoardsAssertDomNodes} from './NodesAndActions-oxo-board.js'
 import {NewGameButtonNodesActions, assertDomNodes as newGameButtonAssertDomNodes} from './NodesAndActions-new-game-button.js'
-
+import {assertDomNodes as gameStewardAssertDomNodes, gameStewardNA} from './NodesAndActions-game-steward.js'
 
 export default function createGameModelsPlaceBoardsWireUpAll() {
   if(!window){
@@ -17,6 +17,7 @@ export default function createGameModelsPlaceBoardsWireUpAll() {
   metagameAssertDomNodes()
   oxoBoardsAssertDomNodes()
   newGameButtonAssertDomNodes()
+  gameStewardAssertDomNodes()
 
 
   const metaGame=new UltimateOxoGame(window.moveQueue)
@@ -35,6 +36,7 @@ export default function createGameModelsPlaceBoardsWireUpAll() {
     metaGame : metaGame,
     metaGameNodesActions : metaGameNodesActions,
     oxoBoardsNodesActionsList : oxoBoardNodesActionsList,
-    newGameButtonNA : newGameButton
+    newGameButtonNA : newGameButton,
+    gameStewardNA : gameStewardNA
   }
 }

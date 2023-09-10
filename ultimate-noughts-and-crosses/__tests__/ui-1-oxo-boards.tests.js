@@ -1,7 +1,7 @@
-import {screen} from '@testing-library/dom'
 import '@jest/globals'
 import '@testing-library/jest-dom'
 import {promises as fs} from 'fs'
+import {screen} from '@testing-library/dom'
 import userEvent from '@testing-library/user-event'
 import OxoGame from '../js/Oxo-game'
 import {cellsByBoardNumberDomNodes, OxoBoardNodesActions} from '../js/NodesAndActions-oxo-board'

@@ -6,14 +6,14 @@ import createGameModelsPlaceBoardsWireUpAll from '../js/create-game-models-place
 import {unplayedSquare} from '../js/Oxo-game'
 import { nineOxoBoardsAllCellsDomNodes} from '../js/Nodes-nine-boards'
 let indexRaw
-let index
+let indexHtml
 let hasDoneInnerHTMLChickenDance=false
 window =  window || {}
 
 async function getIndexHtml(){
   indexRaw= indexRaw || (await fs.readFile('index.html')).toString()
-  index= index || new DOMParser().parseFromString(indexRaw,"text/html")
-  return index
+  indexHtml= indexHtml || new DOMParser().parseFromString(indexRaw,"text/html")
+  return indexHtml
 }
 
 beforeEach( async () => {

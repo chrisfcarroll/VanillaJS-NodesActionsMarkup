@@ -21,6 +21,22 @@
   <div class="title-and-top-level-control-panel">
     <h1>Ultimate Nought and Crosses</h1>
     <div class="centralising-panel"><button id="new-game-button">New Game</button></div>
+    <div class="centralising-panel" >
+      <fieldset role="radiogroup" hidden="hidden">
+        <legend>Player X</legend>
+        <label aria-label="Player X is Human"><input type="radio" name="playerXis" value="human" checked/> Human</label>
+        <br/>
+        <label aria-label="Player X is Computer"><input type="radio" name="playerXis" value="computer"/> Computer</label>
+      </fieldset>
+    </div>
+    <div class="centralising-panel">
+      <fieldset role="radiogroup" hidden="hidden">
+        <legend>Player O</legend>
+        <label aria-label="Player O is Human"><input type="radio" name="playerOis" value="human"/> Human</label>
+        <br/>
+        <label aria-label="Player O is Computer"><input type="radio" name="playerOis" value="computer" checked/> Computer</label>
+      </fieldset>
+    </div>
   </div>
   <div class="twocolumns" id="game">
     <div class="leftcolumn">

@@ -1,7 +1,7 @@
 import {OxoBoardNodesActions} from './NodesAndActions-oxo-board.js'
 import {nineBoardsDomNode} from './Nodes-nine-boards.js'
 
-export const newGameButtonId="new-game-button"
+const newGameButtonId="new-game-button"
 const newGameButtonDomNode= ()=>document.getElementById(newGameButtonId)
 
 export const assertDomNodes= function(){
