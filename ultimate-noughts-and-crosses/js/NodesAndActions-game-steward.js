@@ -5,7 +5,19 @@ const playerOisComputerSelector = "input[name=playerOis][type=radio][value=compu
 
 const playerXisSelector    = "input[name=playerXis][type=radio]:checked"
 const playerOisSelector    = "input[name=playerOis][type=radio]:checked"
+const setPlayerSelector = "input[name=player${XorO}is][type=radio][value=${value}]"
 
+function setPlayer(XorO, humanOrComputer) {
+  if (humanOrComputer !== 'human' && humanOrComputer !== 'computer') {
+    console.error(
+      `tried to set gameStewardNA.inputs.player${XorO}is=${humanOrComputer} which isn't 'human' or 'computer'`)
+    return
+  }
+  document.querySelector(
+    setPlayerSelector
+      .replace("${XorO}", XorO)
+      .replace("${value}", humanOrComputer)).checked = true
+}
 
 export const gameStewardNA={
   nodes : {
@@ -16,12 +28,21 @@ export const gameStewardNA={
   },
   inputs :{
     get playerXis(){ return document.querySelector(playerXisSelector).value},
-    get playerOis(){ return document.querySelector(playerOisSelector).value}
+    set playerXis(humanOrComputer){ setPlayer('X', humanOrComputer)},
+    get playerOis(){ return document.querySelector(playerOisSelector).value},
+    set playerOis(humanOrComputer){ setPlayer('O', humanOrComputer)},
+    player: function(XorO){
+      switch (XorO) {
+        case 'X' : return gameStewardNA.inputs.playerXis
+        case 'O' : return gameStewardNA.inputs.playerOis
+        default: console.error(`GameStewardNA.inputs.player(XorO) was called with ${XorO} which isn't an X or O`)
+      }
+    }
   }
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
-  for(const [name,node] of Object.entries( gameStewardNA.nodes)){
+  for(const [_,node] of Object.entries( gameStewardNA.nodes)){
     node().addEventListener('click', (e)=>{console.log(e.target.name,e.target.value)})
   }
 })

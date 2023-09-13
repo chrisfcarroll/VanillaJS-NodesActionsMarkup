@@ -116,3 +116,56 @@ test('Queue.shift() calls observers', ()=>{
       expect(observed2[observed2.length-1]).toEqual(expectedEvent)
     }
 })
+
+describe('Re-entrant Queue.pushes process all pushes', ()=>{
+
+  test("Given a push that triggers nested pushes.", ()=>{
+
+    let observed= []
+    let observed2=[]
+    const maxTestNestedPushes= 10
+    let nestedPushesMadeSoFar=0
+    const queue= new ObservablePushQueue()
+
+    queue.addObserver('1', e=>observed.push(e))
+    queue.addObserver('2', e=>{
+      observed2.push(e)
+      if( nestedPushesMadeSoFar++ < maxTestNestedPushes){
+        queue.push({from:"observer2", number:nestedPushesMadeSoFar})
+      }
+    })
+
+    queue.push("kick")
+    console.log("queue", queue)
+    console.log("observed", observed)
+    console.log("observed2", observed2)
+    expect(observed.length).toBe(1 + maxTestNestedPushes)
+    expect(observed2.length).toBe(1 + maxTestNestedPushes)
+    expect(observed[maxTestNestedPushes].action).toEqual( {from:"observer2", number:maxTestNestedPushes} )
+
+  })
+
+  test("And the stack size doesn't grow. Given a push that triggers 1000 nested pushes.", ()=>{
+
+    let observed= []
+    let maxStackSize=0
+    const maxTestNestedPushes= 1000
+    let nestedPushesMadeSoFar=0
+    const queue= new ObservablePushQueue()
+
+    queue.addObserver('1', e=>observed.push(e))
+    queue.addObserver('2', ()=>{
+      if( nestedPushesMadeSoFar++ < maxTestNestedPushes){
+        queue.push({from:"observer2", number:nestedPushesMadeSoFar})
+      }
+      const err= new Error().stack
+      const lines= ( err.match(/\n/g) || []).length
+      maxStackSize= Math.max(maxStackSize, lines)
+    })
+
+    queue.push("kick")
+    console.log("Max stack size was", maxStackSize)
+    expect( maxStackSize).toBeLessThan( 50 /* even though we pushed nested 100 events */)
+  })
+
+})

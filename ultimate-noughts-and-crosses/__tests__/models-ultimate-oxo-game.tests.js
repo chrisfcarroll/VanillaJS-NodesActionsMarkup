@@ -14,8 +14,8 @@ test('UltimateOxoGame reads the game queue', ()=>{
       const currentPlayer=games[i-1].playerOnMove
       const queueLengthWas=queue.length
       games[i-1].playMove(i)
-      expect(metaGame.queue.length).toBe(queueLengthWas + 1)
-      expect(metaGame.queue[metaGame.queue.length-1]).toEqual({game:games[i-1].name, player:currentPlayer, playedAt:i})
+      expect(metaGame.moveQueue.length).toBe(queueLengthWas + 1)
+      expect(metaGame.moveQueue[metaGame.moveQueue.length-1]).toEqual({game:games[i-1].name, player:currentPlayer, playedAt:i})
     }
 })
 

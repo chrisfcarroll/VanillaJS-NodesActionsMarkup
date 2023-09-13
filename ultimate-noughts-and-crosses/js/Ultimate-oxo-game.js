@@ -2,16 +2,23 @@ import OxoGame from './Oxo-game.js'
 import ObservablePushQueue from './Observable-push-queue.js'
 
 export function gameNumberFromName(name){
-  let gameNumberMatch= name.match(/\d/)
-  if(!gameNumberMatch || gameNumberMatch[0] < 1 || gameNumberMatch[0] > 9){
+  let gameNumberMatch= tryGetGameNumberFromName(name)
+  if(!gameNumberMatch){
     console.error(`Expected game number in name ${game.name} to be between 1 and 9`)
+  }
+  return gameNumberMatch
+}
+export function tryGetGameNumberFromName(name){
+  let gameNumberMatch= name.match(/\d/)
+  if(!gameNumberMatch || gameNumberMatch[0] < '1' || gameNumberMatch[0] > '9'){
+    return 0
   }
   return parseInt(gameNumberMatch[0])
 }
 
-function UltimateOxoGame(queue,name){
-  this.queue= queue || new ObservablePushQueue()
-  if(queue && (!queue.push || !queue.addObserver)){throw new Error("queue doesn't have push/shift/addObserver functions")}
+function UltimateOxoGame(moveQueue,name){
+  this.moveQueue= moveQueue || new ObservablePushQueue()
+  if(moveQueue && (!moveQueue.push || !moveQueue.addObserver)){throw new Error("queue doesn't have push/shift/addObserver functions")}
   this.name = name || "Metagame started at " + new Date().toTimeString()
   this.oldGames=[]
   this.playerOnMove='X'
@@ -21,14 +28,14 @@ function UltimateOxoGame(queue,name){
   this.newGame= function(){
     that.games=new Array(10)
     for(let i=1; i<=9; i++){
-      that.games[i]= new OxoGame(that.queue,"Game "+i, that)
+      that.games[i]= new OxoGame(that.moveQueue,"Game "+i, that)
     }
     that.metaGame= (that.metaGame)
       ? new OxoGame(that.metaGame.moveQueue,"metaGame")
       : new OxoGame([],"metaGame")
     let lastGame=[]
-    for(let i=0; that.queue.length>0 || i> 9999; i++){
-      lastGame.push(that.queue.shift())
+    for(let i=0; that.moveQueue.length>0 || i> 9999; i++){
+      lastGame.push(that.moveQueue.shift())
     }
     that.oldGames.push(lastGame)
     that.playerOnMove='X'
@@ -66,7 +73,7 @@ function UltimateOxoGame(queue,name){
     }
   }
 
-  this.queue.addObserver(this.name, this.observeMove)
+  this.moveQueue.addObserver(this.name, this.observeMove)
   this.newGame()
 }
 

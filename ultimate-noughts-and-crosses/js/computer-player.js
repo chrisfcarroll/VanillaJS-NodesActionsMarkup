@@ -1,4 +1,5 @@
 import {unplayedSquare} from './Oxo-game.js'
+import {tryGetGameNumberFromName} from './Ultimate-oxo-game'
 
 const wins = [
             [1, 2, 3],
@@ -33,7 +34,7 @@ export function computerPlayMoveOnOxoGame(game){
           .filter(lineState=> lineState.canPlayAt)
 
   playables.sort( (a,b) => a.open - b.open )
-  console.log(playables)
+  //console.info(playables)
 
   game.playMove( playables[0].canPlayAt )
   return playables[0].canPlayAt
@@ -55,4 +56,18 @@ export function computerPlayMoveOnUltimateOxoGame(metaGame){
     const playables= metaGame.games.filter(g => ! g.winLine)
     return Math.ceil(Math.random() * playables.length)
   }
+}
+
+export function registerComputerPlayerToObserveMetaGameMoveQueueListenerToPlay(metaGame, gameStewardIsHumanOrComputer) {
+    metaGame.moveQueue.addObserver("ComputerPlayer", function(event){
+    if(event.method !== 'push')return;
+    //
+    const {game, player}= event.action
+    if(!tryGetGameNumberFromName(game))return;
+    //
+    const nextPlayer= player==='O' ? 'X' : 'O';
+    if(gameStewardIsHumanOrComputer(nextPlayer)==='computer'){
+      computerPlayMoveOnUltimateOxoGame(metaGame)
+    }
+  })
 }

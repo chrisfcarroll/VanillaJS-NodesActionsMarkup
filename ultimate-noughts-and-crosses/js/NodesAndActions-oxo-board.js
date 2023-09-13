@@ -84,6 +84,7 @@ export function OxoBoardNodesActions(boardNumber, game) {
         thisCells[square - 1].classList.add('green')
       }
     }
+
   }
   function cleanCellIfUsedInAPreviousGame(cell) {
     if (!cell.eventForCell) { return }

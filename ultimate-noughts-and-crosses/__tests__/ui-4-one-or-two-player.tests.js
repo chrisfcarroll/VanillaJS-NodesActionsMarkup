@@ -5,6 +5,9 @@ import {screen} from '@testing-library/dom'
 import userEvent from '@testing-library/user-event'
 import createGameModelsPlaceBoardsWireUpAll from '../js/create-game-models-place-boards-wire-up-all'
 import {gameStewardNA} from '../js/NodesAndActions-game-steward'
+import UltimateOxoGame from '../js/Ultimate-oxo-game'
+import ObservablePushQueue from '../js/Observable-push-queue'
+import {registerComputerPlayerToObserveMetaGameMoveQueueListenerToPlay} from '../js/computer-player'
 
 let indexRaw
 let indexHtml
@@ -90,6 +93,26 @@ describe('GameSteward knows which player(s) is computer and which human', () => 
   })
 })
 
-test('Game stewards plays the computer', ()=>{
+describe('ComputerPlayer plays', ()=>{
+
+  const moveQueue = new ObservablePushQueue()
+  const metaGame = new UltimateOxoGame(moveQueue,"test")
+  registerComputerPlayerToObserveMetaGameMoveQueueListenerToPlay(
+      metaGame,
+      gameStewardNA.inputs.player)
+
+  test('Given GameSteward says there is a computer player', async () => {
+
+    document.outerHTML = (await getIndexHtml()).outerHTML
+    gameStewardNA.inputs.playerXis = 'human'
+    gameStewardNA.inputs.playerOis = 'computer'
+
+    metaGame.games[1].playMove(1)
+
+    expect(moveQueue.length).toBe(2)
+    const {game,playedAt} = moveQueue[1]
+    expect({game,playedAt}).not.toEqual({game:metaGame.games[1].name, playedAt:1})
+
+  })
 
 })
