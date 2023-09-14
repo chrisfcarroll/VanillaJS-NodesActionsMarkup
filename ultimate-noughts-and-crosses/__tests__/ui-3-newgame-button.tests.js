@@ -5,6 +5,8 @@ import userEvent from '@testing-library/user-event'
 import createGameModelsPlaceBoardsWireUpAll from '../js/create-game-models-place-boards-wire-up-all'
 import {unplayedSquare} from '../js/Oxo-game'
 import { nineOxoBoardsAllCellsDomNodes} from '../js/Nodes-nine-boards'
+import {gameStewardNA} from '../js/NodesAndActions-game-steward'
+import {NewGameAction} from '../js/NodesAndActions-new-game-button'
 let indexRaw
 let indexHtml
 let hasDoneInnerHTMLChickenDance=false
@@ -20,6 +22,10 @@ beforeEach( async () => {
   if(hasDoneInnerHTMLChickenDance)return
   document.body.innerHTML=(await getIndexHtml()).body.innerHTML
   hasDoneInnerHTMLChickenDance=true;
+
+  gameStewardNA.inputs.playerXis='human'
+  gameStewardNA.inputs.playerOis='human'
+
 })
 
 const winForOinGame1 = [
@@ -99,6 +105,23 @@ test('New Game button clears all squares', async ()=>{
       await user.click( oxoBoardsNodesActionsList[metaGame.nextBoard].nodes.cells[i - 1])
     }
   }
+})
+
+test('New game button pushes new game event to uiMoveQueue', async ()=>{
+  const user = userEvent.setup()
+  document.outerHTML=(await getIndexHtml()).outerHTML
+  // noinspection JSUnusedLocalSymbols
+  const {
+    metaGame,
+    metaGameNodesActions,
+    oxoBoardsNodesActionsList,
+    newGameButtonNA
+  } = createGameModelsPlaceBoardsWireUpAll();
+
+  await user.click(newGameButtonNA.node)
+
+  expect(window.uiMoveQueue.length).toBe(1)
+  expect(window.uiMoveQueue[0]).toEqual(NewGameAction)
 })
 
 test('After pressing New Game button everything is wired up again', async ()=>{

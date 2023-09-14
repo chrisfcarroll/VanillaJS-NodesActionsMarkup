@@ -1,6 +1,6 @@
-import OxoGame from '../js/Oxo-game'
+import OxoGame, {unplayedSquare} from '../js/Oxo-game'
 import UltimateOxoGame, {gameNumberFromName} from '../js/Ultimate-oxo-game'
-import {computerPlayMoveOnOxoGame, computerPlayMoveOnUltimateOxoGame} from '../js/computer-player'
+import {computerChooseMoveOnOxoGame, computerChooseMoveOnUltimateOxoGame} from '../js/computer-player'
 import ObservablePushQueue from '../js/Observable-push-queue'
 
 describe('Computer player', ()=>{
@@ -13,10 +13,14 @@ describe('Computer player', ()=>{
 
     for(let i= 1; i <= 8 ; i++){
       const player=game.playerOnMove
-      const playedAt= computerPlayMoveOnOxoGame(game)
+      const playAt= computerChooseMoveOnOxoGame(game)
+
+      expect(game.boardModel[playAt]).toBe(unplayedSquare)
+
+      game.playMove(playAt)
 
       expect(moves.length).toBe(i)
-      expect(moves[i-1]).toEqual({game:name, player:player, playedAt:playedAt})
+      expect(moves[i-1]).toEqual({game:name, player:player, playedAt:playAt})
     }
     console.log(moves)
   })
@@ -26,10 +30,14 @@ describe('Computer player', ()=>{
     const moves=new ObservablePushQueue()
     const game= new UltimateOxoGame(moves)
 
-    const {board,playedAt}= computerPlayMoveOnUltimateOxoGame(game)
+    const {board,square}= computerChooseMoveOnUltimateOxoGame(game)
+
+    expect( game.games[board].boardModel[square]).toBe(unplayedSquare)
+
+    game.games[board].playMove(square)
 
     expect(moves.length).toBe(1)
-    expect(moves[0].playedAt).toBe(playedAt)
+    expect(moves[0].playedAt).toBe(square)
     expect(gameNumberFromName( moves[0].game)).toBe(board)
 
   })

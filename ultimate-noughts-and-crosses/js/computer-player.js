@@ -1,5 +1,4 @@
 import {unplayedSquare} from './Oxo-game.js'
-import {tryGetGameNumberFromName} from './Ultimate-oxo-game'
 
 const wins = [
             [1, 2, 3],
@@ -12,7 +11,7 @@ const wins = [
             [3, 5, 7]
         ]
 
-export function computerPlayMoveOnOxoGame(game){
+export function computerChooseMoveOnOxoGame(game){
 
   const me= game.playerOnMove
 
@@ -36,18 +35,17 @@ export function computerPlayMoveOnOxoGame(game){
   playables.sort( (a,b) => a.open - b.open )
   //console.info(playables)
 
-  game.playMove( playables[0].canPlayAt )
   return playables[0].canPlayAt
 }
 
-export function computerPlayMoveOnUltimateOxoGame(metaGame){
+export function computerChooseMoveOnUltimateOxoGame(metaGame){
 
   const boardToPlay= (metaGame.nextBoard===0) ? chooseABoard() : metaGame.nextBoard
 
   if(boardToPlay===0) return {board:0, cell:0}
   return {
     board: boardToPlay,
-    playedAt: computerPlayMoveOnOxoGame(metaGame.games[boardToPlay])
+    square: computerChooseMoveOnOxoGame(metaGame.games[boardToPlay])
   }
 
   function chooseABoard(){
@@ -58,16 +56,21 @@ export function computerPlayMoveOnUltimateOxoGame(metaGame){
   }
 }
 
-export function registerComputerPlayerToObserveMetaGameMoveQueueListenerToPlay(metaGame, gameStewardIsHumanOrComputer) {
-    metaGame.moveQueue.addObserver("ComputerPlayer", function(event){
+export function registerComputerPlayerToObserveUiMoveQueue(
+        metaGame,
+        gameStewardIsHumanOrComputer,
+        oxoBoardsNA,
+        uiMoveQueue)
+{
+    uiMoveQueue.addObserver("ComputerPlayer", function(event){
     if(event.method !== 'push')return;
     //
-    const {game, player}= event.action
-    if(!tryGetGameNumberFromName(game))return;
+    console.info("computer player heard",event)
     //
-    const nextPlayer= player==='O' ? 'X' : 'O';
-    if(gameStewardIsHumanOrComputer(nextPlayer)==='computer'){
-      computerPlayMoveOnUltimateOxoGame(metaGame)
+    if(gameStewardIsHumanOrComputer(metaGame.playerOnMove)==='computer'){
+      const {board,square}= computerChooseMoveOnUltimateOxoGame(metaGame)
+      console.info("computer player will play", board, metaGame.playerOnMove, square )
+      oxoBoardsNA[board].clickSquare(square)
     }
   })
 }

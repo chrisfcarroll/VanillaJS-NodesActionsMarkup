@@ -5,9 +5,6 @@ import {screen} from '@testing-library/dom'
 import userEvent from '@testing-library/user-event'
 import createGameModelsPlaceBoardsWireUpAll from '../js/create-game-models-place-boards-wire-up-all'
 import {gameStewardNA} from '../js/NodesAndActions-game-steward'
-import UltimateOxoGame from '../js/Ultimate-oxo-game'
-import ObservablePushQueue from '../js/Observable-push-queue'
-import {registerComputerPlayerToObserveMetaGameMoveQueueListenerToPlay} from '../js/computer-player'
 
 let indexRaw
 let indexHtml
@@ -35,32 +32,6 @@ test('smoke: there are radiobuttons for players X,O is human,computer', async()=
 
 describe('GameSteward knows which player(s) is computer and which human', () => {
 
-  test('Given you pressed PlayerX is Computer and Player O is human', async () => {
-
-    const user = userEvent.setup()
-    document.outerHTML = (await getIndexHtml()).outerHTML
-
-    if(document.body.querySelectorAll("[hidden] [name=playerXis],[hidden] [name=playerOis]").length){
-      console.warn("Human/Computer buttons are hidden so they can't be tested")
-      return
-    }
-
-    // noinspection JSUnusedLocalSymbols
-    const {
-      metaGame,
-      oxoBoardsNodesActionsList,
-      newGameButtonNA,
-      gameStewardNA
-    } = createGameModelsPlaceBoardsWireUpAll();
-
-    await user.click(screen.getByRole('radio', {name:"Player X is Human"}))
-    await user.click(screen.getByRole('radio', {name:"Player O is Computer"}))
-
-    expect(gameStewardNA.inputs.playerXis).toBe("human")
-    expect(gameStewardNA.inputs.playerOis).toBe("computer")
-
-  })
-
   test.each([
     {X:"Human", O:"Human"},
     {X:"Human", O:"Computer"},
@@ -72,16 +43,17 @@ describe('GameSteward knows which player(s) is computer and which human', () => 
     document.outerHTML = (await getIndexHtml()).outerHTML
 
     if(document.body.querySelectorAll("[hidden] [name=playerXis],[hidden] [name=playerOis]").length){
-      console.warn("Human/Computer buttons are hidden so they can't be tested")
-      return
+      console.info("Human/Computer buttons are hidden in the markup, unhiding for test.")
+      for(let node of document.body.querySelectorAll("[data-testid=human-computer-radiogroups][hidden]")){
+        node.attributes.removeNamedItem("hidden")
+      }
     }
 
     // noinspection JSUnusedLocalSymbols
     const {
       metaGame,
       oxoBoardsNodesActionsList,
-      newGameButtonNA,
-      gameStewardNA
+      newGameButtonNA
     } = createGameModelsPlaceBoardsWireUpAll();
 
     await user.click(screen.getByRole('radio', {name:`Player X is ${testcase.X}`}))
@@ -93,24 +65,24 @@ describe('GameSteward knows which player(s) is computer and which human', () => 
   })
 })
 
-describe('ComputerPlayer plays', ()=>{
-
-  const moveQueue = new ObservablePushQueue()
-  const metaGame = new UltimateOxoGame(moveQueue,"test")
-  registerComputerPlayerToObserveMetaGameMoveQueueListenerToPlay(
-      metaGame,
-      gameStewardNA.inputs.player)
+describe('ComputerPlayer plays on board', ()=>{
 
   test('Given GameSteward says there is a computer player', async () => {
 
     document.outerHTML = (await getIndexHtml()).outerHTML
+    // noinspection JSUnusedLocalSymbols
+    const { metaGame,
+            metaGameNodesActions,
+            oxoBoardsNodesActionsList,
+            newGameButtonNA } = createGameModelsPlaceBoardsWireUpAll()
     gameStewardNA.inputs.playerXis = 'human'
     gameStewardNA.inputs.playerOis = 'computer'
 
-    metaGame.games[1].playMove(1)
+    oxoBoardsNodesActionsList[1].clickSquare(1)
 
-    expect(moveQueue.length).toBe(2)
-    const {game,playedAt} = moveQueue[1]
+    expect(window.gameLog.length).toBe(2)
+
+    const {game,playedAt} = window.gameLog[1]
     expect({game,playedAt}).not.toEqual({game:metaGame.games[1].name, playedAt:1})
 
   })

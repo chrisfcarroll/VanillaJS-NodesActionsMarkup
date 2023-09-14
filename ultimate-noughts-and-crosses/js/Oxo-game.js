@@ -32,7 +32,7 @@ function OxoGame(moveQueue, name, metaGame=undefined) {
         //ignore move that is the wrong board in the metaGame
         if (that.metaGame && that.metaGame.nextBoard && that.metaGame.nextBoard !== that.metaGameNumber) return currentValue
       }
-      if(moveIsIllegal()){return currentValue}
+      if(moveIsIllegal()){return false}
       //
       that.boardModel[playedAt] = that.playerOnMove;
       const played= that.playerOnMove

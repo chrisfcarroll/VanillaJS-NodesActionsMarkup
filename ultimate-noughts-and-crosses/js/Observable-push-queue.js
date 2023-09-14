@@ -1,13 +1,14 @@
 function ObservablePushQueue(){
   const that=this;
   this.array=[]
-  this.observers= new Map()
+  this.observers= []
   this.pending=undefined
 
   this.addObserver= function(name,observer){
     if(typeof observer !=='function')throw new Error(observer + ' is not a function');
-    if(that.observers.has(name))throw new Error(name + ' is already registered')
-    that.observers.set(name,observer)
+    // noinspection EqualityComparisonWithCoercionJS
+    if(that.observers.filter(o=>o.name==name).length)throw new Error(name + ' is already registered')
+    that.observers.push( {name:name,observer:observer} )
   }
   this.broadcast = function(method,action) {
     const isaReentrantPush= !!that.pending
@@ -22,12 +23,11 @@ function ObservablePushQueue(){
     that.pending=undefined
 
     function sendToObservers(method, action) {
-      for (let key of that.observers.keys()) {
-        let observer = that.observers.get(key)
+      for (let observer of that.observers) {
         try {
-          observer({method: method, action: action})
+          observer.observer({method: method, action: action})
         } catch (e) {
-          console.warn('Error in call to observer', key, e)
+          console.warn('Error in call to observer', observer.name, e)
         }
       }
     }

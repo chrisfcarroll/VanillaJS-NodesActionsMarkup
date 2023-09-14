@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event'
 import createGameModelsPlaceBoardsWireUpAll from '../js/create-game-models-place-boards-wire-up-all'
 import {cellsByBoardNumberDomNodes} from '../js/NodesAndActions-oxo-board'
 import {gameDomNode} from '../js/NodesAndActions-metagame'
+import {gameStewardNA} from '../js/NodesAndActions-game-steward'
 
 let indexRaw
 let index
@@ -69,7 +70,10 @@ test('Winning a game plays the right move in the metagame', async ()=>{
     oxoBoardsNodesActionsList,
     newGameButtonNA
   } = createGameModelsPlaceBoardsWireUpAll();
-  expect(window.moveQueue).toBeDefined()
+  expect(window.gameLog).toBeDefined()
+
+  gameStewardNA.inputs.playerXis = 'human'
+  gameStewardNA.inputs.playerOis = 'human'
 
   for(let move of winGame1ForO){
     await user.click( oxoBoardsNodesActionsList[move.game].nodes.cells[move.playedAt - 1] )
@@ -90,7 +94,7 @@ test('Winning the metaGame shows game-over style', async ()=>{
     oxoBoardsNodesActionsList,
     newGameButtonNA
   } = createGameModelsPlaceBoardsWireUpAll();
-  expect(window.moveQueue).toBeDefined()
+  expect(window.gameLog).toBeDefined()
 
   for(let move of winMetaGameForO){
     await user.click( oxoBoardsNodesActionsList[move.game].nodes.cells[move.playedAt - 1] )
