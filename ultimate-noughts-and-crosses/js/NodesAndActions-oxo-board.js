@@ -1,6 +1,15 @@
 import {unplayedSquare} from './Oxo-game.js'
 import {nineBoardsDomNode} from './Nodes-nine-boards.js'
 
+export const uiHints={
+  green:'green',
+  played:'played',
+  computerPlayed:'computer-played',
+  playable:'playable',
+  gameOver:'game-over'
+}
+export const uiHintsList= Object.entries(uiHints).map(([_,hint])=> hint)
+
 const boardSelectorPattern = ".oxo-board-section:nth-of-type(${gameNumber})"
 const boardCellsByBoardNumberSelectorPattern=".oxo-board-section:nth-of-type(${boardNumber}) div[role=gridcell]"
 
@@ -44,15 +53,15 @@ export function OxoBoardNodesActions(boardNumber, game, uiMoveQueue) {
     game.newGame()
   }
 
-  this.clickSquare= function(square){
+  this.clickSquare= function(square, uiHint){
     console.assert(1 <=square && square <= 9, `board${boardNumber}.clickSquare(${square}) is outside 1-9`)
-    cellOnClick(cellsByBoardNumberDomNodes(boardNumber)[square-1], square)
+    cellOnClick(cellsByBoardNumberDomNodes(boardNumber)[square-1], square, uiHint)
   }
 
   this.setAllCellAsUnplayed=function(){
     for (let cell of thisCells) {
       cell.innerHTML = cell.innerHTML.replace(/[XO]/, unplayedSquare)
-      cell.classList.remove('green', 'played')
+      cell.classList.remove(...uiHintsList)
     }
   }
 
@@ -64,39 +73,55 @@ export function OxoBoardNodesActions(boardNumber, game, uiMoveQueue) {
     cell.eventForCell= thisCellOnClick
   }
 
-  function cellOnClick(node,square) {
+  function cellOnClick(node,square, uiHint) {
     const justPlayed = game.playMove(square)
     const wasValidMove = !!justPlayed
     if (!wasValidMove) {return }
     //
     const metaGame = game.metaGame
-    node.innerHTML = node.innerHTML.replace(/&nbsp;|X|O/, justPlayed)
-    node.classList.add('played')
-    for (let boardi = 1; boardi <= 9; boardi++) {
-      const board = boardByNumberDomNode(boardi)
-      if (!board) continue
-        ;
-      const showAsPlayable = metaGame && (!metaGame.games[boardi].winLine)
-        && (metaGame.nextBoard === 0 || metaGame.nextBoard === boardi)
-      if (showAsPlayable) {
-        console.info('Board ' + boardi + ' is playable')
-        board.classList.add('playable')
-      } else {
-        board.classList.remove('playable')
+    const isPlayable=(function(){
+      const isPlayable=[]
+      for (let boardi = 1; boardi <= 9 ; boardi++){
+        isPlayable[boardi] = metaGame && (!metaGame.games[boardi].winLine)
+              && (metaGame.nextBoard === 0 || metaGame.nextBoard === boardi)
       }
-    }
-    if (game.winLine) {
-      for (let square of game.winLine) {
-        thisCells[square - 1].classList.add('green')
-      }
-    }
+      return isPlayable
+    })()
+
+    const computerPlayed = uiHint && !!uiHint.match(uiHints.computerPlayed)
+    const uiDelay1= computerPlayed ? 1500 : 0;
+    const uiDelay2= computerPlayed ?  500 : 0;
+    setTimeout(()=>{
+      node.innerHTML = node.innerHTML.replace(/&nbsp;|X|O/, justPlayed)
+      node.classList.add('played')
+      if(uiHint){node.classList.add(uiHint)}
+      setTimeout(()=>{
+        for (let boardi = 1; boardi <= 9; boardi++) {
+          const board = boardByNumberDomNode(boardi)
+          if (!board) continue
+            ;
+          if (isPlayable[boardi]) {
+            console.info('Board ' + boardi + ' is playable')
+            board.classList.add('playable')
+          } else {
+            board.classList.remove('playable')
+          }
+        }
+        if (game.winLine) {
+          for (let square of game.winLine) {
+            thisCells[square - 1].classList.add('green')
+          }
+        }
+      },uiDelay2)
+    }, uiDelay1)
     thisuiMoveQueue.push({game: game.name, player: justPlayed, playedAt: square})
   }
+
   function cleanCellIfUsedInAPreviousGame(cell) {
     if (!cell.eventForCell) { return }
     //
     cell.removeEventListener('click', cell.eventForCell)
     delete cell.eventForCell
-    cell.classList.remove('green', 'played')
+    cell.classList.remove(...uiHintsList)
   }
 }

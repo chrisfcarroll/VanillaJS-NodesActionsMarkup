@@ -1,5 +1,6 @@
-import {OxoBoardNodesActions} from './NodesAndActions-oxo-board.js'
+import {OxoBoardNodesActions, uiHintsList} from './NodesAndActions-oxo-board.js'
 import {nineBoardsDomNode} from './Nodes-nine-boards.js'
+import {gameStewardNA} from './NodesAndActions-game-steward.js'
 
 const newGameButtonId="new-game-button"
 const newGameButtonDomNode= ()=>document.getElementById(newGameButtonId)
@@ -17,6 +18,7 @@ export function NewGameButtonNodesActions(metaGameModel, metaGameNodesActions, o
 
     metaGameModel.newGame()
     metaGameNodesActions.setAllCellAsUnplayed()
+    metaGameNodesActions.nodes.game.classList.remove(...uiHintsList)
 
     for (let board of oxoBoardsNodesActionsList.filter(b => b)) {
       board.setAllCellAsUnplayed()
@@ -25,12 +27,11 @@ export function NewGameButtonNodesActions(metaGameModel, metaGameNodesActions, o
       }
     }
     for (let board of nineBoardsDomNode().querySelectorAll('.playable')) {
-      board.classList.remove('playable')
+      board.classList.remove(...uiHintsList)
     }
-    metaGameNodesActions.nodes.game.classList.remove('game-over')
-    for(let cell of metaGameNodesActions.nodes.metaGameAllCells){
-      cell.classList.remove('green')
-    }
+
+    gameStewardNA.nodes.getGroupIsPlayedBy('X').classList.add("your-turn")
+    gameStewardNA.nodes.getGroupIsPlayedBy('O').classList.remove("your-turn")
 
     uiMoveQueue.push(NewGameAction)
   })

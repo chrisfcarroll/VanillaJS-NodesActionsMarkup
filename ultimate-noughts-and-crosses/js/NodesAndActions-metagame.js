@@ -1,5 +1,6 @@
 import ObservablePushQueue from './Observable-push-queue.js'
 import {unplayedSquare} from './Oxo-game.js'
+import {uiHintsList} from './NodesAndActions-oxo-board.js'
 
 const gameHTMLElementId="game"
 const metaGameHTMLElementId = "metagame-grid"
@@ -34,6 +35,7 @@ export function MetaGameNodesActions(metaGame){
   this.setAllCellAsUnplayed = function(){
     for (let cell of metaGameAllCellDomNodes()) {
       cell.innerHTML = cell.innerHTML.replace(/[XO]/, unplayedSquare)
+      cell.classList.remove(...uiHintsList)
     }
   }
 

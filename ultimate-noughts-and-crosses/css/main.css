@@ -112,7 +112,7 @@ h6 { margin: 0.5rem 0 }
 }
 @keyframes blinkOnce {
   0%     { opacity: .9 }
-  33%    { opacity: .7 }
+  33%    { opacity: .5 }
   66%    { opacity: .9 }
   100%   { opacity: 1 }
 }
@@ -121,6 +121,12 @@ h6 { margin: 0.5rem 0 }
   40%  { scale: .9 }
   70%  { scale: 1.05 }
   100% { scale: 1 }
+}
+@keyframes twistIn {
+    0%  { opacity: 0 ;  transform: translateX(-10%) rotate(-10deg) translateY(-30%)}
+    50% { opacity: 0 ;  transform: translateX(-10%) rotate(-10deg) translateY(-30%)}
+    70% { opacity: 0.5; transform: translateX(3%) rotate( -5deg) translateY(-10%)}
+    100% { }
 }
 
 @media (prefers-reduced-motion) {
@@ -140,7 +146,7 @@ h6 { margin: 0.5rem 0 }
   }
   @keyframes blinkOnce {
     0%   { opacity: 1 }
-    66%  { opacity: .9 }
+    66%  { opacity: .8 }
     100% { opacity: 1 }
   }
   @keyframes expandBounce {
@@ -148,6 +154,12 @@ h6 { margin: 0.5rem 0 }
     40%  { scale: 0.98 ; opacity: .85}
     70%  { scale: 1.02 ; opacity: 1}
     100% { scale: 1 ; opacity: 1}
+  }
+  @keyframes twistIn {
+    0%  { opacity: 0 ;  transform: rotate(-5deg) }
+    50% { opacity: 0 ;  transform: rotate(-5deg) }
+    70% { opacity: 0.5; transform: rotate(-5deg) }
+    100% { }
   }
 }
 
@@ -178,7 +190,7 @@ h6 { margin: 0.5rem 0 }
 }
 .title-and-top-level-control-panel fieldset {
   border: lightgrey 1px solid;
-  border-radius: 1.5vmin;
+  border-radius: 0.5vmin;
   padding: 1vmin;
 }
 
@@ -290,8 +302,13 @@ h6 { margin: 0.5rem 0 }
 }
 
 .played { animation: fadeIn 0.3s ease-out;}
+.played.computer-played { animation: twistIn .5s}
 .green { color:green ; animation: blinkOnce .8s ease-out;}
-.your-turn { background-color:palegreen ; animation: blinkOnce .8s ease-out;}
+fieldset.your-turn, .your-turn {
+  background-color:#f7fff7 ;
+  animation: fadeIn 1s ;
+  border: 1px solid green;
+}
 
 
 /* ==========================================================================

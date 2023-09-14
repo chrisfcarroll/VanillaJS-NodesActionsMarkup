@@ -1,5 +1,6 @@
 import {unplayedSquare} from './Oxo-game.js'
 import {gameNumberFromName} from './Ultimate-oxo-game.js'
+import {uiHints} from './NodesAndActions-oxo-board.js'
 
 const wins = [
             [1, 2, 3],
@@ -82,7 +83,7 @@ export function registerComputerPlayerToObserveUiMoveQueue(
       console.info("computer player will play", board, metaGame.playerOnMove, square, canPlay )
 
       if(canPlay){
-        oxoBoardsNA[board].clickSquare(square)
+        oxoBoardsNA[board].clickSquare(square, uiHints.computerPlayed)
       }else{
         console.log("Game Over")
       }
