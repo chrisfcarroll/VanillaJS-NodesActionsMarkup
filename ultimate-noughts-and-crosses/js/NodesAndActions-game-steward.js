@@ -6,6 +6,7 @@ const playerOisComputerSelector = "input[name=playerOis][type=radio][value=compu
 const playerXisSelector    = "input[name=playerXis][type=radio]:checked"
 const playerOisSelector    = "input[name=playerOis][type=radio]:checked"
 const setPlayerSelector = "input[name=player${XorO}is][type=radio][value=${value}]"
+export const humanOrComputerChanged="Human or Computer Changed"
 
 function setPlayer(XorO, humanOrComputer) {
   if (humanOrComputer !== 'human' && humanOrComputer !== 'computer') {
@@ -43,7 +44,12 @@ export const gameStewardNA={
 
 document.addEventListener('DOMContentLoaded', ()=>{
   for(const [_,node] of Object.entries( gameStewardNA.nodes)){
-    node().addEventListener('click', (e)=>{console.log(e.target.name,e.target.value)})
+    node().addEventListener('click', (e)=>{
+      console.log(e.target.name,e.target.value)
+      if(window.uiMoveQueue){
+        window.uiMoveQueue.push({[e.target.name]:e.target.value})
+      }
+    })
   }
 })
 

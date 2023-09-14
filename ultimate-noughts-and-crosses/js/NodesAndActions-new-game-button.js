@@ -28,6 +28,9 @@ export function NewGameButtonNodesActions(metaGameModel, metaGameNodesActions, o
       board.classList.remove('playable')
     }
     metaGameNodesActions.nodes.game.classList.remove('game-over')
+    for(let cell of metaGameNodesActions.nodes.metaGameAllCells){
+      cell.classList.remove('green')
+    }
 
     uiMoveQueue.push(NewGameAction)
   })
