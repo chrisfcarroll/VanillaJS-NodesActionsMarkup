@@ -68,7 +68,7 @@ export function computerChooseMoveOnUltimateOxoGame(metaGame){
 
 export function registerComputerPlayerToObserveUiMoveQueue(
         metaGame,
-        gameStewardIsHumanOrComputer,
+        gameStewardNA,
         oxoBoardsNA,
         uiMoveQueue)
 {
@@ -77,7 +77,7 @@ export function registerComputerPlayerToObserveUiMoveQueue(
     //
     console.info("computer player heard",event)
     //
-    if(gameStewardIsHumanOrComputer(metaGame.playerOnMove)==='computer'){
+    if(gameStewardNA.inputs.player(metaGame.playerOnMove)==='computer'){
       const {board,square,canPlay}= computerChooseMoveOnUltimateOxoGame(metaGame)
       console.info("computer player will play", board, metaGame.playerOnMove, square, canPlay )
 

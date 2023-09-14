@@ -1,6 +1,14 @@
 import {gameNumberFromName} from './Ultimate-oxo-game.js'
 
 export const unplayedSquare = '\u00A0'
+export function otherPlayer(XorO){
+  switch(XorO){
+    case 'X' : return 'O'
+    case 'O' : return 'X'
+    default:
+      console.error(`otherPlayer() was called with ${XorO} which isn't X or O`)
+  }
+}
 
 export class GameEvent{
   constructor(game,player,playedAt) {
@@ -37,7 +45,7 @@ function OxoGame(moveQueue, name, metaGame=undefined) {
       that.boardModel[playedAt] = that.playerOnMove;
       const played= that.playerOnMove
       that.setWinnerIfWon()
-      that.playerOnMove = (that.playerOnMove === 'X' ? 'O' : 'X')
+      that.playerOnMove = otherPlayer(that.playerOnMove)
       that.moveQueue.push( {game:that.name, player:played, playedAt:playedAt} )
       return played
     }

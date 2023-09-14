@@ -6,7 +6,11 @@ import {MetaGameNodesActions, assertDomNodes as metagameAssertDomNodes} from './
 import {insertOxoBoardMarkup} from './Markup-oxo-board.js'
 import {OxoBoardNodesActions, assertDomNodes as oxoBoardsAssertDomNodes} from './NodesAndActions-oxo-board.js'
 import {NewGameButtonNodesActions, assertDomNodes as newGameButtonAssertDomNodes} from './NodesAndActions-new-game-button.js'
-import {assertDomNodes as gameStewardAssertDomNodes, gameStewardNA} from './NodesAndActions-game-steward.js'
+import {
+  assertDomNodes as gameStewardAssertDomNodes,
+  gameStewardNA,
+  wireUpGameSteward
+} from './NodesAndActions-game-steward.js'
 import {registerComputerPlayerToObserveUiMoveQueue} from './computer-player.js'
 
 export default function createGameModelsPlaceBoardsWireUpAll() {
@@ -21,7 +25,6 @@ export default function createGameModelsPlaceBoardsWireUpAll() {
   newGameButtonAssertDomNodes()
   gameStewardAssertDomNodes()
 
-
   const metaGame=new UltimateOxoGame(window.gameLog)
   const metaGameNodesActions=new MetaGameNodesActions(metaGame)
 
@@ -34,11 +37,13 @@ export default function createGameModelsPlaceBoardsWireUpAll() {
 
   const newGameButton=new NewGameButtonNodesActions(metaGame, metaGameNodesActions, oxoBoardNodesActionsList, window.uiMoveQueue)
 
-    registerComputerPlayerToObserveUiMoveQueue(
-      metaGame,
-      gameStewardNA.inputs.player,
-      oxoBoardNodesActionsList,
-      window.uiMoveQueue)
+  wireUpGameSteward()
+
+  registerComputerPlayerToObserveUiMoveQueue(
+    metaGame,
+    gameStewardNA,
+    oxoBoardNodesActionsList,
+    window.uiMoveQueue)
 
   return {
     metaGame : metaGame,

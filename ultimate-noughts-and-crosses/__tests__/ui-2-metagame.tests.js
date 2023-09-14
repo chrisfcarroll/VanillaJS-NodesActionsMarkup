@@ -72,8 +72,8 @@ test('Winning a game plays the right move in the metagame', async ()=>{
   } = createGameModelsPlaceBoardsWireUpAll();
   expect(window.gameLog).toBeDefined()
 
-  gameStewardNA.inputs.playerXis = 'human'
-  gameStewardNA.inputs.playerOis = 'human'
+  gameStewardNA.inputs.setPlayerXis('human')
+  gameStewardNA.inputs.setPlayerOis('human')
 
   for(let move of winGame1ForO){
     await user.click( oxoBoardsNodesActionsList[move.game].nodes.cells[move.playedAt - 1] )

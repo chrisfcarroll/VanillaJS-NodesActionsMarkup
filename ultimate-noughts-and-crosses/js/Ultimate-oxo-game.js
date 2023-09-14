@@ -47,7 +47,7 @@ function UltimateOxoGame(moveQueue,name){
       console.info('ignoring',event.method,event.action)
       return
     }
-    console.info(event.method, event.action)
+    console.info("Metagame heard",event.method, event.action)
     updateMetaGame()
     overrideChildGamesPlayerOnMove()
 

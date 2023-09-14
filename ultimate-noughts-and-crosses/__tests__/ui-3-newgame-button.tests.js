@@ -23,8 +23,8 @@ beforeEach( async () => {
   document.body.innerHTML=(await getIndexHtml()).body.innerHTML
   hasDoneInnerHTMLChickenDance=true;
 
-  gameStewardNA.inputs.playerXis='human'
-  gameStewardNA.inputs.playerOis='human'
+  gameStewardNA.inputs.setPlayerXis('human')
+  gameStewardNA.inputs.setPlayerOis('human')
 
 })
 
@@ -150,4 +150,23 @@ test('After pressing New Game button everything is wired up again', async ()=>{
       expect(metaGame.metaGame.boardModel[i]).toBe(unplayedSquare)
     }
   }
+})
+
+test('After pressing New Game button GameSteward UI is reset', async ()=>{
+  const user = userEvent.setup()
+  document.outerHTML=(await getIndexHtml()).outerHTML
+  // noinspection JSUnusedLocalSymbols
+  const {
+    metaGame,
+    oxoBoardsNodesActionsList,
+    newGameButtonNA
+  } = createGameModelsPlaceBoardsWireUpAll();
+
+  await user.click(oxoBoardsNodesActionsList[1].nodes.cells[0])
+
+  await user.click(newGameButtonNA.node)
+
+  expect(gameStewardNA.nodes.getGroupIsPlayedBy('X').classList).toContain('your-turn')
+  expect(gameStewardNA.nodes.getGroupIsPlayedBy('O').classList).not.toContain('your-turn')
+
 })
