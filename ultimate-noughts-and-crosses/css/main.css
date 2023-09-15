@@ -13,9 +13,8 @@
 
 html {
   color: #222;
-  font-size: 1em;
-  line-height: 1.4;
-  font-family: "Arial Rounded MT Bold","Avenir","Futura",sans-serif;
+  line-height: 1.2;
+  font-family: "Arial",sans-serif;
 }
 
 /*div,legend,label { border: 1px blue dashed}*/
@@ -90,6 +89,7 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+h1,h2,h3,h4,h5,h6 {font-size: 1.2rem}
 h1 { margin: 1rem 0 }
 h6 { margin: 0.5rem 0 }
 @media not (min-width: 35em) {
@@ -206,9 +206,12 @@ h6 { margin: 0.5rem 0 }
 }
 .three-by-three h6 {margin:0 ; font-weight: normal;}
 
-.three-by-three .oxo-board-section{
+.oxo-board-section{
   display:flex;
+  font-family: "Arial Rounded MT Bold","Avenir","Futura",sans-serif ;
 }
+.oxo-board-section .piece { line-height: 12vmin; }
+.metagame .piece { line-height: 9vmin; }
 
 .one-by-one{
   width: 27vmin;
