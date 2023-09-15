@@ -10,6 +10,8 @@ export const uiHints={
 }
 export const uiHintsList= Object.entries(uiHints).map(([_,hint])=> hint)
 
+export const computerPlayUIDelayMS=[1000,500]
+
 const boardSelectorPattern = ".oxo-board-section:nth-of-type(${gameNumber})"
 const boardCellsByBoardNumberSelectorPattern=".oxo-board-section:nth-of-type(${boardNumber}) div[role=gridcell]"
 
@@ -89,8 +91,8 @@ export function OxoBoardNodesActions(boardNumber, game, uiMoveQueue) {
     })()
 
     const computerPlayed = uiHint && !!uiHint.match(uiHints.computerPlayed)
-    const uiDelay1= computerPlayed ? 1500 : 0;
-    const uiDelay2= computerPlayed ?  500 : 0;
+    const uiDelay1= computerPlayed ? computerPlayUIDelayMS[0] : 0;
+    const uiDelay2= computerPlayed ? computerPlayUIDelayMS[1] : 0;
     setTimeout(()=>{
       node.innerHTML = node.innerHTML.replace(/&nbsp;|X|O/, justPlayed)
       node.classList.add('played')

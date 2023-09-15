@@ -123,9 +123,8 @@ h6 { margin: 0.5rem 0 }
   100% { scale: 1 }
 }
 @keyframes twistIn {
-    0%  { opacity: 0 ;  transform: translateX(-10%) rotate(-10deg) translateY(-30%)}
-    50% { opacity: 0 ;  transform: translateX(-10%) rotate(-10deg) translateY(-30%)}
-    70% { opacity: 0.5; transform: translateX(3%) rotate( -5deg) translateY(-10%)}
+    0%  { opacity: 0.5 ;  transform: translateX(-5%) rotate(-10deg) translateY(-15%)}
+    50%  {                transform: rotate(3deg) }
     100% { }
 }
 
@@ -302,7 +301,7 @@ h6 { margin: 0.5rem 0 }
 }
 
 .played { animation: fadeIn 0.3s ease-out;}
-.played.computer-played { animation: twistIn .5s}
+.computer-played .piece { animation: twistIn 1s}
 .green { color:green ; animation: blinkOnce .8s ease-out;}
 fieldset.your-turn, .your-turn {
   background-color:#f7fff7 ;
