@@ -35,9 +35,10 @@ export function computerChooseMoveOnOxoGame(game){
           .filter(lineState=> lineState.canPlayAt)
 
   if(playables.length){
-    playables.sort( (a,b) => a.open - b.open )
+    playables.sort( (a,b) => (a.open - b.open)*10 + (a.me - b.me) )
     //console.info(playables)
-    return playables[0].canPlayAt
+    const chooseables= playables.filter(p=>p.open === playables[0].open)
+    return chooseables[Math.floor(Math.random()*chooseables.length)].canPlayAt
   }
   console.info("no playable move left")
   return 0
@@ -82,7 +83,7 @@ export function registerComputerPlayerToObserveUiMoveQueue(
       const {board,square,canPlay}= computerChooseMoveOnUltimateOxoGame(metaGame)
       console.info("computer player will play", board, metaGame.playerOnMove, square, canPlay )
 
-      if(canPlay){
+      if(canPlay && ! metaGame.metaGame.winLine){
         oxoBoardsNA[board].clickSquare(square, uiHints.computerPlayed)
       }else{
         console.log("Game Over")
