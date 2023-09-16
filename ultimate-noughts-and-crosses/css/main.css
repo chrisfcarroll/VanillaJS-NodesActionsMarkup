@@ -97,6 +97,7 @@ h6 { margin: 0.5rem 0 ; font-weight: normal; font-size: small}
 @media not (min-width: 35em) {
   h1 {font-size: 1rem; margin:0}
   h6 {margin:0}
+  .columns-of-text {padding-top: 5rem;}
 }
 
 @keyframes fadeInOut {
@@ -184,6 +185,7 @@ h6 { margin: 0.5rem 0 ; font-weight: normal; font-size: small}
 }
 
 .control-panel{
+  margin:0 4px;
   display:flex;
   flex-direction: row;
   justify-content: space-between;
@@ -331,7 +333,7 @@ fieldset.your-turn, .your-turn legend{
   content:' to move'
 }
 
-.columns-of-text {margin:8px}
+.columns-of-text {margin:9px}
 
 /* ==========================================================================
    Helper classes

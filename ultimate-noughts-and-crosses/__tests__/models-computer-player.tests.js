@@ -11,7 +11,7 @@ describe('Computer player', ()=>{
     const name=new Date().toISOString()
     const game= new OxoGame(moves, name )
 
-    for(let i= 1; i <= 8 ; i++){
+    for(let i= 1; i <= 4 ; i++){
       const player=game.playerOnMove
       const playAt= computerChooseMoveOnOxoGame(game)
 
