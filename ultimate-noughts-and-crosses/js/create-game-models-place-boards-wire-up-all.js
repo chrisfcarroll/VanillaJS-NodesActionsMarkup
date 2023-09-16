@@ -25,6 +25,8 @@ export default function createGameModelsPlaceBoardsWireUpAll() {
   newGameButtonAssertDomNodes()
   gameStewardAssertDomNodes()
 
+  wireUpGameSteward()
+
   const metaGame=new UltimateOxoGame(window.gameLog)
   const metaGameNodesActions=new MetaGameNodesActions(metaGame)
 
@@ -36,8 +38,6 @@ export default function createGameModelsPlaceBoardsWireUpAll() {
   }
 
   const newGameButton=new NewGameButtonNodesActions(metaGame, metaGameNodesActions, oxoBoardNodesActionsList, window.uiMoveQueue)
-
-  wireUpGameSteward()
 
   registerComputerPlayerToObserveUiMoveQueue(
     metaGame,

@@ -30,8 +30,16 @@ export function NewGameButtonNodesActions(metaGameModel, metaGameNodesActions, o
       board.classList.remove(...uiHintsList)
     }
 
-    gameStewardNA.nodes.getGroupIsPlayedBy('X').classList.add("your-turn")
-    gameStewardNA.nodes.getGroupIsPlayedBy('O').classList.remove("your-turn")
+
+    gameStewardNA.nodes.getGroupIsPlayedBy('X').classList.remove("your-turn")
+    gameStewardNA.nodes.getGroupIsPlayedBy('O').classList.add("your-turn")
+    setTimeout(
+      ()=>{
+        gameStewardNA.nodes.getGroupIsPlayedBy('X').classList.add("your-turn")
+        gameStewardNA.nodes.getGroupIsPlayedBy('O').classList.remove("your-turn")
+      },
+      0
+    )
 
     uiMoveQueue.push(NewGameAction)
   })

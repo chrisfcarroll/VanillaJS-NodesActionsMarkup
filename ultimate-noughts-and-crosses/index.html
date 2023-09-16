@@ -19,7 +19,8 @@
 
 <body>
   <h1>Ultimate Noughts and Crosses</h1>
-  <div class="title-and-top-level-control-panel">
+
+ <div class="control-panel">
     <div class="centralising-panel"><button id="new-game-button">New Game</button></div>
     <div class="centralising-panel">
       <fieldset role="radiogroup" id="fieldset-player-X-is-played-by" data-testid="human-computer-radiogroups" class="your-turn">
@@ -37,10 +38,34 @@
         <label aria-label="Player O is Computer"><input type="radio" name="playerOis" value="computer" /> Computer</label>
       </fieldset>
     </div>
+    <div class="centralising-panel">
+        <section class="oxo-board-section metagame">
+          <div role="grid" class="oxo-board small" aria-labelledby="metaboard-header" id="metagame-grid">
+            <div role="gridcell" id="metaboard-cell-1" aria-labelledby="metaboard-header metaboard-cell-1">
+              <label>top left</label><div class="piece">&nbsp;</div>
+            </div>
+            <div role="gridcell" id="metaboard-cell-2"  aria-labelledby="metaboard-header metaboard-cell-2">
+              <label>top middle</label><div class="piece">&nbsp;</div></div>
+            <div role="gridcell" id="metaboard-cell-3"  aria-labelledby="metaboard-header metaboard-cell-3">
+              <label>top right</label><div class="piece">&nbsp;</div></div>
+            <div role="gridcell" id="metaboard-cell-4" aria-labelledby="metaboard-header metaboard-cell-4">
+              <label>middle left</label><div class="piece">&nbsp;</div></div>
+            <div role="gridcell" id="metaboard-cell-5"  aria-labelledby="metaboard-header metaboard-cell-5">
+              <label>middle square</label><div class="piece">&nbsp;</div></div>
+            <div role="gridcell" id="metaboard-cell-6"  aria-labelledby="metaboard-header metaboard-cell-6">
+              <label>middle right</label><div class="piece">&nbsp;</div></div>
+            <div role="gridcell" id="metaboard-cell-7" aria-labelledby="metaboard-header metaboard-cell-7">
+              <label>bottom left</label><div class="piece">&nbsp;</div></div>
+            <div role="gridcell" id="metaboard-cell-8"  aria-labelledby="metaboard-header metaboard-cell-8">
+              <label>bottom middle</label><div class="piece">&nbsp;</div></div>
+            <div role="gridcell" id="metaboard-cell-9"  aria-labelledby="metaboard-header metaboard-cell-9">
+              <label>bottom right</label><div class="piece">&nbsp;</div></div>
+          </div>
+        </section>
+    </div>
   </div>
-  <div class="twocolumns" id="game">
-    <div class="leftcolumn">
-      <h6>Play!</h6>
+
+  <div id="game">
       <div role="grid" class="three-by-three">
         <section class="oxo-board-section">
           <div role="grid" class="oxo-board" aria-label="Board 1" id="board1">
@@ -66,36 +91,8 @@
           </div>
         </section>
       </div>
-    </div>
-    <div class="rightcolumn">
-      <h6 id="metaboard-header">Meta Game</h6>
-      <div class="one-by-one">
-        <section class="oxo-board-section metagame">
-          <div role="grid" class="oxo-board small" aria-labelledby="metaboard-header" id="metagame-grid">
-            <div role="gridcell" id="metaboard-cell-1" aria-labelledby="metaboard-header metaboard-cell-1">
-              <label>top left</label><div class="piece">&nbsp;</div>
-            </div>
-            <div role="gridcell" id="metaboard-cell-2"  aria-labelledby="metaboard-header metaboard-cell-2">
-              <label>top middle</label><div class="piece">&nbsp;</div></div>
-            <div role="gridcell" id="metaboard-cell-3"  aria-labelledby="metaboard-header metaboard-cell-3">
-              <label>top right</label><div class="piece">&nbsp;</div></div>
-            <div role="gridcell" id="metaboard-cell-4" aria-labelledby="metaboard-header metaboard-cell-4">
-              <label>middle left</label><div class="piece">&nbsp;</div></div>
-            <div role="gridcell" id="metaboard-cell-5"  aria-labelledby="metaboard-header metaboard-cell-5">
-              <label>middle square</label><div class="piece">&nbsp;</div></div>
-            <div role="gridcell" id="metaboard-cell-6"  aria-labelledby="metaboard-header metaboard-cell-6">
-              <label>middle right</label><div class="piece">&nbsp;</div></div>
-            <div role="gridcell" id="metaboard-cell-7" aria-labelledby="metaboard-header metaboard-cell-7">
-              <label>bottom left</label><div class="piece">&nbsp;</div></div>
-            <div role="gridcell" id="metaboard-cell-8"  aria-labelledby="metaboard-header metaboard-cell-8">
-              <label>bottom middle</label><div class="piece">&nbsp;</div></div>
-            <div role="gridcell" id="metaboard-cell-9"  aria-labelledby="metaboard-header metaboard-cell-9">
-              <label>bottom right</label><div class="piece">&nbsp;</div></div>
-          </div>
-        </section>
-      </div>
-    </div>
   </div>
+
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/plugins.js"></script>
 
