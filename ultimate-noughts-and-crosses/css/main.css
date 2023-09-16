@@ -208,9 +208,6 @@ h6 { margin: 0.5rem 0 ; font-weight: normal}
   padding: 1vmin;
 }
 
-
-
-
 .three-by-three {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -333,6 +330,8 @@ fieldset.your-turn, .your-turn legend{
 .your-turn legend:after {
   content:' to move'
 }
+
+.columns-of-text {margin:8px}
 
 /* ==========================================================================
    Helper classes
