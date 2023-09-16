@@ -19,9 +19,11 @@
 
 <body>
   <h1>Ultimate Noughts and Crosses</h1>
-
- <div class="control-panel">
-    <div class="centralising-panel"><button id="new-game-button">New Game</button></div>
+  <h6><a href="#the-rules">How to play</a></h6>
+   <div class="control-panel">
+    <div class="centralising-panel">
+      <button id="new-game-button">New Game</button>
+    </div>
     <div class="centralising-panel">
       <fieldset role="radiogroup" id="fieldset-player-X-is-played-by" data-testid="human-computer-radiogroups" class="your-turn">
         <legend>Player X</legend>
@@ -33,9 +35,9 @@
     <div class="centralising-panel" >
       <fieldset role="radiogroup" id="fieldset-player-O-is-played-by" data-testid="human-computer-radiogroups">
         <legend>Player O</legend>
-        <label aria-label="Player O is Human"><input type="radio" name="playerOis" value="human" checked/> Human</label>
+        <label aria-label="Player O is Human"><input type="radio" name="playerOis" value="human" /> Human</label>
         <br/>
-        <label aria-label="Player O is Computer"><input type="radio" name="playerOis" value="computer" /> Computer</label>
+        <label aria-label="Player O is Computer"><input type="radio" name="playerOis" value="computer" checked/> Computer</label>
       </fieldset>
     </div>
     <div class="centralising-panel">
@@ -93,21 +95,25 @@
       </div>
   </div>
   <div class="columns-of-text">
+    <a id="the-rules"></a>
     <h1>Ultimate Nought And Crosses</h1>
     <p>You play <strong>nine</strong> simultaneous games of noughts and crosses! But your goal is to
     win the “meta-game.” The meta-game is the three-by-three board made up of the nine games you
     are playing. To win the meta-game, you must be the first to win a <i>line</i> of games, just
-    like winning an ordinary noughts-and-crosses game — but much harder.</p>
+    like winning an ordinary noughts-and-crosses game — but nine times harder.</p>
     <h2>The Rules</h2>
     Just like in noughts and crosses, you take turns to play a move. The starting player plays <strong>X</strong>,
     the other player plays <strong>O</strong>. But instead of taking turns on the same board, there are two
     new rules for ultimate noughts and crosses:
     <ol>
-      <li>Whichever square you play on in one of the nine boards determines which <i>on which board</i>
+      <li>Whichever <i>square</i> you play on in one of the nine boards dictates <i>on which board</i>
         your opponent must play their next move.</li>
-      <li>If rule one forces you to play on a game that is already finished, then you may instead
+      <li>If rule 1 forces you to play on a game that is already finished, then you may instead
       play on <i>any board you like</i>.</li>
     </ol>
+    <p>Enjoy your challenge! If you want to play ultimate noughts and crosses on a real board,
+    you can play on a <a href="https://ddg.gg/tic_tac_ku">tic-tac-ku</a> set. Traditionalists
+    may still prefer to play with pencil and paper.</p>
   </div>
 
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>

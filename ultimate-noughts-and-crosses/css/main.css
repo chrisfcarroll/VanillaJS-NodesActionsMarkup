@@ -13,10 +13,10 @@
 
 html {
   color: #222;
-  line-height: 1.2;
-  font-family: "Arial",sans-serif;
+  line-height: 1.4;
+  font-family: "Helvetica Neue","Helvetica","Arial",sans-serif;
 }
-body {max-width: 81vmin}
+body {max-width: 81vmin; margin-bottom: 2rem;}
 
 /*div,legend,label { border: 1px blue dashed}*/
 
@@ -92,7 +92,7 @@ textarea {
 
 h1,h2,h3,h4,h5,h6 {font-size: 1.2rem}
 h1 { margin: 1rem 0 }
-h6 { margin: 0.5rem 0 ; font-weight: normal}
+h6 { margin: 0.5rem 0 ; font-weight: normal; font-size: small}
 
 @media not (min-width: 35em) {
   h1 {font-size: 1rem; margin:0}

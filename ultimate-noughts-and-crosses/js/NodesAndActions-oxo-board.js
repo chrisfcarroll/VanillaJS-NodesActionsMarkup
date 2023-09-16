@@ -10,7 +10,7 @@ export const uiHints={
 }
 export const uiHintsList= Object.entries(uiHints).map(([_,hint])=> hint)
 
-export const computerPlayUIDelayMS=[1000,500]
+export const computerPlayUIDelayMS=[800,400]
 
 const boardSelectorPattern = ".oxo-board-section:nth-of-type(${gameNumber})"
 const boardCellsByBoardNumberSelectorPattern=".oxo-board-section:nth-of-type(${boardNumber}) div[role=gridcell]"
