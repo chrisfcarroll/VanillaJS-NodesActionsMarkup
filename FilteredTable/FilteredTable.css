@@ -1,0 +1,29 @@
+.filtered-table th, td, label, legend { padding:0.2rem }
+.filtered-table table { border-collapse: collapse }
+
+.filtered-table {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+.filtered-table form,
+.filtered-table table,
+.filtered-table th {
+  border: 0.7px black solid;
+  padding: 0.3rem;
+}
+.filtered-table form legend { font-size: small }
+
+.filtered-table th {
+  text-align: left;
+}
+
+.twoColumnNarrowWideGrid {
+  display: grid;
+  grid-template-columns: 1fr 4fr ;
+  grid-template-rows: max-content;
+  align-items: center;
+  justify-items: start;
+}
+
+/*div,span { border: 0.3px blue dashed}*/
