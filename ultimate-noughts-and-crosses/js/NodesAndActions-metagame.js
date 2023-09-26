@@ -1,6 +1,6 @@
 import ObservablePushQueue from './Observable-push-queue.js'
 import {unplayedSquare} from './Oxo-game.js'
-import {uiHintsList} from './NodesAndActions-oxo-board.js'
+import {uiHints, uiHintsList} from './NodesAndActions-oxo-board.js'
 
 const gameHTMLElementId="game"
 const metaGameHTMLElementId = "metagame-grid"
@@ -54,6 +54,10 @@ export function MetaGameNodesActions(metaGame){
         cell.classList.add("green")
       }
       gameDomNode().classList.add('game-over')
+      gameDomNode()
+        .querySelectorAll('.' + uiHints.yourTurn)
+        .forEach(n=>n.classList.remove(uiHints.yourTurn))
+
     }
   })
 }

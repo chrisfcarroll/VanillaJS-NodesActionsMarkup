@@ -1,4 +1,4 @@
-import {OxoBoardNodesActions, uiHintsList} from './NodesAndActions-oxo-board.js'
+import {OxoBoardNodesActions, uiHints, uiHintsList} from './NodesAndActions-oxo-board.js'
 import {nineBoardsDomNode} from './Nodes-nine-boards.js'
 import {gameStewardNA} from './NodesAndActions-game-steward.js'
 
@@ -19,6 +19,7 @@ export function NewGameButtonNodesActions(metaGameModel, metaGameNodesActions, o
     metaGameModel.newGame()
     metaGameNodesActions.setAllCellAsUnplayed()
     metaGameNodesActions.nodes.game.classList.remove(...uiHintsList)
+    metaGameNodesActions.nodes.metaGame.classList.remove(...uiHintsList)
 
     for (let board of oxoBoardsNodesActionsList.filter(b => b)) {
       board.setAllCellAsUnplayed()
@@ -31,12 +32,12 @@ export function NewGameButtonNodesActions(metaGameModel, metaGameNodesActions, o
     }
 
 
-    gameStewardNA.nodes.getGroupIsPlayedBy('X').classList.remove("your-turn")
-    gameStewardNA.nodes.getGroupIsPlayedBy('O').classList.add("your-turn")
+    gameStewardNA.nodes.getGroupIsPlayedBy('X').classList.remove(uiHints.yourTurn)
+    gameStewardNA.nodes.getGroupIsPlayedBy('O').classList.add(uiHints.yourTurn)
     setTimeout(
       ()=>{
-        gameStewardNA.nodes.getGroupIsPlayedBy('X').classList.add("your-turn")
-        gameStewardNA.nodes.getGroupIsPlayedBy('O').classList.remove("your-turn")
+        gameStewardNA.nodes.getGroupIsPlayedBy('X').classList.add(uiHints.yourTurn)
+        gameStewardNA.nodes.getGroupIsPlayedBy('O').classList.remove(uiHints.yourTurn)
       },
       0
     )

@@ -6,7 +6,8 @@ export const uiHints={
   played:'played',
   computerPlayed:'computer-played',
   playable:'playable',
-  gameOver:'game-over'
+  gameOver:'game-over',
+  yourTurn: 'your-turn'
 }
 export const uiHintsList= Object.entries(uiHints).map(([_,hint])=> hint)
 

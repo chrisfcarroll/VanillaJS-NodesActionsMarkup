@@ -20,12 +20,14 @@
 <body>
   <h1>Ultimate Noughts and Crosses</h1>
   <h6><a href="#the-rules">How to play</a></h6>
-   <div class="control-panel">
+
+  <div id="game">
+  <div class="control-panel">
     <div class="centralising-panel">
       <button id="new-game-button">New Game</button>
     </div>
     <div class="centralising-panel">
-      <fieldset role="radiogroup" id="fieldset-player-X-is-played-by" data-testid="human-computer-radiogroups" class="your-turn">
+      <fieldset role="radiogroup" id="fieldset-player-X-is-played-by" data-testid="human-computer-radiogroups" class="your-turn playerX">
         <legend>Player X</legend>
         <label aria-label="Player X is Human"><input type="radio" name="playerXis" value="human" checked/> Human</label>
         <br/>
@@ -33,7 +35,7 @@
       </fieldset>
     </div>
     <div class="centralising-panel" >
-      <fieldset role="radiogroup" id="fieldset-player-O-is-played-by" data-testid="human-computer-radiogroups">
+      <fieldset role="radiogroup" id="fieldset-player-O-is-played-by" data-testid="human-computer-radiogroups" class="playerO">
         <legend>Player O</legend>
         <label aria-label="Player O is Human"><input type="radio" name="playerOis" value="human" /> Human</label>
         <br/>
@@ -66,8 +68,7 @@
         </section>
     </div>
   </div>
-
-  <div role="grid" class="three-by-three" id="game">
+  <div role="grid" class="three-by-three" >
     <section class="oxo-board-section">
       <div role="grid" class="oxo-board" aria-label="Board 1" id="board1">
         <div role="gridcell" id="board1-cell-1" aria-labelledby="board1 board1-cell-1">
@@ -91,6 +92,7 @@
           <label>bottom right</label><div class="piece">&nbsp;</div></div>
       </div>
     </section>
+  </div>
   </div>
   <hr class="clearfix"/>
   <div class="columns-of-text">
