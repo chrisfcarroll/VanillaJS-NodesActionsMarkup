@@ -1,5 +1,8 @@
 import getProducts from "./depends-on/getProducts.js";
 
+// @ts-ignore
+console.assert(window.axios, "expected axios to be loaded as a global variable by index.html")
+
 export interface Product {
   category: string,
   price: string,
