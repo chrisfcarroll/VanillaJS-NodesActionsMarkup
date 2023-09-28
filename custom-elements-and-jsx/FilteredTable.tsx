@@ -1,8 +1,5 @@
 import getProducts from "./depends-on/getProducts.js";
 
-// @ts-ignore
-console.assert(window.axios, "expected axios to be loaded as a global variable by index.html")
-
 export interface Product {
   category: string,
   price: string,
@@ -15,7 +12,7 @@ type ProductFilter = {
   inStockOnly:boolean
 }
 
-const ref = {nextId:1}
+const idSequence = {nextId:1}
 
 type ProductFilterBarProps = {
   searchId:string,
@@ -40,12 +37,14 @@ function SearchForm({products,filter, setFilter, title, searchId, inStockId} : P
                setFilter({...filter,searchText: e.target.value})
              }}
       />
-      <input type='checkbox' id={inStockId} {...checkedattr}
-                      onChange={e => setFilter({
-                        ...filter,
-                        inStockOnly: e.target.checked
-                      })}/>
-      <label htmlFor={inStockId}>Only show in-stock products</label>
+      <div class="form-check form-switch">
+        <input role="switch" class="form-check-input" type='checkbox' id={inStockId} {...checkedattr}
+                        onChange={e => setFilter({
+                          ...filter,
+                          inStockOnly: e.target.checked
+                        })}/>
+      </div>
+      <label class="form-check-label" htmlFor={inStockId}>Only show in-stock products</label>
     </div>
   </form>
 }
@@ -114,13 +113,15 @@ function ProductResultsTable({products,filter}:{products:Product[],filter:Produc
   );
 }
 
+
+
 class FilteredTable extends HTMLElement {
 
   products : Product[]
   title: string
   filter = { searchText:'' , inStockOnly:false}
   autofocus:boolean
-  id='filtered-table' + (ref.nextId++)
+  id='filtered-table' + (idSequence.nextId++)
   searchId:string
   inStockId:string
 
@@ -141,8 +142,8 @@ class FilteredTable extends HTMLElement {
   connectedCallback() {
     this.autofocus=this.hasAttribute("autofocus")
     this.title=this.getAttribute("title")??"Filter Table"
-    this.searchId = 'filter-bar-search-' + ref.nextId++
-    this.inStockId = 'filter-bar-instock-' + ref.nextId++
+    this.searchId = 'filter-bar-search-' + idSequence.nextId++
+    this.inStockId = 'filter-bar-instock-' + idSequence.nextId++
     getProducts()
       .then(d=> this.products= d)
       .then(()=>{

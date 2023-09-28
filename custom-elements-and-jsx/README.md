@@ -9,6 +9,7 @@
 - Use JSX and/or TypeScript if you like, by adding a script tag for
   <a href="https://babeljs.io/docs/babel-standalone">babel standalone</a>
   to your document
+- Use Bootstrap classes, including in JSX
 - Use promises inside WebComponents to fetch data asynchronously
 
 #### Can't Easily Do

@@ -1,5 +1,4 @@
-
-const axios= window.axios //axios was loaded by global script tag in index.html
+import axios from "axios"
 const urlGetProducts = "/depends-on/products.json";
 
 function logThen(e){

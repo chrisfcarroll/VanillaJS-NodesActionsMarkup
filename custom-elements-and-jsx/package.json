@@ -1,0 +1,8 @@
+{
+  "name": "custom-elements-and-jsx",
+  "description": "This file exists only top help IDEs recognise imports listed in index.html's importmap. It isn't otherwise needed.",
+  "version": "1.0.0",
+  "dependencies": {
+    "axios": "^1.5.1"
+  }
+}
