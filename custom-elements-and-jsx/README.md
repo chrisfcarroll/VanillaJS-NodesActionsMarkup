@@ -4,16 +4,19 @@
 - Define stateless WebComponents straightforwardly as Classes with a
   <code>connectedCallback</code> method using <code>this.replaceWith(...)</code>
   or <code>this.innerHTML=...</code>
-- Define stateful WebComponents somewhat straightforwardly as classes,
-  with state stored in fields
+- Define state<i>ful</i> WebComponents as classes, with state stored in fields
 - Use JSX and/or TypeScript if you like, by adding a script tag for
   <a href="https://babeljs.io/docs/babel-standalone">babel standalone</a>
   to your document
-- Use Bootstrap classes, including in JSX
-- Use promises inside WebComponents to fetch data asynchronously
+- Use Bootstrap or Semantic UI other style classes, including in JSX
+- Use Promises inside WebComponents to fetch data asynchronously
 
 #### Can't Easily Do
-- autofocus inside a custom element may have to be implemented manually in code. Probably there are other similar gotchas.</li>
+- I can't see a way to import styles as modules in the browser, have to
+  use a build process.
+- `autofocus` inside a custom element that relies on a promise to load data
+   may have to be implemented manually in code. Probably there are other
+  similar gotchas.</li>
 
 
 #### Sources

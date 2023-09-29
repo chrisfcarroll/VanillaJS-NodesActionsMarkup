@@ -12,18 +12,19 @@
   border: 0.7px black solid;
   padding: 0.3rem;
 }
-.filtered-table form legend { font-size: small }
 
 .filtered-table th {
   text-align: left;
 }
 
 .twoColumnNarrowWideGrid {
+  padding: 0.3rem;
   display: grid;
   grid-template-columns: max-content 1fr;
   grid-template-rows: max-content;
   align-items: center;
   justify-items: start;
+  grid-column-gap: 1rem;
 }
 
 /*div,span { border: 0.3px blue dashed}*/

@@ -1,3 +1,5 @@
+// noinspection HtmlUnknownAttribute
+
 import getProducts from "./depends-on/getProducts.js";
 
 export interface Product {
@@ -22,7 +24,7 @@ type ProductFilterBarProps = {
   setFilter:(_:ProductFilter)=>void,
   title:string
 }
-function SearchForm({products,filter, setFilter, title, searchId, inStockId} : ProductFilterBarProps) {
+function SearchForm({filter, setFilter, title, searchId, inStockId} : ProductFilterBarProps) {
 
   const checkedattr = filter.inStockOnly ? {"checked":""} : {}
   return <form>
@@ -37,12 +39,13 @@ function SearchForm({products,filter, setFilter, title, searchId, inStockId} : P
                setFilter({...filter,searchText: e.target.value})
              }}
       />
-      <div class="form-check form-switch">
+      <div class="ui fitted toggle checkbox">
         <input role="switch" class="form-check-input" type='checkbox' id={inStockId} {...checkedattr}
                         onChange={e => setFilter({
                           ...filter,
                           inStockOnly: e.target.checked
                         })}/>
+        <label></label>
       </div>
       <label class="form-check-label" htmlFor={inStockId}>Only show in-stock products</label>
     </div>
